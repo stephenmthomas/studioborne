@@ -1,0 +1,16 @@
+C:\Users\Stephen\source\repos\MusicBuddyPrototype\MusicBuddyPrototype\obj\Debug\MusicBuddyPrototype.vbprojAssemblyReference.cache
+C:\Users\Stephen\source\repos\MusicBuddyPrototype\MusicBuddyPrototype\obj\Debug\MusicBuddyPrototype.vbproj.GenerateResource.cache
+C:\Users\Stephen\source\repos\MusicBuddyPrototype\MusicBuddyPrototype\obj\Debug\MusicBuddyPrototype.vbproj.CoreCompileInputs.cache
+C:\Users\Stephen\source\repos\MusicBuddyPrototype\MusicBuddyPrototype\bin\Debug\Studio Buddy.exe.config
+C:\Users\Stephen\source\repos\MusicBuddyPrototype\MusicBuddyPrototype\bin\Debug\Studio Buddy.exe
+C:\Users\Stephen\source\repos\MusicBuddyPrototype\MusicBuddyPrototype\bin\Debug\Studio Buddy.pdb
+C:\Users\Stephen\source\repos\MusicBuddyPrototype\MusicBuddyPrototype\bin\Debug\Studio Buddy.xml
+C:\Users\Stephen\source\repos\MusicBuddyPrototype\MusicBuddyPrototype\obj\Debug\StudioBuddyPrototype.frmFretboard.resources
+C:\Users\Stephen\source\repos\MusicBuddyPrototype\MusicBuddyPrototype\obj\Debug\StudioBuddyPrototype.frmKeyboard.resources
+C:\Users\Stephen\source\repos\MusicBuddyPrototype\MusicBuddyPrototype\obj\Debug\StudioBuddyPrototype.frmTabTool.resources
+C:\Users\Stephen\source\repos\MusicBuddyPrototype\MusicBuddyPrototype\obj\Debug\StudioBuddyPrototype.Resources.resources
+C:\Users\Stephen\source\repos\MusicBuddyPrototype\MusicBuddyPrototype\obj\Debug\Studio Buddy.exe
+C:\Users\Stephen\source\repos\MusicBuddyPrototype\MusicBuddyPrototype\obj\Debug\Studio Buddy.xml
+C:\Users\Stephen\source\repos\MusicBuddyPrototype\MusicBuddyPrototype\obj\Debug\Studio Buddy.pdb
+C:\Users\Stephen\source\repos\MusicBuddyPrototype\MusicBuddyPrototype\obj\Debug\StudioBuddyPrototype.frmChordBuilder.resources
+C:\Users\Stephen\source\repos\MusicBuddyPrototype\MusicBuddyPrototype\obj\Debug\StudioBuddyPrototype.frmAbout.resources
