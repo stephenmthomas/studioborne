@@ -57,9 +57,7 @@ Partial Class frmKeyboard
         Me.Controls.Add(Me.chkOnTop)
         Me.Controls.Add(Me.pbKeys)
         Me.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MaximizeBox = False
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmKeyboard"
         Me.Text = "Keyboard"
         CType(Me.pbKeys, System.ComponentModel.ISupportInitialize).EndInit()

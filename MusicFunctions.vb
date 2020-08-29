@@ -1,6 +1,7 @@
 ﻿Module MusicFunctions
-    Public SBVersion As String = "version 0.6"
-    Public FretNo As Integer = 24
+    Public SBVersion As String = "version 0.7"
+    Public FretMin As Integer = 0
+    Public FretMax As Integer = 24
     Public RootNote As String 'The Key
     Public RootDiff As Integer 'Difference between the root note and "A", which is considered 0
     Public Tuning As String 'What tuning is the guitar in
@@ -98,9 +99,8 @@ Starter:
 
     End Function
     Public Function GenNotesCSV(WhatIntervalCSV As String) As String
-        'Generates the notes of a  scale based on semitones
-        'The semitones generation relies on intervals
-        'This function needs to be written and deleted
+        'Generates the notes of a  scale based on intervals (CALC ROOT DIFF BEFORE USING)
+
 
         Dim sSteps() As String
 
@@ -117,6 +117,28 @@ Starter:
         CurString = Mid(CurString, 1, Len(CurString) - 1)
 
         GenNotesCSV = CurString
+
+    End Function
+    Public Function GenNotesFromSemitones(WhatRoot As String, WhatTonesCSV As String) As String
+        'Generates the notes based on semitones from root (CALC ROOT DIFF BEFORE USING)
+
+        '0,2,7 in C should yield C,D,G, but yields C,C#,D
+
+        Dim sSteps() As String
+
+        Dim i As Integer
+        Dim CurString As String
+
+        CurString = ""
+        sSteps = Split(GenSemiCSV(WhatTonesCSV), ",")
+
+        For i = 0 To UBound(sSteps) - 1
+            CurString = CurString & Value2Note(sSteps(i + 1) + RootDiff) & ","
+        Next i
+
+        CurString = Mid(CurString, 1, Len(CurString) - 1)
+
+        GenNotesFromSemitones = CurString
 
     End Function
     Public Function GenSemiCSV(WhatIntervalCSV As String) As String
@@ -156,6 +178,19 @@ Starter:
         Next
 
         GenChordFromCSV = Mid(OutputCSV, 1, Len(OutputCSV) - 1)
+
+    End Function
+    Public Function GenIntFromNotes(Note1 As String, Note2 As String) As Integer
+        'Generates the interval between two notes.  Can be used to show relative semitones from root.
+        'ie in Key of C, C is 0 - but in code C is 3.
+        'So Root(C) = 3, Note(C) = 3, diff = 0
+
+        If Note2Value(Note2) < Note2Value(Note1) Then 'for example, B in key of C should be 11
+            '=(B) - (C) = 2 - 3 = - 1
+            GenIntFromNotes = 12 - (Note2Value(Note1) - Note2Value(Note2))
+        Else
+            GenIntFromNotes = Note2Value(Note2) - Note2Value(Note1)
+        End If
 
     End Function
 End Module

@@ -59,6 +59,11 @@ Partial Class frmTabTool
         Me.cmdRefresh = New System.Windows.Forms.Button()
         Me.cmdMaximize = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.txtFretMax = New System.Windows.Forms.TextBox()
+        Me.txtFretMin = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.chkTones = New System.Windows.Forms.CheckBox()
         Me.chkTransparency = New System.Windows.Forms.CheckBox()
         Me.chkOnTop = New System.Windows.Forms.CheckBox()
         Me.chkTabRoot = New System.Windows.Forms.CheckBox()
@@ -117,7 +122,7 @@ Partial Class frmTabTool
         '
         Me.cbMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbMode.FormattingEnabled = True
-        Me.cbMode.Items.AddRange(New Object() {"Major (Ionian)", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Minor (Aeolian)", "Locrian", "Melodic Minor", "Harmonic Minor", "Super Locrian", "Major Pentatonic", "Minor Pentatonic", "Blues Scale"})
+        Me.cbMode.Items.AddRange(New Object() {"Major (Ionian)", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Minor (Aeolian)", "Locrian", "Melodic Minor", "Harmonic Minor", "Super Locrian", "Major Pentatonic*", "Minor Pentatonic*", "Blues Scale*", "Chromatic*"})
         Me.cbMode.Location = New System.Drawing.Point(160, 25)
         Me.cbMode.Name = "cbMode"
         Me.cbMode.Size = New System.Drawing.Size(141, 22)
@@ -136,7 +141,7 @@ Partial Class frmTabTool
         '
         Me.cbInt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInt.FormattingEnabled = True
-        Me.cbInt.Items.AddRange(New Object() {"2,2,1,2,2,2,1", "2,1,2,2,2,1,2", "1,2,2,2,1,2,2", "2,2,2,1,2,2,1", "2,2,1,2,2,1,2", "2,1,2,2,1,2,2", "1,2,2,1,2,2,2", "2,1,2,2,2,2,1", "2,1,2,2,1,3,1", "1,2,1,2,2,2,2", "2,2,3,2,3", "3,2,2,3,2", "3,2,1,1,3,2"})
+        Me.cbInt.Items.AddRange(New Object() {"2,2,1,2,2,2,1", "2,1,2,2,2,1,2", "1,2,2,2,1,2,2", "2,2,2,1,2,2,1", "2,2,1,2,2,1,2", "2,1,2,2,1,2,2", "1,2,2,1,2,2,2", "2,1,2,2,2,2,1", "2,1,2,2,1,3,1", "1,2,1,2,2,2,2", "2,2,3,2,3", "3,2,2,3,2", "3,2,1,1,3,2", "1,1,1,1,1,1,1,1,1,1,1,1"})
         Me.cbInt.Location = New System.Drawing.Point(307, 25)
         Me.cbInt.Name = "cbInt"
         Me.cbInt.Size = New System.Drawing.Size(141, 22)
@@ -353,7 +358,7 @@ Partial Class frmTabTool
         '
         'cmdClear
         '
-        Me.cmdClear.Location = New System.Drawing.Point(797, 221)
+        Me.cmdClear.Location = New System.Drawing.Point(139, 221)
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.Size = New System.Drawing.Size(88, 20)
         Me.cmdClear.TabIndex = 29
@@ -393,7 +398,7 @@ Partial Class frmTabTool
         '
         Me.cmdMaximize.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdMaximize.ForeColor = System.Drawing.Color.Green
-        Me.cmdMaximize.Location = New System.Drawing.Point(420, 149)
+        Me.cmdMaximize.Location = New System.Drawing.Point(417, 149)
         Me.cmdMaximize.Name = "cmdMaximize"
         Me.cmdMaximize.Size = New System.Drawing.Size(81, 21)
         Me.cmdMaximize.TabIndex = 33
@@ -402,23 +407,75 @@ Partial Class frmTabTool
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label12)
+        Me.GroupBox1.Controls.Add(Me.txtFretMax)
+        Me.GroupBox1.Controls.Add(Me.txtFretMin)
+        Me.GroupBox1.Controls.Add(Me.Label11)
+        Me.GroupBox1.Controls.Add(Me.chkTones)
         Me.GroupBox1.Controls.Add(Me.chkTransparency)
         Me.GroupBox1.Controls.Add(Me.chkOnTop)
         Me.GroupBox1.Controls.Add(Me.chkTabRoot)
         Me.GroupBox1.Controls.Add(Me.chkNoteIcon)
         Me.GroupBox1.Controls.Add(Me.chkNoteText)
         Me.GroupBox1.Controls.Add(Me.chkAutoChord)
-        Me.GroupBox1.Location = New System.Drawing.Point(602, 130)
+        Me.GroupBox1.Location = New System.Drawing.Point(602, 137)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(283, 86)
+        Me.GroupBox1.Size = New System.Drawing.Size(283, 104)
         Me.GroupBox1.TabIndex = 35
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Options"
         '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(134, 80)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(21, 14)
+        Me.Label12.TabIndex = 45
+        Me.Label12.Text = "to"
+        '
+        'txtFretMax
+        '
+        Me.txtFretMax.Location = New System.Drawing.Point(159, 78)
+        Me.txtFretMax.Name = "txtFretMax"
+        Me.txtFretMax.Size = New System.Drawing.Size(29, 20)
+        Me.txtFretMax.TabIndex = 44
+        Me.txtFretMax.Text = "24"
+        Me.txtFretMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'txtFretMin
+        '
+        Me.txtFretMin.Location = New System.Drawing.Point(101, 78)
+        Me.txtFretMin.Name = "txtFretMin"
+        Me.txtFretMin.Size = New System.Drawing.Size(29, 20)
+        Me.txtFretMin.TabIndex = 43
+        Me.txtFretMin.Text = "0"
+        Me.txtFretMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(13, 81)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(84, 14)
+        Me.Label11.TabIndex = 42
+        Me.Label11.Text = "FRET RANGE:"
+        '
+        'chkTones
+        '
+        Me.chkTones.AutoSize = True
+        Me.chkTones.Location = New System.Drawing.Point(16, 44)
+        Me.chkTones.Name = "chkTones"
+        Me.chkTones.Size = New System.Drawing.Size(110, 18)
+        Me.chkTones.TabIndex = 41
+        Me.chkTones.Text = "Tone Overlay"
+        Me.ToolTip.SetToolTip(Me.chkTones, "Shows relative semitone on displays.")
+        Me.chkTones.UseVisualStyleBackColor = True
+        '
         'chkTransparency
         '
         Me.chkTransparency.AutoSize = True
-        Me.chkTransparency.Location = New System.Drawing.Point(160, 47)
+        Me.chkTransparency.Location = New System.Drawing.Point(159, 44)
         Me.chkTransparency.Name = "chkTransparency"
         Me.chkTransparency.Size = New System.Drawing.Size(110, 18)
         Me.chkTransparency.TabIndex = 40
@@ -429,7 +486,7 @@ Partial Class frmTabTool
         'chkOnTop
         '
         Me.chkOnTop.AutoSize = True
-        Me.chkOnTop.Location = New System.Drawing.Point(161, 19)
+        Me.chkOnTop.Location = New System.Drawing.Point(159, 30)
         Me.chkOnTop.Name = "chkOnTop"
         Me.chkOnTop.Size = New System.Drawing.Size(117, 18)
         Me.chkOnTop.TabIndex = 39
@@ -440,7 +497,7 @@ Partial Class frmTabTool
         'chkTabRoot
         '
         Me.chkTabRoot.AutoSize = True
-        Me.chkTabRoot.Location = New System.Drawing.Point(17, 60)
+        Me.chkTabRoot.Location = New System.Drawing.Point(16, 59)
         Me.chkTabRoot.Name = "chkTabRoot"
         Me.chkTabRoot.Size = New System.Drawing.Size(89, 18)
         Me.chkTabRoot.TabIndex = 38
@@ -453,7 +510,7 @@ Partial Class frmTabTool
         Me.chkNoteIcon.AutoSize = True
         Me.chkNoteIcon.Checked = True
         Me.chkNoteIcon.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkNoteIcon.Location = New System.Drawing.Point(17, 47)
+        Me.chkNoteIcon.Location = New System.Drawing.Point(159, 16)
         Me.chkNoteIcon.Name = "chkNoteIcon"
         Me.chkNoteIcon.Size = New System.Drawing.Size(96, 18)
         Me.chkNoteIcon.TabIndex = 37
@@ -463,11 +520,12 @@ Partial Class frmTabTool
         'chkNoteText
         '
         Me.chkNoteText.AutoSize = True
-        Me.chkNoteText.Location = New System.Drawing.Point(17, 33)
+        Me.chkNoteText.Location = New System.Drawing.Point(16, 30)
         Me.chkNoteText.Name = "chkNoteText"
         Me.chkNoteText.Size = New System.Drawing.Size(110, 18)
         Me.chkNoteText.TabIndex = 36
-        Me.chkNoteText.Text = "Text Overlay"
+        Me.chkNoteText.Text = "Note Overlay"
+        Me.ToolTip.SetToolTip(Me.chkNoteText, "Shows notes on displays.")
         Me.chkNoteText.UseVisualStyleBackColor = True
         '
         'chkAutoChord
@@ -475,7 +533,7 @@ Partial Class frmTabTool
         Me.chkAutoChord.AutoSize = True
         Me.chkAutoChord.Checked = True
         Me.chkAutoChord.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkAutoChord.Location = New System.Drawing.Point(17, 19)
+        Me.chkAutoChord.Location = New System.Drawing.Point(16, 16)
         Me.chkAutoChord.Name = "chkAutoChord"
         Me.chkAutoChord.Size = New System.Drawing.Size(138, 18)
         Me.chkAutoChord.TabIndex = 35
@@ -582,11 +640,11 @@ Partial Class frmTabTool
         'cmdBuilder
         '
         Me.cmdBuilder.ForeColor = System.Drawing.SystemColors.Highlight
-        Me.cmdBuilder.Location = New System.Drawing.Point(428, 88)
+        Me.cmdBuilder.Location = New System.Drawing.Point(338, 149)
         Me.cmdBuilder.Name = "cmdBuilder"
         Me.cmdBuilder.Size = New System.Drawing.Size(73, 21)
         Me.cmdBuilder.TabIndex = 57
-        Me.cmdBuilder.Text = "Builder"
+        Me.cmdBuilder.Text = "Chorder"
         Me.ToolTip.SetToolTip(Me.cmdBuilder, "A tool to build chords.")
         Me.cmdBuilder.UseVisualStyleBackColor = True
         '
@@ -615,7 +673,7 @@ Partial Class frmTabTool
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(630, 63)
+        Me.Label10.Location = New System.Drawing.Point(526, 69)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(154, 14)
         Me.Label10.TabIndex = 54
@@ -626,9 +684,9 @@ Partial Class frmTabTool
         Me.cbProgressions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbProgressions.FormattingEnabled = True
         Me.cbProgressions.Items.AddRange(New Object() {"Popular Kid", "Sensitive One", "Stirring Hope", "Drama Resolution", "Jazz Cat", "The Canon", "Chris Issac - Wicked Game", "Coldplay - Clocks", "Doo Wop Progression (very popular)", "Oasis - Don't Look Back", "The Cure - A Letter to Elise"})
-        Me.cbProgressions.Location = New System.Drawing.Point(631, 77)
+        Me.cbProgressions.Location = New System.Drawing.Point(527, 83)
         Me.cbProgressions.Name = "cbProgressions"
-        Me.cbProgressions.Size = New System.Drawing.Size(254, 22)
+        Me.cbProgressions.Size = New System.Drawing.Size(358, 22)
         Me.cbProgressions.TabIndex = 53
         '
         'cbProgList
@@ -636,14 +694,14 @@ Partial Class frmTabTool
         Me.cbProgList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbProgList.FormattingEnabled = True
         Me.cbProgList.Items.AddRange(New Object() {"I,IV,V", "I,V,vi,IV", "vi,V,IV,V", "i,VII,III,VI", "ii,V,I", "I,V,vi,iii,IV,I,IV,V", "i,VII,IV,IV", "I,v,v,ii", "I,vi,IV,V", "IV,I,IV,V", "I,V,vi,IV"})
-        Me.cbProgList.Location = New System.Drawing.Point(631, 103)
+        Me.cbProgList.Location = New System.Drawing.Point(527, 109)
         Me.cbProgList.Name = "cbProgList"
-        Me.cbProgList.Size = New System.Drawing.Size(254, 22)
+        Me.cbProgList.Size = New System.Drawing.Size(358, 22)
         Me.cbProgList.TabIndex = 55
         '
         'cmdHideTab
         '
-        Me.cmdHideTab.Location = New System.Drawing.Point(525, 196)
+        Me.cmdHideTab.Location = New System.Drawing.Point(156, 186)
         Me.cmdHideTab.Name = "cmdHideTab"
         Me.cmdHideTab.Size = New System.Drawing.Size(71, 20)
         Me.cmdHideTab.TabIndex = 56
@@ -778,4 +836,9 @@ Partial Class frmTabTool
     Friend WithEvents chkTransparency As CheckBox
     Friend WithEvents cmdBuilder As Button
     Friend WithEvents cmdAbout As Button
+    Friend WithEvents chkTones As CheckBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents txtFretMax As TextBox
+    Friend WithEvents txtFretMin As TextBox
+    Friend WithEvents Label11 As Label
 End Class

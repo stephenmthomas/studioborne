@@ -1,7 +1,7 @@
 ﻿Public Class frmTabTool
 
-    Public Sub GenRootDiff()
-        RootDiff = Note2Value(RootNote) - 0
+    Public Sub GenRootDiff(WhatNote)
+        RootDiff = Note2Value(WhatNote) - 0
     End Sub
     Public Sub GenNotes()
         txtNotes.Text = GenNotesCSV(cbInt.Text)
@@ -50,7 +50,7 @@
     Private Sub cbKey_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbKey.SelectedIndexChanged
         On Error Resume Next
         RootNote = cbKey.Text
-        GenRootDiff()
+        GenRootDiff(cbKey.Text)
         GenNotes()
         GenValues()
 
@@ -73,7 +73,7 @@
             StringTuning = TuningNotes(StringNo - CurString) 'Current Tuning of String
             txtTab.Text = txtTab.Text & StringTuning & "-|-"
 
-            For CurFret = 0 To FretNo 'Search each fret open to 24
+            For CurFret = FretMin To FretMax 'Search each fret open to 24
                 FretPitch = Fret2Note(StringTuning, CurFret) 'Current pitch of current fret
 
                 If CurFret > 9 Then
@@ -143,16 +143,24 @@
 
         For CurString = 1 To StringNo 'For each string on instrument
             StringTuning = TuningNotes(StringNo - CurString) 'Current Tuning of String
-            For CurFret = 0 To FretNo 'Search each fret open to 24
+            For CurFret = FretMin To FretMax 'Search each fret open to 24
                 FretPitch = Fret2Note(StringTuning, CurFret) 'Current pitch of current fret
                 For CurNote = LBound(ScaleNotes) To UBound(ScaleNotes) '- 1 'Search each note of the scale to see if it matches the fret
                     'ScaleNote(CurNote) = note in scale to look for
                     If FretPitch = ScaleNotes(CurNote) Then 'If the current note is in the scale [GUITAR MONEY MAKER]
                         If frmFretboard.Visible = True Then
                             If FretPitch = RootNote Then
-                                frmFretboard.FretDraw(CurString, CurFret, Color.Red, "R")
+                                If chkTones.Checked = True Then
+                                    frmFretboard.FretDraw(CurString, CurFret, Color.Red, Trim(Str(CurNote + 1)))
+                                Else
+                                    frmFretboard.FretDraw(CurString, CurFret, Color.Red, ScaleNotes(CurNote))
+                                End If
                             Else
-                                frmFretboard.FretDraw(CurString, CurFret, Color.Green, CurNote)
+                                If chkTones.Checked = True Then
+                                    frmFretboard.FretDraw(CurString, CurFret, Color.Green, Trim(Str(CurNote + 1)))
+                                Else
+                                    frmFretboard.FretDraw(CurString, CurFret, Color.Green, ScaleNotes(CurNote))
+                                End If
                             End If
                         End If
                     End If
@@ -230,18 +238,30 @@
     End Function
     Sub DrawKeyboard(WhatNotes As String) 'Accepts CSV
         Dim AddNotes() As String
+        Dim NoteStep As Integer
 
+        NoteStep = 0
         AddNotes = Split(WhatNotes, ",")
         frmKeyboard.KeyClearAll()
 
         For Each Note In AddNotes
             If frmKeyboard.Visible = True Then
                 If Note = RootNote Then
-                    frmKeyboard.KeyDraw(Note, Color.Red, Note)
+                    If chkTones.Checked = True Then
+                        frmKeyboard.KeyDraw(Note, Color.Red, Trim(Str(NoteStep)))
+                    Else
+                        frmKeyboard.KeyDraw(Note, Color.Red, Note)
+                    End If
                 Else
-                    frmKeyboard.KeyDraw(Note, Color.Green, Note)
+                    If chkTones.Checked = True Then
+                        frmKeyboard.KeyDraw(Note, Color.Green, Trim(Str(NoteStep)))
+                    Else
+                        frmKeyboard.KeyDraw(Note, Color.Green, Note)
+                    End If
+
                 End If
             End If
+            NoteStep += 1
         Next
     End Sub
     Private Sub cmdDraw_Click(sender As Object, e As EventArgs) Handles cmdDraw.Click
@@ -256,7 +276,7 @@
         TempRoot = Split(txtChord.Text, ",")
         RootNote = TempRoot(0)
         DrawKeyboard(txtChord.Text)
-        frmFretboard.FretClearAll()
+        'frmFretboard.FretClearAll()
         txtTab.Text += "Generating " & cbKey.Text & " " & cbMode.Text & " degree " & Str(LastChord) & " chord:" & vbNewLine
         GenerateTabScale(txtChord.Text)
         RootNote = cbKey.Text
@@ -390,4 +410,38 @@
         DrawKeyboard(CurrentNotes)
         DrawFretBoard(CurrentNotes)
     End Sub
+    Private Sub txtFretMin_TextChanged(sender As Object, e As EventArgs) Handles txtFretMin.TextChanged
+        FretMin = Val(txtFretMin.Text)
+    End Sub
+
+
+    Private Sub txtFretMin_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtFretMin.KeyPress
+        '97 - 122 = Ascii codes for simple letters
+        '65 - 90  = Ascii codes for capital letters
+        '48 - 57  = Ascii codes for numbers
+
+        If Asc(e.KeyChar) <> 8 Then
+            If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
+                e.Handled = True
+            End If
+        End If
+    End Sub
+
+    Private Sub txtFretMax_TextChanged(sender As Object, e As EventArgs) Handles txtFretMax.TextChanged
+        FretMax = Val(txtFretMax.Text)
+    End Sub
+
+    Private Sub txtFretMax_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtFretMax.KeyPress
+        '97 - 122 = Ascii codes for simple letters
+        '65 - 90  = Ascii codes for capital letters
+        '48 - 57  = Ascii codes for numbers
+
+        If Asc(e.KeyChar) <> 8 Then
+            If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
+                e.Handled = True
+            End If
+        End If
+    End Sub
+
+
 End Class

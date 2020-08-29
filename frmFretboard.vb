@@ -4,13 +4,14 @@
     Public Const FretOrigin_y = 12
     Dim r_image As Image = My.Resources.ind_r
     Dim g_image As Image = My.Resources.ind_g
-
+    Dim y_image As Image = My.Resources.ind_y
+    Dim b_image As Image = My.Resources.ind_b
 
     Public Sub FretDraw(WutString As Integer, WutFret As Integer, WutColor As Color, Optional ByVal WhatText As String = "")
         Dim NewDot As New Label
 
 
-        If frmTabTool.chkNoteText.Checked = False Then
+        If frmTabTool.chkNoteText.Checked = False And frmTabTool.chkTones.Checked = False Then
             WhatText = ""
         End If
 
@@ -18,13 +19,17 @@
             .Text = WhatText
             .BackColor = WutColor
             .Location = New Point(FretOrigin_x + (50 * (WutFret - 1)) + 19, FretOrigin_y + (35 * WutString) - 38)
-            .Height = 15
-            .Width = 15
+            .Height = 25
+            .Width = 25
             .Font = New Font("Verdana", 8, FontStyle.Bold)
             .TextAlign = ContentAlignment.MiddleCenter
             If frmTabTool.chkNoteIcon.Checked = True Then
                 If WutColor = Color.Red Then
                     .Image = r_image
+                ElseIf WutColor = Color.Blue Then
+                    .Image = b_image
+                ElseIf WutColor = Color.Yellow Then
+                    .Image = y_image
                 Else
                     .Image = g_image
                 End If

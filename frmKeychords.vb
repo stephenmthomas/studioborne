@@ -1,17 +1,16 @@
 ﻿Public Class frmKeyboard
     Public Const KeyWidth = 46 'pixels
-    Public Const Key_x = 12 'where does image start?
-    Public Const Key_y = 12 'where does image start?
-
+    Public Const Key_x = 12
+    Public Const Key_y = 12
     Dim r_image As Image = My.Resources.ind_r
     Dim g_image As Image = My.Resources.ind_g
-    Dim y_image As Image = My.Resources.ind_y
-    Dim b_image As Image = My.Resources.ind_b
+    'Dim r_image As Image = Image.FromFile(Application.StartupPath & "\ind_r.png")
+    'Dim g_image As Image = Image.FromFile(Application.StartupPath & "\ind_g.png")
 
     Public Sub KeyDraw(WhatNote As String, WutColor As Color, Optional ByVal WhatText As String = "")
         Dim Oct1Dot, Oct2Dot As New Label
 
-        If frmTabTool.chkNoteText.Checked = False And frmTabTool.chkTones.Checked = False Then
+        If frmTabTool.chkNoteText.Checked = False Then
             WhatText = ""
         End If
 
@@ -19,18 +18,14 @@
             .Text = WhatText
             .BackColor = WutColor
             .Location = New Point(Note2X(WhatNote), Note2Y(WhatNote))
-            .Height = 25
-            .Width = 25
+            .Height = 15
+            .Width = 15
             .Font = New Font("Verdana", 8, FontStyle.Bold)
             .TextAlign = ContentAlignment.MiddleCenter
             .ForeColor = Color.Black
             If frmTabTool.chkNoteIcon.Checked = True Then
                 If WutColor = Color.Red Then
                     .Image = r_image
-                ElseIf WutColor = Color.Blue Then
-                    .Image = b_image
-                ElseIf WutColor = Color.Yellow Then
-                    .Image = y_image
                 Else
                     .Image = g_image
                 End If
@@ -41,17 +36,13 @@
             .Text = WhatText
             .BackColor = WutColor
             .Location = New Point(320 + Note2X(WhatNote), Note2Y(WhatNote))
-            .Height = 25
-            .Width = 25
+            .Height = 15
+            .Width = 15
             .Font = New Font("Verdana", 8, FontStyle.Bold)
             .TextAlign = ContentAlignment.MiddleCenter
             If frmTabTool.chkNoteIcon.Checked = True Then
                 If WutColor = Color.Red Then
                     .Image = r_image
-                ElseIf WutColor = Color.Blue Then
-                    .Image = b_image
-                ElseIf WutColor = Color.Yellow Then
-                    .Image = y_image
                 Else
                     .Image = g_image
                 End If
