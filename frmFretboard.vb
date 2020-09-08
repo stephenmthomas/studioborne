@@ -1,7 +1,9 @@
 ﻿Public Class frmFretboard
 
-    Public Const FretOrigin_x = 30
-    Public Const FretOrigin_y = 12
+    Public Const FretOrigin_x = 43 'What x pixel is the 1st fret of the 1st string on
+    Public Const FretOrigin_y = 12 'What y pixel is the 1st fret of the 1st string on
+    Public Const FretSpace_x = 51 'Constant for misc x spacing between frets
+    Public Const FretSpace_y = 35 'constant for misc y spacing between strings
     Dim r_image As Image = My.Resources.ind_r
     Dim g_image As Image = My.Resources.ind_g
     Dim y_image As Image = My.Resources.ind_y
@@ -9,6 +11,16 @@
 
     Public Sub FretDraw(WutString As Integer, WutFret As Integer, WutColor As Color, Optional ByVal WhatText As String = "")
         Dim NewDot As New Label
+        Dim StringMod As Integer 'Fine Tune for placing dots
+
+        'JUST HARDCODE THE Y POSITION FOR THE STRING
+        If WutString = 1 Then StringMod = 2
+        If WutString = 2 Then StringMod = 38
+        If WutString = 3 Then StringMod = 75
+        If WutString = 4 Then StringMod = 111
+        If WutString = 5 Then StringMod = 147
+        If WutString = 6 Then StringMod = 182
+
 
 
         If frmTabTool.chkNoteText.Checked = False And frmTabTool.chkTones.Checked = False Then
@@ -18,7 +30,7 @@
         With NewDot
             .Text = WhatText
             .BackColor = WutColor
-            .Location = New Point(FretOrigin_x + (50 * (WutFret - 1)) + 19, FretOrigin_y + (35 * WutString) - 38)
+            .Location = New Point(FretOrigin_x + (FretSpace_x * (WutFret - 1)) - (WutFret * 0.3), StringMod)
             .Height = 25
             .Width = 25
             .Font = New Font("Verdana", 8, FontStyle.Bold)
@@ -37,7 +49,6 @@
         End With
 
         Me.Controls.Add(NewDot)
-        'NewDot.Font = New Font(Me.Font, FontStyle.Bold)
         Me.pbFretboard.SendToBack()
 
     End Sub

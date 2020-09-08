@@ -1,7 +1,9 @@
 ﻿Module MusicFunctions
-    Public SBVersion As String = "version 0.7"
+    Public SBVersion As String = "version 0.8"
+    Public DefaultOpts As String = "autoshow=true,notes=false,tones=false,tabroots=false,icons=true,ontop=false,transparency=0.5,transparent=false,fretmin=0,fretmax=24"
     Public FretMin As Integer = 0
     Public FretMax As Integer = 24
+    Public Transparency As Single = 0.5
     Public RootNote As String 'The Key
     Public RootDiff As Integer 'Difference between the root note and "A", which is considered 0
     Public Tuning As String 'What tuning is the guitar in
@@ -13,6 +15,7 @@
     Public Function Note2Value(WhatNote As String) As Integer
         Note2Value = 99
         WhatNote = UCase(WhatNote)
+        WhatNote = Trim(WhatNote)
         If WhatNote = "A" Then Note2Value = 0
         If WhatNote = "A#" Then Note2Value = 1
         If WhatNote = "B" Then Note2Value = 2
@@ -185,12 +188,75 @@ Starter:
         'ie in Key of C, C is 0 - but in code C is 3.
         'So Root(C) = 3, Note(C) = 3, diff = 0
 
-        If Note2Value(Note2) < Note2Value(Note1) Then 'for example, B in key of C should be 11
-            '=(B) - (C) = 2 - 3 = - 1
-            GenIntFromNotes = 12 - (Note2Value(Note1) - Note2Value(Note2))
+        'If Note2Value(Note2) < Note2Value(Note1) Then 'for example, B in key of C should be 11
+        '   =(B) - (C) = 2 - 3 = - 1
+        '   GenIntFromNotes = 12 - (Note2Value(Note1) - Note2Value(Note2))
+        'Else
+        '   GenIntFromNotes = Note2Value(Note2) - Note2Value(Note1)
+        'End If
+        If Note2Value(Note2) < Note2Value(Note1) Then
+            GenIntFromNotes = 12 - Math.Abs(Note2Value(Note2) - Note2Value(Note1))
         Else
-            GenIntFromNotes = Note2Value(Note2) - Note2Value(Note1)
+            GenIntFromNotes = Math.Abs(Note2Value(Note2) - Note2Value(Note1))
         End If
+
+    End Function
+    Public Function ScaleDegIntFromNotes(WhatNotes As String, WhatDegree As Integer) As String
+        'Outputs the intervals, in CSV, of a particular scale degree from a set of notes (should be a diatonic scale!)
+        'ie feed C Major as 'WhatNotes' and '3' as WhatDegree and output is '0,3,7'
+
+        Dim ScaleNotes() As String
+        Dim ChordDeg As String
+        Dim NoteX As Integer
+
+        ScaleNotes = Split(WhatNotes & "," & WhatNotes, ",")
+        NoteX = 0
+
+        ScaleDegIntFromNotes = "Error"
+
+        For NoteX = 0 To 6
+            ChordDeg = "0," & GenIntFromNotes(ScaleNotes(NoteX), ScaleNotes(NoteX + 2)) & "," & GenIntFromNotes(ScaleNotes(NoteX), ScaleNotes(NoteX + 4))
+            If NoteX + 1 = WhatDegree Then
+                ScaleDegIntFromNotes = ChordDeg
+            End If
+        Next
+
+    End Function
+    Public Function ChordTypeFromCSV(ChordCSV As String) As String
+        ChordTypeFromCSV = "Error"
+        If ChordCSV = "0,2,7" Then ChordTypeFromCSV = "sus2"
+        If ChordCSV = "0,3,6" Then ChordTypeFromCSV = "dim"
+        If ChordCSV = "0,3,6,9" Then ChordTypeFromCSV = "dim7"
+        If ChordCSV = "0,3,6,10" Then ChordTypeFromCSV = "°7/m7b5"
+        If ChordCSV = "0,3,7" Then ChordTypeFromCSV = "min"
+        If ChordCSV = "0,3,7,10" Then ChordTypeFromCSV = "min7/m7"
+        If ChordCSV = "0,3,7,11" Then ChordTypeFromCSV = "min/maj7"
+        If ChordCSV = "0,3,7,9" Then ChordTypeFromCSV = "min6/m6"
+        If ChordCSV = "0,3,8,10" Then ChordTypeFromCSV = "m7#5"
+        If ChordCSV = "0,4,5" Then ChordTypeFromCSV = "flat5"
+        If ChordCSV = "0,4,6,10" Then ChordTypeFromCSV = "7b5"
+        If ChordCSV = "0,4,6,11" Then ChordTypeFromCSV = "maj7b5"
+        If ChordCSV = "0,4,7" Then ChordTypeFromCSV = "Δ/maj"
+        If ChordCSV = "0,4,7,10" Then ChordTypeFromCSV = "dom7/7th"
+        If ChordCSV = "0,4,7,11" Then ChordTypeFromCSV = "maj7"
+        If ChordCSV = "0,4,7,9" Then ChordTypeFromCSV = "maj6/6th"
+        If ChordCSV = "0,4,8" Then ChordTypeFromCSV = "aug"
+        If ChordCSV = "0,4,8,10" Then ChordTypeFromCSV = "aug7"
+        If ChordCSV = "0,4,8,10" Then ChordTypeFromCSV = "7#5"
+        If ChordCSV = "0,4,8,11" Then ChordTypeFromCSV = "maj7#5"
+        If ChordCSV = "0,5,7" Then ChordTypeFromCSV = "sus4"
+        If ChordCSV = "0,5,7,10" Then ChordTypeFromCSV = "7sus4"
+        If ChordCSV = "0,7" Then ChordTypeFromCSV = "5"
+    End Function
+
+    Public Function ChordDegButton(ChordCSV As String, WhatDeg As String) As String
+        'Used to set quick chord button text
+        ChordDegButton = WhatDeg
+
+        If ChordCSV = "0,3,6" Then ChordDegButton = LCase(WhatDeg) & "°" 'Diminished Triad
+        If ChordCSV = "0,3,7" Then ChordDegButton = LCase(WhatDeg)
+        If ChordCSV = "0,4,7" Then ChordDegButton = UCase(WhatDeg)
+        If ChordCSV = "0,4,8" Then ChordDegButton = UCase(WhatDeg) & "+" 'Augmented Triad
 
     End Function
 End Module

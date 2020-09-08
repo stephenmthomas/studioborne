@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Label5.Text" xml:space="preserve">
-    <value>Studioborne was coded (poorly) in Visual Studio 2019 / Visual Basic in about 5 hours, from scratch.  Primarily created for myself and good ol' Eli, though I've uploaded the sourcecode to GitHub for those interested.  The foundations here are surprisingly versatile, though not exactly elegant.  Enjoy.
+    <value>Studioborne was coded (poorly) in Visual Studio 2019 / Visual Basic.  Primarily created for myself and good ol' Eli, though I've uploaded the sourcecode to GitHub for those interested.  The foundations here are surprisingly versatile, though not exactly elegant.  Enjoy.
 
 </value>
   </data>

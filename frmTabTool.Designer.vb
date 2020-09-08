@@ -56,7 +56,6 @@ Partial Class frmTabTool
         Me.cmdClear = New System.Windows.Forms.Button()
         Me.cmdFretboard = New System.Windows.Forms.Button()
         Me.cmdKeyboard = New System.Windows.Forms.Button()
-        Me.cmdRefresh = New System.Windows.Forms.Button()
         Me.cmdMaximize = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Label12 = New System.Windows.Forms.Label()
@@ -73,8 +72,6 @@ Partial Class frmTabTool
         Me.chkDim = New System.Windows.Forms.CheckBox()
         Me.chkSus2 = New System.Windows.Forms.CheckBox()
         Me.chkSus4 = New System.Windows.Forms.CheckBox()
-        Me.chkMin11 = New System.Windows.Forms.CheckBox()
-        Me.chkMin9 = New System.Windows.Forms.CheckBox()
         Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.chkDim7 = New System.Windows.Forms.CheckBox()
         Me.chkAug = New System.Windows.Forms.CheckBox()
@@ -82,7 +79,7 @@ Partial Class frmTabTool
         Me.chkMin = New System.Windows.Forms.CheckBox()
         Me.cmdBuilder = New System.Windows.Forms.Button()
         Me.cmdAbout = New System.Windows.Forms.Button()
-        Me.chkMin7 = New System.Windows.Forms.CheckBox()
+        Me.cmdTriadView = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cbProgressions = New System.Windows.Forms.ComboBox()
         Me.cbProgList = New System.Windows.Forms.ComboBox()
@@ -241,61 +238,61 @@ Partial Class frmTabTool
         '
         Me.cmdChord1.Location = New System.Drawing.Point(13, 88)
         Me.cmdChord1.Name = "cmdChord1"
-        Me.cmdChord1.Size = New System.Drawing.Size(53, 21)
+        Me.cmdChord1.Size = New System.Drawing.Size(42, 21)
         Me.cmdChord1.TabIndex = 16
         Me.cmdChord1.Text = "I"
         Me.cmdChord1.UseVisualStyleBackColor = True
         '
         'cmdChord2
         '
-        Me.cmdChord2.Location = New System.Drawing.Point(72, 88)
+        Me.cmdChord2.Location = New System.Drawing.Point(59, 88)
         Me.cmdChord2.Name = "cmdChord2"
-        Me.cmdChord2.Size = New System.Drawing.Size(53, 21)
+        Me.cmdChord2.Size = New System.Drawing.Size(42, 21)
         Me.cmdChord2.TabIndex = 17
         Me.cmdChord2.Text = "II"
         Me.cmdChord2.UseVisualStyleBackColor = True
         '
         'cmdChord3
         '
-        Me.cmdChord3.Location = New System.Drawing.Point(131, 88)
+        Me.cmdChord3.Location = New System.Drawing.Point(105, 88)
         Me.cmdChord3.Name = "cmdChord3"
-        Me.cmdChord3.Size = New System.Drawing.Size(53, 21)
+        Me.cmdChord3.Size = New System.Drawing.Size(42, 21)
         Me.cmdChord3.TabIndex = 18
         Me.cmdChord3.Text = "III"
         Me.cmdChord3.UseVisualStyleBackColor = True
         '
         'cmdChord4
         '
-        Me.cmdChord4.Location = New System.Drawing.Point(192, 88)
+        Me.cmdChord4.Location = New System.Drawing.Point(153, 88)
         Me.cmdChord4.Name = "cmdChord4"
-        Me.cmdChord4.Size = New System.Drawing.Size(53, 21)
+        Me.cmdChord4.Size = New System.Drawing.Size(42, 21)
         Me.cmdChord4.TabIndex = 19
         Me.cmdChord4.Text = "IV"
         Me.cmdChord4.UseVisualStyleBackColor = True
         '
         'cmdChord7
         '
-        Me.cmdChord7.Location = New System.Drawing.Point(369, 88)
+        Me.cmdChord7.Location = New System.Drawing.Point(297, 88)
         Me.cmdChord7.Name = "cmdChord7"
-        Me.cmdChord7.Size = New System.Drawing.Size(53, 21)
+        Me.cmdChord7.Size = New System.Drawing.Size(42, 21)
         Me.cmdChord7.TabIndex = 22
         Me.cmdChord7.Text = "VII"
         Me.cmdChord7.UseVisualStyleBackColor = True
         '
         'cmdChord6
         '
-        Me.cmdChord6.Location = New System.Drawing.Point(310, 88)
+        Me.cmdChord6.Location = New System.Drawing.Point(249, 88)
         Me.cmdChord6.Name = "cmdChord6"
-        Me.cmdChord6.Size = New System.Drawing.Size(53, 21)
+        Me.cmdChord6.Size = New System.Drawing.Size(42, 21)
         Me.cmdChord6.TabIndex = 21
         Me.cmdChord6.Text = "VI"
         Me.cmdChord6.UseVisualStyleBackColor = True
         '
         'cmdChord5
         '
-        Me.cmdChord5.Location = New System.Drawing.Point(251, 88)
+        Me.cmdChord5.Location = New System.Drawing.Point(201, 88)
         Me.cmdChord5.Name = "cmdChord5"
-        Me.cmdChord5.Size = New System.Drawing.Size(53, 21)
+        Me.cmdChord5.Size = New System.Drawing.Size(42, 21)
         Me.cmdChord5.TabIndex = 20
         Me.cmdChord5.Text = "V"
         Me.cmdChord5.UseVisualStyleBackColor = True
@@ -330,7 +327,7 @@ Partial Class frmTabTool
         'chk9
         '
         Me.chk9.AutoSize = True
-        Me.chk9.Location = New System.Drawing.Point(68, 114)
+        Me.chk9.Location = New System.Drawing.Point(50, 114)
         Me.chk9.Name = "chk9"
         Me.chk9.Size = New System.Drawing.Size(40, 18)
         Me.chk9.TabIndex = 26
@@ -340,7 +337,7 @@ Partial Class frmTabTool
         'chk11
         '
         Me.chk11.AutoSize = True
-        Me.chk11.Location = New System.Drawing.Point(121, 113)
+        Me.chk11.Location = New System.Drawing.Point(87, 113)
         Me.chk11.Name = "chk11"
         Me.chk11.Size = New System.Drawing.Size(47, 18)
         Me.chk11.TabIndex = 27
@@ -385,15 +382,6 @@ Partial Class frmTabTool
         Me.cmdKeyboard.Text = "Keyboard"
         Me.cmdKeyboard.UseVisualStyleBackColor = True
         '
-        'cmdRefresh
-        '
-        Me.cmdRefresh.Location = New System.Drawing.Point(454, 25)
-        Me.cmdRefresh.Name = "cmdRefresh"
-        Me.cmdRefresh.Size = New System.Drawing.Size(47, 22)
-        Me.cmdRefresh.TabIndex = 32
-        Me.cmdRefresh.Text = "Show"
-        Me.cmdRefresh.UseVisualStyleBackColor = True
-        '
         'cmdMaximize
         '
         Me.cmdMaximize.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -403,6 +391,7 @@ Partial Class frmTabTool
         Me.cmdMaximize.Size = New System.Drawing.Size(81, 21)
         Me.cmdMaximize.TabIndex = 33
         Me.cmdMaximize.Text = "Expand"
+        Me.ToolTip.SetToolTip(Me.cmdMaximize, "Show/Hide Options")
         Me.cmdMaximize.UseVisualStyleBackColor = True
         '
         'GroupBox1
@@ -543,7 +532,7 @@ Partial Class frmTabTool
         'chkDim
         '
         Me.chkDim.AutoSize = True
-        Me.chkDim.Location = New System.Drawing.Point(263, 113)
+        Me.chkDim.Location = New System.Drawing.Point(276, 111)
         Me.chkDim.Name = "chkDim"
         Me.chkDim.Size = New System.Drawing.Size(47, 18)
         Me.chkDim.TabIndex = 36
@@ -554,7 +543,7 @@ Partial Class frmTabTool
         'chkSus2
         '
         Me.chkSus2.AutoSize = True
-        Me.chkSus2.Location = New System.Drawing.Point(316, 113)
+        Me.chkSus2.Location = New System.Drawing.Point(177, 113)
         Me.chkSus2.Name = "chkSus2"
         Me.chkSus2.Size = New System.Drawing.Size(54, 18)
         Me.chkSus2.TabIndex = 37
@@ -565,7 +554,7 @@ Partial Class frmTabTool
         'chkSus4
         '
         Me.chkSus4.AutoSize = True
-        Me.chkSus4.Location = New System.Drawing.Point(369, 113)
+        Me.chkSus4.Location = New System.Drawing.Point(225, 113)
         Me.chkSus4.Name = "chkSus4"
         Me.chkSus4.Size = New System.Drawing.Size(54, 18)
         Me.chkSus4.TabIndex = 38
@@ -573,30 +562,10 @@ Partial Class frmTabTool
         Me.ToolTip.SetToolTip(Me.chkSus4, "Suspended 4th: Sharp Third")
         Me.chkSus4.UseVisualStyleBackColor = True
         '
-        'chkMin11
-        '
-        Me.chkMin11.AutoSize = True
-        Me.chkMin11.Location = New System.Drawing.Point(121, 126)
-        Me.chkMin11.Name = "chkMin11"
-        Me.chkMin11.Size = New System.Drawing.Size(61, 18)
-        Me.chkMin11.TabIndex = 41
-        Me.chkMin11.Text = "min11"
-        Me.chkMin11.UseVisualStyleBackColor = True
-        '
-        'chkMin9
-        '
-        Me.chkMin9.AutoSize = True
-        Me.chkMin9.Location = New System.Drawing.Point(68, 127)
-        Me.chkMin9.Name = "chkMin9"
-        Me.chkMin9.Size = New System.Drawing.Size(54, 18)
-        Me.chkMin9.TabIndex = 40
-        Me.chkMin9.Text = "min9"
-        Me.chkMin9.UseVisualStyleBackColor = True
-        '
         'chkDim7
         '
         Me.chkDim7.AutoSize = True
-        Me.chkDim7.Location = New System.Drawing.Point(263, 127)
+        Me.chkDim7.Location = New System.Drawing.Point(319, 111)
         Me.chkDim7.Name = "chkDim7"
         Me.chkDim7.Size = New System.Drawing.Size(54, 18)
         Me.chkDim7.TabIndex = 42
@@ -607,7 +576,7 @@ Partial Class frmTabTool
         'chkAug
         '
         Me.chkAug.AutoSize = True
-        Me.chkAug.Location = New System.Drawing.Point(316, 127)
+        Me.chkAug.Location = New System.Drawing.Point(368, 111)
         Me.chkAug.Name = "chkAug"
         Me.chkAug.Size = New System.Drawing.Size(47, 18)
         Me.chkAug.TabIndex = 43
@@ -618,7 +587,7 @@ Partial Class frmTabTool
         'chkAug7
         '
         Me.chkAug7.AutoSize = True
-        Me.chkAug7.Location = New System.Drawing.Point(369, 127)
+        Me.chkAug7.Location = New System.Drawing.Point(412, 111)
         Me.chkAug7.Name = "chkAug7"
         Me.chkAug7.Size = New System.Drawing.Size(54, 18)
         Me.chkAug7.TabIndex = 44
@@ -629,7 +598,7 @@ Partial Class frmTabTool
         'chkMin
         '
         Me.chkMin.AutoSize = True
-        Me.chkMin.Location = New System.Drawing.Point(188, 113)
+        Me.chkMin.Location = New System.Drawing.Point(131, 113)
         Me.chkMin.Name = "chkMin"
         Me.chkMin.Size = New System.Drawing.Size(47, 18)
         Me.chkMin.TabIndex = 45
@@ -660,15 +629,16 @@ Partial Class frmTabTool
         Me.ToolTip.SetToolTip(Me.cmdAbout, "Information")
         Me.cmdAbout.UseVisualStyleBackColor = True
         '
-        'chkMin7
+        'cmdTriadView
         '
-        Me.chkMin7.AutoSize = True
-        Me.chkMin7.Location = New System.Drawing.Point(13, 127)
-        Me.chkMin7.Name = "chkMin7"
-        Me.chkMin7.Size = New System.Drawing.Size(54, 18)
-        Me.chkMin7.TabIndex = 39
-        Me.chkMin7.Text = "min7"
-        Me.chkMin7.UseVisualStyleBackColor = True
+        Me.cmdTriadView.ForeColor = System.Drawing.Color.Purple
+        Me.cmdTriadView.Location = New System.Drawing.Point(345, 88)
+        Me.cmdTriadView.Name = "cmdTriadView"
+        Me.cmdTriadView.Size = New System.Drawing.Size(111, 21)
+        Me.cmdTriadView.TabIndex = 59
+        Me.cmdTriadView.Text = "Triad Viewer"
+        Me.ToolTip.SetToolTip(Me.cmdTriadView, "Shows all chord degree triads on a single form.")
+        Me.cmdTriadView.UseVisualStyleBackColor = True
         '
         'Label10
         '
@@ -714,6 +684,7 @@ Partial Class frmTabTool
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(897, 824)
+        Me.Controls.Add(Me.cmdTriadView)
         Me.Controls.Add(Me.cmdAbout)
         Me.Controls.Add(Me.cmdBuilder)
         Me.Controls.Add(Me.cmdHideTab)
@@ -724,15 +695,11 @@ Partial Class frmTabTool
         Me.Controls.Add(Me.chkAug7)
         Me.Controls.Add(Me.chkAug)
         Me.Controls.Add(Me.chkDim7)
-        Me.Controls.Add(Me.chkMin11)
-        Me.Controls.Add(Me.chkMin9)
-        Me.Controls.Add(Me.chkMin7)
         Me.Controls.Add(Me.chkSus4)
         Me.Controls.Add(Me.chkSus2)
         Me.Controls.Add(Me.chkDim)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.cmdMaximize)
-        Me.Controls.Add(Me.cmdRefresh)
         Me.Controls.Add(Me.cmdKeyboard)
         Me.Controls.Add(Me.cmdFretboard)
         Me.Controls.Add(Me.cmdClear)
@@ -810,7 +777,6 @@ Partial Class frmTabTool
     Friend WithEvents cmdClear As Button
     Friend WithEvents cmdFretboard As Button
     Friend WithEvents cmdKeyboard As Button
-    Friend WithEvents cmdRefresh As Button
     Friend WithEvents cmdMaximize As Button
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents chkNoteText As CheckBox
@@ -820,13 +786,10 @@ Partial Class frmTabTool
     Friend WithEvents ToolTip As ToolTip
     Friend WithEvents chkSus2 As CheckBox
     Friend WithEvents chkSus4 As CheckBox
-    Friend WithEvents chkMin11 As CheckBox
-    Friend WithEvents chkMin9 As CheckBox
     Friend WithEvents chkTabRoot As CheckBox
     Friend WithEvents chkDim7 As CheckBox
     Friend WithEvents chkAug As CheckBox
     Friend WithEvents chkAug7 As CheckBox
-    Friend WithEvents chkMin7 As CheckBox
     Friend WithEvents chkMin As CheckBox
     Friend WithEvents Label10 As Label
     Friend WithEvents cbProgressions As ComboBox
@@ -841,4 +804,5 @@ Partial Class frmTabTool
     Friend WithEvents txtFretMax As TextBox
     Friend WithEvents txtFretMin As TextBox
     Friend WithEvents Label11 As Label
+    Friend WithEvents cmdTriadView As Button
 End Class

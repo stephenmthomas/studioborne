@@ -25,6 +25,7 @@ Partial Class frmFretboard
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmFretboard))
         Me.pbFretboard = New System.Windows.Forms.PictureBox()
         Me.chkOnTop = New System.Windows.Forms.CheckBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.pbFretboard, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -48,6 +49,14 @@ Partial Class frmFretboard
         Me.chkOnTop.Text = "Top"
         Me.chkOnTop.UseVisualStyleBackColor = True
         '
+        'Label1
+        '
+        Me.Label1.BackColor = System.Drawing.Color.Red
+        Me.Label1.Location = New System.Drawing.Point(42, 2)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(25, 25)
+        Me.Label1.TabIndex = 42
+        '
         'frmFretboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
@@ -55,6 +64,7 @@ Partial Class frmFretboard
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ClientSize = New System.Drawing.Size(919, 216)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.chkOnTop)
         Me.Controls.Add(Me.pbFretboard)
         Me.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -71,4 +81,5 @@ Partial Class frmFretboard
 
     Friend WithEvents pbFretboard As PictureBox
     Friend WithEvents chkOnTop As CheckBox
+    Friend WithEvents Label1 As Label
 End Class

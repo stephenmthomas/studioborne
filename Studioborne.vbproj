@@ -91,6 +91,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmKeyTriad.Designer.vb">
+      <DependentUpon>frmKeyTriad.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmKeyTriad.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmAbout.Designer.vb">
       <DependentUpon>frmAbout.vb</DependentUpon>
     </Compile>
@@ -152,6 +158,9 @@
     <EmbeddedResource Include="frmKeyboard.resx">
       <DependentUpon>frmKeyboard.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmKeyTriad.resx">
+      <DependentUpon>frmKeyTriad.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmTabTool.resx">
       <DependentUpon>frmTabTool.vb</DependentUpon>
     </EmbeddedResource>
@@ -180,6 +189,7 @@
     <None Include="bin\Debug\ind_g.png" />
     <None Include="bin\Debug\ind_r.png" />
     <None Include="bin\Debug\ind_y.png" />
+    <None Include="studioborne.ico" />
     <Content Include="Treetog-Junior-Folder-blue-music.ico" />
   </ItemGroup>
   <ItemGroup>

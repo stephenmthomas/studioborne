@@ -28,8 +28,9 @@ Partial Class frmAbout
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.cmdClose = New System.Windows.Forms.Button()
+        Me.lblURL = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -61,7 +62,7 @@ Partial Class frmAbout
         Me.Label3.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.Gray
         Me.Label3.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Label3.Location = New System.Drawing.Point(6, 52)
+        Me.Label3.Location = New System.Drawing.Point(6, 45)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(249, 16)
         Me.Label3.TabIndex = 2
@@ -73,7 +74,7 @@ Partial Class frmAbout
         Me.Label4.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.SystemColors.MenuHighlight
         Me.Label4.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Label4.Location = New System.Drawing.Point(6, 68)
+        Me.Label4.Location = New System.Drawing.Point(6, 61)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(249, 16)
         Me.Label4.TabIndex = 3
@@ -85,41 +86,43 @@ Partial Class frmAbout
         Me.Label5.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.White
         Me.Label5.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Label5.Location = New System.Drawing.Point(6, 114)
+        Me.Label5.Location = New System.Drawing.Point(6, 134)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(249, 146)
+        Me.Label5.Size = New System.Drawing.Size(249, 119)
         Me.Label5.TabIndex = 4
         Me.Label5.Text = resources.GetString("Label5.Text")
         '
-        'Label6
+        'lblURL
         '
-        Me.Label6.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.ForeColor = System.Drawing.SystemColors.MenuHighlight
-        Me.Label6.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Label6.Location = New System.Drawing.Point(6, 85)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(249, 16)
-        Me.Label6.TabIndex = 5
-        Me.Label6.Text = "https://github.com/stephenmthomas"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblURL.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblURL.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblURL.ForeColor = System.Drawing.SystemColors.MenuHighlight
+        Me.lblURL.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.lblURL.Location = New System.Drawing.Point(6, 78)
+        Me.lblURL.Name = "lblURL"
+        Me.lblURL.Size = New System.Drawing.Size(249, 16)
+        Me.lblURL.TabIndex = 5
+        Me.lblURL.Text = "https://github.com/stephenmthomas"
+        Me.lblURL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'cmdClose
+        'PictureBox1
         '
-        Me.cmdClose.Location = New System.Drawing.Point(60, 257)
-        Me.cmdClose.Name = "cmdClose"
-        Me.cmdClose.Size = New System.Drawing.Size(195, 26)
-        Me.cmdClose.TabIndex = 6
-        Me.cmdClose.Text = "Yeah, cool story, bro..."
-        Me.cmdClose.UseVisualStyleBackColor = True
+        Me.PictureBox1.Image = Global.Studioborne.My.Resources.Resources.studioborne
+        Me.PictureBox1.Location = New System.Drawing.Point(114, 101)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(32, 32)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PictureBox1.TabIndex = 7
+        Me.PictureBox1.TabStop = False
         '
         'frmAbout
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
-        Me.ClientSize = New System.Drawing.Size(267, 296)
-        Me.Controls.Add(Me.cmdClose)
-        Me.Controls.Add(Me.Label6)
+        Me.ClientSize = New System.Drawing.Size(267, 261)
+        Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.lblURL)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
@@ -129,7 +132,9 @@ Partial Class frmAbout
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmAbout"
         Me.Text = "A B O U T"
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -138,6 +143,6 @@ Partial Class frmAbout
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents cmdClose As Button
+    Friend WithEvents lblURL As Label
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

@@ -23,20 +23,10 @@ Partial Class frmKeyboard
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmKeyboard))
-        Me.pbKeys = New System.Windows.Forms.PictureBox()
         Me.chkOnTop = New System.Windows.Forms.CheckBox()
+        Me.pbKeys = New System.Windows.Forms.PictureBox()
         CType(Me.pbKeys, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'pbKeys
-        '
-        Me.pbKeys.Image = CType(resources.GetObject("pbKeys.Image"), System.Drawing.Image)
-        Me.pbKeys.Location = New System.Drawing.Point(12, 12)
-        Me.pbKeys.Name = "pbKeys"
-        Me.pbKeys.Size = New System.Drawing.Size(640, 199)
-        Me.pbKeys.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.pbKeys.TabIndex = 0
-        Me.pbKeys.TabStop = False
         '
         'chkOnTop
         '
@@ -47,6 +37,16 @@ Partial Class frmKeyboard
         Me.chkOnTop.TabIndex = 40
         Me.chkOnTop.Text = "Top"
         Me.chkOnTop.UseVisualStyleBackColor = True
+        '
+        'pbKeys
+        '
+        Me.pbKeys.Image = CType(resources.GetObject("pbKeys.Image"), System.Drawing.Image)
+        Me.pbKeys.Location = New System.Drawing.Point(12, 12)
+        Me.pbKeys.Name = "pbKeys"
+        Me.pbKeys.Size = New System.Drawing.Size(640, 199)
+        Me.pbKeys.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.pbKeys.TabIndex = 0
+        Me.pbKeys.TabStop = False
         '
         'frmKeyboard
         '
