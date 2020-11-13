@@ -1,5 +1,5 @@
 ﻿Module MusicFunctions
-    Public SBVersion As String = "version 0.8"
+    Public SBVersion As String = "version 0.92"
     Public DefaultOpts As String = "autoshow=true,notes=false,tones=false,tabroots=false,icons=true,ontop=false,transparency=0.5,transparent=false,fretmin=0,fretmax=24"
     Public FretMin As Integer = 0
     Public FretMax As Integer = 24
@@ -188,17 +188,31 @@ Starter:
         'ie in Key of C, C is 0 - but in code C is 3.
         'So Root(C) = 3, Note(C) = 3, diff = 0
 
-        'If Note2Value(Note2) < Note2Value(Note1) Then 'for example, B in key of C should be 11
-        '   =(B) - (C) = 2 - 3 = - 1
-        '   GenIntFromNotes = 12 - (Note2Value(Note1) - Note2Value(Note2))
-        'Else
-        '   GenIntFromNotes = Note2Value(Note2) - Note2Value(Note1)
-        'End If
+        'GenIntFromNotes("C","D") = 2
+
         If Note2Value(Note2) < Note2Value(Note1) Then
             GenIntFromNotes = 12 - Math.Abs(Note2Value(Note2) - Note2Value(Note1))
         Else
             GenIntFromNotes = Math.Abs(Note2Value(Note2) - Note2Value(Note1))
         End If
+
+    End Function
+    Public Function GenIntsFromNotes(NoteCSV As String) As String
+        'Giving a CSV of notes, generates the interval formula
+        'ie GenIntFromCSV("C,E,G") = "0,4,7"  -  the c major chord
+
+        Dim SplitCSV() As String
+        Dim OutputStr As String
+
+        SplitCSV = Split(NoteCSV, ",")
+        OutputStr = ""
+        GenIntsFromNotes = "Error"
+
+        For Each Note In SplitCSV
+            OutputStr = OutputStr & Trim(Str(GenIntFromNotes(SplitCSV(0), Note)) & ",")
+        Next
+
+        GenIntsFromNotes = Mid(OutputStr, 1, Len(OutputStr) - 1)
 
     End Function
     Public Function ScaleDegIntFromNotes(WhatNotes As String, WhatDegree As Integer) As String
@@ -223,7 +237,7 @@ Starter:
 
     End Function
     Public Function ChordTypeFromCSV(ChordCSV As String) As String
-        ChordTypeFromCSV = "Error"
+        ChordTypeFromCSV = "" 'unknown chord type
         If ChordCSV = "0,2,7" Then ChordTypeFromCSV = "sus2"
         If ChordCSV = "0,3,6" Then ChordTypeFromCSV = "dim"
         If ChordCSV = "0,3,6,9" Then ChordTypeFromCSV = "dim7"

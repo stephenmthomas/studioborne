@@ -25,7 +25,6 @@ Partial Class frmKeyTriad
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmKeyTriad))
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.chkOnTop = New System.Windows.Forms.CheckBox()
         Me.pb7 = New System.Windows.Forms.PictureBox()
         Me.pb6 = New System.Windows.Forms.PictureBox()
         Me.pb4 = New System.Windows.Forms.PictureBox()
@@ -33,6 +32,14 @@ Partial Class frmKeyTriad
         Me.pb3 = New System.Windows.Forms.PictureBox()
         Me.pb2 = New System.Windows.Forms.PictureBox()
         Me.pb1 = New System.Windows.Forms.PictureBox()
+        Me.chkOnTop = New System.Windows.Forms.CheckBox()
+        Me.cb1 = New System.Windows.Forms.CheckBox()
+        Me.cb2 = New System.Windows.Forms.CheckBox()
+        Me.cb3 = New System.Windows.Forms.CheckBox()
+        Me.cb4 = New System.Windows.Forms.CheckBox()
+        Me.cb5 = New System.Windows.Forms.CheckBox()
+        Me.cb6 = New System.Windows.Forms.CheckBox()
+        Me.cb7 = New System.Windows.Forms.CheckBox()
         CType(Me.pb7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pb6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pb4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -41,16 +48,6 @@ Partial Class frmKeyTriad
         CType(Me.pb2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pb1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'chkOnTop
-        '
-        Me.chkOnTop.AutoSize = True
-        Me.chkOnTop.Location = New System.Drawing.Point(272, 702)
-        Me.chkOnTop.Name = "chkOnTop"
-        Me.chkOnTop.Size = New System.Drawing.Size(47, 18)
-        Me.chkOnTop.TabIndex = 42
-        Me.chkOnTop.Text = "Top"
-        Me.chkOnTop.UseVisualStyleBackColor = True
         '
         'pb7
         '
@@ -129,12 +126,113 @@ Partial Class frmKeyTriad
         Me.pb1.TabStop = False
         Me.ToolTip1.SetToolTip(Me.pb1, "Chord Degree 1")
         '
+        'chkOnTop
+        '
+        Me.chkOnTop.AutoSize = True
+        Me.chkOnTop.Location = New System.Drawing.Point(272, 702)
+        Me.chkOnTop.Name = "chkOnTop"
+        Me.chkOnTop.Size = New System.Drawing.Size(47, 18)
+        Me.chkOnTop.TabIndex = 42
+        Me.chkOnTop.Text = "Top"
+        Me.chkOnTop.UseVisualStyleBackColor = True
+        '
+        'cb1
+        '
+        Me.cb1.CheckAlign = System.Drawing.ContentAlignment.BottomRight
+        Me.cb1.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cb1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.cb1.Location = New System.Drawing.Point(321, 82)
+        Me.cb1.Name = "cb1"
+        Me.cb1.Size = New System.Drawing.Size(130, 19)
+        Me.cb1.TabIndex = 43
+        Me.cb1.Text = "I"
+        Me.cb1.UseVisualStyleBackColor = True
+        '
+        'cb2
+        '
+        Me.cb2.CheckAlign = System.Drawing.ContentAlignment.BottomRight
+        Me.cb2.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cb2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.cb2.Location = New System.Drawing.Point(321, 182)
+        Me.cb2.Name = "cb2"
+        Me.cb2.Size = New System.Drawing.Size(130, 19)
+        Me.cb2.TabIndex = 44
+        Me.cb2.Text = "I"
+        Me.cb2.UseVisualStyleBackColor = True
+        '
+        'cb3
+        '
+        Me.cb3.CheckAlign = System.Drawing.ContentAlignment.BottomRight
+        Me.cb3.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cb3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.cb3.Location = New System.Drawing.Point(321, 282)
+        Me.cb3.Name = "cb3"
+        Me.cb3.Size = New System.Drawing.Size(130, 19)
+        Me.cb3.TabIndex = 45
+        Me.cb3.Text = "I"
+        Me.cb3.UseVisualStyleBackColor = True
+        '
+        'cb4
+        '
+        Me.cb4.CheckAlign = System.Drawing.ContentAlignment.BottomRight
+        Me.cb4.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cb4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.cb4.Location = New System.Drawing.Point(321, 382)
+        Me.cb4.Name = "cb4"
+        Me.cb4.Size = New System.Drawing.Size(130, 19)
+        Me.cb4.TabIndex = 46
+        Me.cb4.Text = "I"
+        Me.cb4.UseVisualStyleBackColor = True
+        '
+        'cb5
+        '
+        Me.cb5.CheckAlign = System.Drawing.ContentAlignment.BottomRight
+        Me.cb5.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cb5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.cb5.Location = New System.Drawing.Point(321, 482)
+        Me.cb5.Name = "cb5"
+        Me.cb5.Size = New System.Drawing.Size(130, 19)
+        Me.cb5.TabIndex = 47
+        Me.cb5.Text = "I"
+        Me.cb5.UseVisualStyleBackColor = True
+        '
+        'cb6
+        '
+        Me.cb6.CheckAlign = System.Drawing.ContentAlignment.BottomRight
+        Me.cb6.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cb6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.cb6.Location = New System.Drawing.Point(321, 582)
+        Me.cb6.Name = "cb6"
+        Me.cb6.Size = New System.Drawing.Size(130, 19)
+        Me.cb6.TabIndex = 48
+        Me.cb6.Text = "I"
+        Me.cb6.UseVisualStyleBackColor = True
+        '
+        'cb7
+        '
+        Me.cb7.CheckAlign = System.Drawing.ContentAlignment.BottomRight
+        Me.cb7.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cb7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.cb7.Location = New System.Drawing.Point(321, 682)
+        Me.cb7.Name = "cb7"
+        Me.cb7.Size = New System.Drawing.Size(130, 19)
+        Me.cb7.TabIndex = 49
+        Me.cb7.Text = "I"
+        Me.cb7.UseVisualStyleBackColor = True
+        '
         'frmKeyTriad
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(320, 720)
+        Me.ClientSize = New System.Drawing.Size(355, 720)
+        Me.Controls.Add(Me.cb7)
+        Me.Controls.Add(Me.cb6)
+        Me.Controls.Add(Me.cb5)
+        Me.Controls.Add(Me.cb4)
+        Me.Controls.Add(Me.cb3)
+        Me.Controls.Add(Me.cb2)
+        Me.Controls.Add(Me.cb1)
         Me.Controls.Add(Me.chkOnTop)
         Me.Controls.Add(Me.pb7)
         Me.Controls.Add(Me.pb6)
@@ -171,4 +269,11 @@ Partial Class frmKeyTriad
     Friend WithEvents pb7 As PictureBox
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents chkOnTop As CheckBox
+    Friend WithEvents cb1 As CheckBox
+    Friend WithEvents cb2 As CheckBox
+    Friend WithEvents cb3 As CheckBox
+    Friend WithEvents cb4 As CheckBox
+    Friend WithEvents cb5 As CheckBox
+    Friend WithEvents cb6 As CheckBox
+    Friend WithEvents cb7 As CheckBox
 End Class

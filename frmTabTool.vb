@@ -102,6 +102,16 @@
         cmdChord6.Text = ChordDegButton(ScaleDegIntFromNotes(CurrentNotes & "," & CurrentNotes, 6), "VI")
         cmdChord7.Text = ChordDegButton(ScaleDegIntFromNotes(CurrentNotes & "," & CurrentNotes, 7), "VII")
 
+        If frmKeyTriad.Visible = True Then
+            frmKeyTriad.cb1.Text = cmdChord1.Text
+            frmKeyTriad.cb2.Text = cmdChord2.Text
+            frmKeyTriad.cb3.Text = cmdChord3.Text
+            frmKeyTriad.cb4.Text = cmdChord4.Text
+            frmKeyTriad.cb5.Text = cmdChord5.Text
+            frmKeyTriad.cb6.Text = cmdChord6.Text
+            frmKeyTriad.cb7.Text = cmdChord7.Text
+        End If
+
     End Sub
 
     Private Sub cbInt_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbInt.SelectedIndexChanged
@@ -379,50 +389,64 @@
 
     Private Sub cmdChord1_Click(sender As Object, e As EventArgs) Handles cmdChord1.Click
         txtChord.Text = GenerateChord(1)
+        Dim SplitChord() As String
+        SplitChord = Split(txtChord.Text, ",")
 
-        frmFretboard.Text = "Fretboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord1.Text & " Chord"
-        frmKeyboard.Text = "Keyboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord1.Text & " Chord"
+        frmFretboard.Text = "Fretboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord1.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(txtVals.Text)
+        frmKeyboard.Text = "Keyboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord1.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(txtVals.Text)
     End Sub
     Private Sub cmdChord2_Click(sender As Object, e As EventArgs) Handles cmdChord2.Click
         txtChord.Text = GenerateChord(2)
+        Dim SplitChord() As String
+        SplitChord = Split(txtChord.Text, ",")
 
-        frmFretboard.Text = "Fretboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord2.Text & " Chord"
-        frmKeyboard.Text = "Keyboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord2.Text & " Chord"
+        frmFretboard.Text = "Fretboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord2.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(txtVals.Text)
+        frmKeyboard.Text = "Keyboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord2.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(txtVals.Text)
     End Sub
 
     Private Sub cmdChord3_Click(sender As Object, e As EventArgs) Handles cmdChord3.Click
         txtChord.Text = GenerateChord(3)
+        Dim SplitChord() As String
+        SplitChord = Split(txtChord.Text, ",")
 
-        frmFretboard.Text = "Fretboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord3.Text & " Chord"
-        frmKeyboard.Text = "Keyboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord3.Text & " Chord"
+        frmFretboard.Text = "Fretboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord3.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(txtVals.Text)
+        frmKeyboard.Text = "Keyboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord3.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(txtVals.Text)
     End Sub
 
     Private Sub cmdChord4_Click(sender As Object, e As EventArgs) Handles cmdChord4.Click
         txtChord.Text = GenerateChord(4)
+        Dim SplitChord() As String
+        SplitChord = Split(txtChord.Text, ",")
 
-        frmFretboard.Text = "Fretboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord4.Text & " Chord"
-        frmKeyboard.Text = "Keyboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord4.Text & " Chord"
+        frmFretboard.Text = "Fretboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord4.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(txtVals.Text)
+        frmKeyboard.Text = "Keyboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord4.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(txtVals.Text)
     End Sub
 
     Private Sub cmdChord5_Click(sender As Object, e As EventArgs) Handles cmdChord5.Click
         txtChord.Text = GenerateChord(5)
+        Dim SplitChord() As String
+        SplitChord = Split(txtChord.Text, ",")
 
-        frmFretboard.Text = "Fretboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord5.Text & " Chord"
-        frmKeyboard.Text = "Keyboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord5.Text & " Chord"
+        frmFretboard.Text = "Fretboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord5.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(txtVals.Text)
+        frmKeyboard.Text = "Keyboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord5.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(txtVals.Text)
     End Sub
 
     Private Sub cmdChord6_Click(sender As Object, e As EventArgs) Handles cmdChord6.Click
         txtChord.Text = GenerateChord(6)
+        Dim SplitChord() As String
+        SplitChord = Split(txtChord.Text, ",")
 
-        frmFretboard.Text = "Fretboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord6.Text & " Chord"
-        frmKeyboard.Text = "Keyboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord6.Text & " Chord"
+        frmFretboard.Text = "Fretboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord6.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(txtVals.Text)
+        frmKeyboard.Text = "Keyboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord6.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(txtVals.Text)
     End Sub
 
     Private Sub cmdChord7_Click(sender As Object, e As EventArgs) Handles cmdChord7.Click
         txtChord.Text = GenerateChord(7)
+        Dim SplitChord() As String
+        SplitChord = Split(txtChord.Text, ",")
 
-        frmFretboard.Text = "Fretboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord7.Text & " Chord"
-        frmKeyboard.Text = "Keyboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord7.Text & " Chord"
+        frmFretboard.Text = "Fretboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord7.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(txtVals.Text)
+        frmKeyboard.Text = "Keyboard - " & cbKey.Text & " " & cbMode.Text & " " & cmdChord7.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(txtVals.Text)
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
@@ -548,9 +572,21 @@
     Private Sub cmdTriadView_Click(sender As Object, e As EventArgs) Handles cmdTriadView.Click
         frmKeyTriad.Show()
         RefreshAllForms()
+        frmKeyTriad.cb1.Text = cmdChord1.Text
+        frmKeyTriad.cb2.Text = cmdChord2.Text
+        frmKeyTriad.cb3.Text = cmdChord3.Text
+        frmKeyTriad.cb4.Text = cmdChord4.Text
+        frmKeyTriad.cb5.Text = cmdChord5.Text
+        frmKeyTriad.cb6.Text = cmdChord6.Text
+        frmKeyTriad.cb7.Text = cmdChord7.Text
     End Sub
 
     Private Sub frmTabTool_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         SaveOptions()
+    End Sub
+
+    Private Sub txtChord_TextChanged(sender As Object, e As EventArgs) Handles txtChord.TextChanged
+        txtVals.Text = GenIntsFromNotes(txtChord.Text)
+
     End Sub
 End Class

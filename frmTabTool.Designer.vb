@@ -119,7 +119,7 @@ Partial Class frmTabTool
         '
         Me.cbMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbMode.FormattingEnabled = True
-        Me.cbMode.Items.AddRange(New Object() {"Major (Ionian)", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Minor (Aeolian)", "Locrian", "Melodic Minor", "Harmonic Minor", "Super Locrian", "Major Pentatonic*", "Minor Pentatonic*", "Blues Scale*", "Chromatic*"})
+        Me.cbMode.Items.AddRange(New Object() {"Major (Ionian)", "Dorian", "Phrygian", "Phrygian Dominant", "Lydian", "Mixolydian", "Minor (Aeolian)", "Locrian", "Melodic Minor", "Harmonic Minor", "Super Locrian", "Major Pentatonic*", "Minor Pentatonic*", "Blues Scale*", "Chromatic*"})
         Me.cbMode.Location = New System.Drawing.Point(160, 25)
         Me.cbMode.Name = "cbMode"
         Me.cbMode.Size = New System.Drawing.Size(141, 22)
@@ -138,7 +138,7 @@ Partial Class frmTabTool
         '
         Me.cbInt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInt.FormattingEnabled = True
-        Me.cbInt.Items.AddRange(New Object() {"2,2,1,2,2,2,1", "2,1,2,2,2,1,2", "1,2,2,2,1,2,2", "2,2,2,1,2,2,1", "2,2,1,2,2,1,2", "2,1,2,2,1,2,2", "1,2,2,1,2,2,2", "2,1,2,2,2,2,1", "2,1,2,2,1,3,1", "1,2,1,2,2,2,2", "2,2,3,2,3", "3,2,2,3,2", "3,2,1,1,3,2", "1,1,1,1,1,1,1,1,1,1,1,1"})
+        Me.cbInt.Items.AddRange(New Object() {"2,2,1,2,2,2,1", "2,1,2,2,2,1,2", "1,2,2,2,1,2,2", "1,3,1,2,1,2,2", "2,2,2,1,2,2,1", "2,2,1,2,2,1,2", "2,1,2,2,1,2,2", "1,2,2,1,2,2,2", "2,1,2,2,2,2,1", "2,1,2,2,1,3,1", "1,2,1,2,2,2,2", "2,2,3,2,3", "3,2,2,3,2", "3,2,1,1,3,2", "1,1,1,1,1,1,1,1,1,1,1,1"})
         Me.cbInt.Location = New System.Drawing.Point(307, 25)
         Me.cbInt.Name = "cbInt"
         Me.cbInt.Size = New System.Drawing.Size(141, 22)
@@ -238,7 +238,7 @@ Partial Class frmTabTool
         '
         Me.cmdChord1.Location = New System.Drawing.Point(13, 88)
         Me.cmdChord1.Name = "cmdChord1"
-        Me.cmdChord1.Size = New System.Drawing.Size(42, 21)
+        Me.cmdChord1.Size = New System.Drawing.Size(47, 21)
         Me.cmdChord1.TabIndex = 16
         Me.cmdChord1.Text = "I"
         Me.cmdChord1.UseVisualStyleBackColor = True
@@ -247,7 +247,7 @@ Partial Class frmTabTool
         '
         Me.cmdChord2.Location = New System.Drawing.Point(59, 88)
         Me.cmdChord2.Name = "cmdChord2"
-        Me.cmdChord2.Size = New System.Drawing.Size(42, 21)
+        Me.cmdChord2.Size = New System.Drawing.Size(47, 21)
         Me.cmdChord2.TabIndex = 17
         Me.cmdChord2.Text = "II"
         Me.cmdChord2.UseVisualStyleBackColor = True
@@ -256,43 +256,43 @@ Partial Class frmTabTool
         '
         Me.cmdChord3.Location = New System.Drawing.Point(105, 88)
         Me.cmdChord3.Name = "cmdChord3"
-        Me.cmdChord3.Size = New System.Drawing.Size(42, 21)
+        Me.cmdChord3.Size = New System.Drawing.Size(47, 21)
         Me.cmdChord3.TabIndex = 18
         Me.cmdChord3.Text = "III"
         Me.cmdChord3.UseVisualStyleBackColor = True
         '
         'cmdChord4
         '
-        Me.cmdChord4.Location = New System.Drawing.Point(153, 88)
+        Me.cmdChord4.Location = New System.Drawing.Point(151, 88)
         Me.cmdChord4.Name = "cmdChord4"
-        Me.cmdChord4.Size = New System.Drawing.Size(42, 21)
+        Me.cmdChord4.Size = New System.Drawing.Size(47, 21)
         Me.cmdChord4.TabIndex = 19
         Me.cmdChord4.Text = "IV"
         Me.cmdChord4.UseVisualStyleBackColor = True
         '
         'cmdChord7
         '
-        Me.cmdChord7.Location = New System.Drawing.Point(297, 88)
+        Me.cmdChord7.Location = New System.Drawing.Point(289, 88)
         Me.cmdChord7.Name = "cmdChord7"
-        Me.cmdChord7.Size = New System.Drawing.Size(42, 21)
+        Me.cmdChord7.Size = New System.Drawing.Size(47, 21)
         Me.cmdChord7.TabIndex = 22
         Me.cmdChord7.Text = "VII"
         Me.cmdChord7.UseVisualStyleBackColor = True
         '
         'cmdChord6
         '
-        Me.cmdChord6.Location = New System.Drawing.Point(249, 88)
+        Me.cmdChord6.Location = New System.Drawing.Point(243, 88)
         Me.cmdChord6.Name = "cmdChord6"
-        Me.cmdChord6.Size = New System.Drawing.Size(42, 21)
+        Me.cmdChord6.Size = New System.Drawing.Size(47, 21)
         Me.cmdChord6.TabIndex = 21
         Me.cmdChord6.Text = "VI"
         Me.cmdChord6.UseVisualStyleBackColor = True
         '
         'cmdChord5
         '
-        Me.cmdChord5.Location = New System.Drawing.Point(201, 88)
+        Me.cmdChord5.Location = New System.Drawing.Point(197, 88)
         Me.cmdChord5.Name = "cmdChord5"
-        Me.cmdChord5.Size = New System.Drawing.Size(42, 21)
+        Me.cmdChord5.Size = New System.Drawing.Size(47, 21)
         Me.cmdChord5.TabIndex = 20
         Me.cmdChord5.Text = "V"
         Me.cmdChord5.UseVisualStyleBackColor = True
@@ -634,7 +634,7 @@ Partial Class frmTabTool
         Me.cmdTriadView.ForeColor = System.Drawing.Color.Purple
         Me.cmdTriadView.Location = New System.Drawing.Point(345, 88)
         Me.cmdTriadView.Name = "cmdTriadView"
-        Me.cmdTriadView.Size = New System.Drawing.Size(111, 21)
+        Me.cmdTriadView.Size = New System.Drawing.Size(103, 21)
         Me.cmdTriadView.TabIndex = 59
         Me.cmdTriadView.Text = "Triad Viewer"
         Me.ToolTip.SetToolTip(Me.cmdTriadView, "Shows all chord degree triads on a single form.")
