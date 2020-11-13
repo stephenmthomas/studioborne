@@ -1,6 +1,6 @@
 ﻿Module MusicFunctions
-    Public SBVersion As String = "version 0.92"
-    Public DefaultOpts As String = "autoshow=true,notes=false,tones=false,tabroots=false,icons=true,ontop=false,transparency=0.5,transparent=false,fretmin=0,fretmax=24"
+    Public SBVersion As String = "version 0.95"
+    Public DefaultOpts As String = "autoshow=true,notes=false,tones=false,tabroots=false,icons=true,ontop=false,transparency=0.5,transparent=false,fretmin=0,fretmax=24,key=3,mode=0"
     Public FretMin As Integer = 0
     Public FretMax As Integer = 24
     Public Transparency As Single = 0.5

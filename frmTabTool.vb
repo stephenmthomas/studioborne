@@ -25,7 +25,9 @@
         NewOpts += "transparency=" & Str(Transparency) & ","
         NewOpts += "transparent=" & chkTransparency.Checked & ","
         NewOpts += "fretmin=" & txtFretMin.Text & ","
-        NewOpts += "fretmax=" & txtFretMax.Text
+        NewOpts += "fretmax=" & txtFretMax.Text & ","
+        NewOpts += "key=" & cbKey.SelectedIndex & ","
+        NewOpts += "mode=" & cbMode.SelectedIndex
 
         ConfigFile = My.Computer.FileSystem.OpenTextFileWriter(Application.StartupPath & "\settings.cfg", False)
         ConfigFile.WriteLine(NewOpts)
@@ -35,7 +37,11 @@
         Dim ConfigFile As System.IO.StreamWriter
         Dim SBOptions As String
         Dim Opts(), CurOpt() As String
+        Dim LdError As Integer
 
+        On Error GoTo LoadError
+
+LoadConfig:
         If System.IO.File.Exists(Application.StartupPath & "\settings.cfg") Then
             SBOptions = My.Computer.FileSystem.ReadAllText(Application.StartupPath & "\settings.cfg")
             Opts = Split(SBOptions, ",")
@@ -52,21 +58,34 @@
                 If CurOpt(0) = "transparent" Then chkTransparency.Checked = CurOpt(1)
                 If CurOpt(0) = "fretmin" Then txtFretMin.Text = CurOpt(1)
                 If CurOpt(0) = "fretmax" Then txtFretMax.Text = CurOpt(1)
+                If CurOpt(0) = "key" Then cbKey.SelectedIndex = CurOpt(1)
+                If CurOpt(0) = "mode" Then cbMode.SelectedIndex = CurOpt(1)
             Next
 
         Else
             ConfigFile = My.Computer.FileSystem.OpenTextFileWriter(Application.StartupPath & "\settings.cfg", False)
             ConfigFile.WriteLine(DefaultOpts)
             ConfigFile.Close()
+            cbKey.SelectedIndex = 3
+            cbMode.SelectedIndex = 0
         End If
+
+        Exit Sub
+
+LoadError:
+        LdError = MsgBox("There appears to be an error loading the configuration file.  Would you like to delete the configuration file and try again? (Recommended!)", vbYesNo, "Load Error!")
+        '6 = yes, 7 = no
+        If LdError = 6 Then
+            My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\settings.cfg")
+            GoTo LoadConfig
+        End If
+
     End Sub
     Private Sub frmTabTool_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadOptions()
         Me.Text = Me.Text & " - " & SBVersion
         Me.Height = 219
         Me.Width = 525
-        cbKey.SelectedIndex = 3
-        cbMode.SelectedIndex = 0
         GenNotes()
         GenValues()
     End Sub
