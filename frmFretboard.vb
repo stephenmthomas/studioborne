@@ -21,9 +21,7 @@
         If WutString = 5 Then StringMod = 147
         If WutString = 6 Then StringMod = 182
 
-
-
-        If frmTabTool.chkNoteText.Checked = False And frmTabTool.chkTones.Checked = False Then
+        If oNotes = False And oTones = False Then
             WhatText = ""
         End If
 
@@ -35,7 +33,7 @@
             .Width = 25
             .Font = New Font("Verdana", 8, FontStyle.Bold)
             .TextAlign = ContentAlignment.MiddleCenter
-            If frmTabTool.chkNoteIcon.Checked = True Then
+            If oIcon = True Then
                 If WutColor = Color.Red Then
                     .Image = r_image
                 ElseIf WutColor = Color.Blue Then

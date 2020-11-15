@@ -11,7 +11,7 @@
     Public Sub KeyDraw(WhatNote As String, WutColor As Color, Optional ByVal WhatText As String = "")
         Dim Oct1Dot, Oct2Dot As New Label
 
-        If frmTabTool.chkNoteText.Checked = False And frmTabTool.chkTones.Checked = False Then
+        If oNotes = False And oTones = False Then
             WhatText = ""
         End If
 
@@ -24,7 +24,7 @@
             .Font = New Font("Verdana", 8, FontStyle.Bold)
             .TextAlign = ContentAlignment.MiddleCenter
             .ForeColor = Color.Black
-            If frmTabTool.chkNoteIcon.Checked = True Then
+            If oIcon = True Then
                 If WutColor = Color.Red Then
                     .Image = r_image
                 ElseIf WutColor = Color.Blue Then
@@ -45,7 +45,7 @@
             .Width = 25
             .Font = New Font("Verdana", 8, FontStyle.Bold)
             .TextAlign = ContentAlignment.MiddleCenter
-            If frmTabTool.chkNoteIcon.Checked = True Then
+            If oIcon = True Then
                 If WutColor = Color.Red Then
                     .Image = r_image
                 ElseIf WutColor = Color.Blue Then

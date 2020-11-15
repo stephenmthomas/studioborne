@@ -1,15 +1,36 @@
 ﻿Module MusicFunctions
-    Public SBVersion As String = "version 0.95"
-    Public DefaultOpts As String = "autoshow=true,notes=false,tones=false,tabroots=false,icons=true,ontop=false,transparency=0.5,transparent=false,fretmin=0,fretmax=24,key=3,mode=0"
+    Public SBVersion As String = "version 0.96"
+    Public DefaultOpts As String = "autoshow=true,notes=false,tones=false,tabroots=false,icons=true,ontop=false,transparency=0.5,transparent=false,fretmin=0,fretmax=17,expanded=false,fretload=false,keyload=false,mode=0,key=3,frettune=E-A-D-G-B-E"
+
+    'OPTIONS/CONFIGURATION VARIABLES: (in order of config file)
+    Public oAutoshow As Boolean = True      'Auto-Show Chords Option
+    Public oNotes As Boolean = False        'Note blips show Notes (A,A#,B,etc.)
+    Public oTones As Boolean = False        'Note blips show scale interval
+    Public oTabroot As Boolean = False      'Do generated tabs highlight the root note?
+    Public oIcon As Boolean = True          'Show graphics in note blips
+    Public oOnTop As Boolean = True         'Do forms stay on top?
+    Public Transparency As Single = 0.5     'Transparency value
+    Public oTransparent As Boolean = False
     Public FretMin As Integer = 0
-    Public FretMax As Integer = 24
-    Public Transparency As Single = 0.5
-    Public RootNote As String 'The Key
-    Public RootDiff As Integer 'Difference between the root note and "A", which is considered 0
-    Public Tuning As String 'What tuning is the guitar in
-    Public StringNo As Integer 'How many strings does it have?
-    Public LastChord As Integer 'What chord degree is in the box?
-    Public CurrentNotes As String 'The notes of the selected mode
+    Public FretMax As Integer = 17
+    Public oExpanded As Boolean             'Does the main form start expanded?
+    Public oFretLoad As Boolean             'Does the Fretboard load automatically?
+    Public oKeyLoad As Boolean              'Does the keyboard load automatically?
+
+    'OPERATIONAL VARIABLES:
+    Public CurrentMode As String
+    Public CurrentKey As String = "C"
+    Public CurrentChord As String           'Takes the place of an old "Chord" textbox which showed the output of the chord functions
+    Public CurrentSemitones As String       'Holds the value that used to be stored by in the semitone textbox 'txtVals'
+    Public CurrentNotes As String           'The notes of the selected mode
+    Public ScaleInt As String               'Holds the value that used to be held by the interval combobox 'cbInt'
+
+    Public RootNote As String               'The Key
+    Public RootDiff As Integer              'Difference between the root note and "A", which is considered 0
+    Public Tuning As String                 'What tuning is the guitar in
+    Public StringNo As Integer              'How many strings does it have?
+    Public LastChord As Integer             'What chord degree is in the box?
+
 
 
     Public Function Note2Value(WhatNote As String) As Integer
@@ -158,7 +179,7 @@ Starter:
         HSteps = Split(WhatIntervalCSV, ",")
 
         For i = 0 To UBound(HSteps)
-            CurVal += Str(HSteps(i))
+            CurVal += Str(Val(HSteps(i)))
             CurString = CurString & "," & Replace(Str(CurVal), " ", "")
         Next i
 
@@ -273,4 +294,53 @@ Starter:
         If ChordCSV = "0,4,8" Then ChordDegButton = UCase(WhatDeg) & "+" 'Augmented Triad
 
     End Function
+    Public Sub RefreshAllForms()
+        'Refreshes all forms
+        If frmKeyboard.Visible = True Then
+            frmTabTool.DrawKeyboard(CurrentNotes)
+            frmKeyboard.Text = "Keyboard - " & RootNote & " " & CurrentMode
+        End If
+
+        If frmFretboard.Visible = True Then
+            frmTabTool.DrawFretBoard(CurrentNotes)
+            frmFretboard.Text = "Fretboard - " & RootNote & " " & CurrentMode
+        End If
+
+        If frmKeyTriad.Visible = True Then
+            frmTabTool.DrawTriadForm()
+            frmKeyTriad.Text = "Triads - " & RootNote & " " & CurrentMode
+        End If
+
+        If frmInfo.Visible = True Then
+            frmInfo.txtChord.Text = CurrentChord
+            frmInfo.txtVals.Text = CurrentSemitones
+            frmInfo.txtNotes.Text = CurrentNotes
+            frmInfo.cbInt.SelectedIndex = frmTabTool.cbInt.SelectedIndex
+            frmInfo.cbKey.SelectedIndex = frmTabTool.cbKey.SelectedIndex
+            frmInfo.cbMode.SelectedIndex = frmTabTool.cbMode.SelectedIndex
+        End If
+
+        'TRANSPARENCIES [only applies to primary forms]
+        If oTransparent = True Then
+            frmProgressor.Opacity = Transparency
+            frmInfo.Opacity = Transparency
+            frmTabEdit.Opacity = Transparency
+            frmTabTool.Opacity = Transparency
+            frmKeyboard.Opacity = Transparency
+            frmFretboard.Opacity = Transparency
+            frmChordBuilder.Opacity = Transparency
+            frmKeyTriad.Opacity = Transparency
+        ElseIf oTransparent = False Then
+            frmProgressor.Opacity = 1
+            frmInfo.Opacity = 1
+            frmTabEdit.Opacity = 1
+            frmTabTool.Opacity = 1
+            frmKeyboard.Opacity = 1
+            frmFretboard.Opacity = 1
+            frmChordBuilder.Opacity = 1
+            frmKeyTriad.Opacity = 1
+        End If
+
+
+    End Sub
 End Module

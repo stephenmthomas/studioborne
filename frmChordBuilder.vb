@@ -149,7 +149,7 @@
     End Sub
 
     Private Sub txtNotes_TextChanged(sender As Object, e As EventArgs) Handles txtNotes.TextChanged
-        frmTabTool.txtChord.Text = txtNotes.Text
+        CurrentChord = txtNotes.Text
 
     End Sub
 
@@ -222,10 +222,14 @@
             cbIntervals.SelectedIndex = cbIntervals.Items.IndexOf(ChordStack)
         End If
 
-        txtNotes.Text = GenChordFromCSV(cbRoot.Text, ChordStack)
+        CurrentChord = GenChordFromCSV(cbRoot.Text, ChordStack)
 
-        frmTabTool.DrawKeyboard(txtNotes.Text)
-        frmTabTool.DrawFretBoard(txtNotes.Text)
+        frmTabTool.DrawKeyboard(CurrentChord)
+        frmTabTool.DrawFretBoard(CurrentChord)
 
+    End Sub
+
+    Private Sub frmChordBuilder_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        RefreshAllForms()
     End Sub
 End Class

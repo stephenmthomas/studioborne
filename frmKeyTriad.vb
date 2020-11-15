@@ -20,7 +20,7 @@
             .Font = New Font("Verdana", 8, FontStyle.Bold)
             .TextAlign = ContentAlignment.MiddleCenter
             .ForeColor = Color.Black
-            If frmTabTool.chkNoteIcon.Checked = True Then
+            If oIcon = True Then
                 If WutColor = Color.Red Then
                     .Image = r_image
                 ElseIf WutColor = Color.Blue Then
@@ -40,7 +40,7 @@
             .Width = 12
             .Font = New Font("Verdana", 8, FontStyle.Bold)
             .TextAlign = ContentAlignment.MiddleCenter
-            If frmTabTool.chkNoteIcon.Checked = True Then
+            If oIcon = True Then
                 If WutColor = Color.Red Then
                     .Image = r_image
                 ElseIf WutColor = Color.Blue Then
