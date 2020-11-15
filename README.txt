@@ -49,7 +49,7 @@ CONTENTS:
 	
 	
 [4] VERSION HISTORY
-	0.97 - Pending
+	0.97 - Released 15NOV2020
 		-Added the ability to change note blip colors.
 		-Fixed an issue cauting the fretboard tuning to load incorrectly.
 
