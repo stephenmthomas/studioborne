@@ -8,8 +8,30 @@
     Dim g_image As Image = My.Resources.ind_g
     Dim y_image As Image = My.Resources.ind_y
     Dim b_image As Image = My.Resources.ind_b
+    Function SetNoteColor(IsRoot As Boolean) As Image
+        Dim ColDex As Integer
 
-    Public Sub FretDraw(WutString As Integer, WutFret As Integer, WutColor As Color, Optional ByVal WhatText As String = "")
+        If IsRoot = True Then
+            ColDex = RootColor
+        Else
+            ColDex = NoteColor
+        End If
+
+        If ColDex = 0 Then
+            SetNoteColor = r_image
+        ElseIf ColDex = 1 Then
+            SetNoteColor = g_image
+        ElseIf ColDex = 2 Then
+            SetNoteColor = y_image
+        ElseIf ColDex = 3 Then
+            SetNoteColor = b_image
+        Else
+            SetNoteColor = g_image
+        End If
+
+    End Function
+
+    Public Sub FretDraw(WutString As Integer, WutFret As Integer, WutColor As Color, Optional ByVal WhatText As String = "", Optional ByVal IsRoot As Boolean = False)
         Dim NewDot As New Label
         Dim StringMod As Integer 'Fine Tune for placing dots
 
@@ -34,14 +56,10 @@
             .Font = New Font("Verdana", 8, FontStyle.Bold)
             .TextAlign = ContentAlignment.MiddleCenter
             If oIcon = True Then
-                If WutColor = Color.Red Then
-                    .Image = r_image
-                ElseIf WutColor = Color.Blue Then
-                    .Image = b_image
-                ElseIf WutColor = Color.Yellow Then
-                    .Image = y_image
+                If IsRoot = True Then 'Need to fix this but it works; the Color.Red is only passed if its a root note!
+                    .Image = SetNoteColor(True)
                 Else
-                    .Image = g_image
+                    .Image = SetNoteColor(False)
                 End If
             End If
         End With

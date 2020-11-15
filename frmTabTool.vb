@@ -18,8 +18,10 @@
         NewOpts += "tones=" & oTones & ","
         NewOpts += "tabroots=" & oTabroot & ","
         NewOpts += "icons=" & oIcon & ","
+        NewOpts += "rootcolor=" & Trim(Str(RootColor)) & ","
+        NewOpts += "notecolor=" & Trim(Str(NoteColor)) & ","
         NewOpts += "ontop=" & oOnTop & ","
-        NewOpts += "transparency=" & Str(Transparency) & ","
+        NewOpts += "transparency=" & Trim(Str(Transparency)) & ","
         NewOpts += "transparent=" & oTransparent & ","
         NewOpts += "fretmin=" & FretMin & ","
         NewOpts += "fretmax=" & FretMax & ","
@@ -55,6 +57,8 @@ LoadConfig:
                 If CurOpt(0) = "tones" Then oTones = CurOpt(1)
                 If CurOpt(0) = "tabroots" Then oTabroot = CurOpt(1)
                 If CurOpt(0) = "icons" Then oIcon = CurOpt(1)
+                If CurOpt(0) = "rootcolor" Then RootColor = Val(CurOpt(1))
+                If CurOpt(0) = "notecolor" Then NoteColor = Val(CurOpt(1))
                 If CurOpt(0) = "ontop" Then oOnTop = CurOpt(1)
                 If CurOpt(0) = "transparency" Then Transparency = Val(CurOpt(1))
                 If CurOpt(0) = "transparent" Then oTransparent = CurOpt(1)
@@ -72,11 +76,7 @@ LoadConfig:
             ConfigFile = My.Computer.FileSystem.OpenTextFileWriter(Application.StartupPath & "\settings.cfg", False)
             ConfigFile.WriteLine(DefaultOpts)
             ConfigFile.Close()
-            cbMode.SelectedIndex = 0
-            CurrentNotes = GenNotesCSV(cbInt.Text)
-            cbKey.SelectedIndex = 3
-            FretMin = 0
-            FretMax = 17
+            GoTo LoadConfig
         End If
 
         'SET OPTIONS
@@ -122,7 +122,6 @@ LoadError: 'ERROR HANDLER; 6 = yes, 7 = no
         If oKeyLoad = True Then frmKeyboard.Show()
 
         RefreshAllForms()
-
     End Sub
 
 
@@ -197,17 +196,17 @@ LoadError: 'ERROR HANDLER; 6 = yes, 7 = no
                     'ScaleNote(CurNote) = note in scale to look for
                     If FretPitch = ScaleNotes(CurNote) Then 'If the current note is in the scale [GUITAR MONEY MAKER]
                         If frmFretboard.Visible = True Then
-                            If FretPitch = RootNote Then
-                                If oTones = True Then
-                                    frmFretboard.FretDraw(CurString, CurFret, Color.Red, Trim(Str(CurNote + 1)))
+                            If FretPitch = RootNote Then 'IF THE NOTE IS THE ROOT, PASS RED (functional, but bad technique written after the fact)
+                                If oTones = True Then 'Note will have the scale degree drawn on it
+                                    frmFretboard.FretDraw(CurString, CurFret, SetNoteClipColor(True), Trim(Str(CurNote + 1)), True)
                                 Else
-                                    frmFretboard.FretDraw(CurString, CurFret, Color.Red, ScaleNotes(CurNote))
+                                    frmFretboard.FretDraw(CurString, CurFret, SetNoteClipColor(True), ScaleNotes(CurNote), True)
                                 End If
                             Else
                                 If oTones = True Then
-                                    frmFretboard.FretDraw(CurString, CurFret, Color.Green, Trim(Str(CurNote + 1)))
+                                    frmFretboard.FretDraw(CurString, CurFret, SetNoteClipColor(False), Trim(Str(CurNote + 1)))
                                 Else
-                                    frmFretboard.FretDraw(CurString, CurFret, Color.Green, ScaleNotes(CurNote))
+                                    frmFretboard.FretDraw(CurString, CurFret, SetNoteClipColor(False), ScaleNotes(CurNote))
                                 End If
                             End If
                         End If
@@ -216,6 +215,34 @@ LoadError: 'ERROR HANDLER; 6 = yes, 7 = no
             Next CurFret
         Next CurString
 
+    End Sub
+    Sub DrawKeyboard(WhatNotes As String) 'Accepts CSV
+        Dim AddNotes() As String
+        Dim NoteStep As Integer
+
+        NoteStep = 0
+        AddNotes = Split(WhatNotes, ",")
+        frmKeyboard.KeyClearAll()
+
+        For Each Note In AddNotes
+            If frmKeyboard.Visible = True Then
+                If Note = RootNote Then
+                    If oTones = True Then
+                        frmKeyboard.KeyDraw(Note, SetNoteClipColor(True), Trim(Str(NoteStep + 1)), True)
+                    Else
+                        frmKeyboard.KeyDraw(Note, SetNoteClipColor(True), Note, True)
+                    End If
+                Else
+                    If oTones = True Then
+                        frmKeyboard.KeyDraw(Note, SetNoteClipColor(False), Trim(Str(NoteStep + 1)))
+                    Else
+                        frmKeyboard.KeyDraw(Note, SetNoteClipColor(False), Note)
+                    End If
+
+                End If
+            End If
+            NoteStep += 1
+        Next
     End Sub
     Sub DrawTriadForm()
         'Draws triads on the triad viewer
@@ -243,7 +270,7 @@ LoadError: 'ERROR HANDLER; 6 = yes, 7 = no
 
         For Each Note In CurNotes
             If frmKeyTriad.Visible = True Then
-                If Note = CurNotes(0) Then
+                If Note = CurNotes(0) Then 'THIS CHECKS FOR ROOT NOTE
                     frmKeyTriad.KeyDraw(Note, Color.Red, WhatDegree)
                 Else
                     frmKeyTriad.KeyDraw(Note, Color.Green, WhatDegree)
@@ -330,34 +357,7 @@ LoadError: 'ERROR HANDLER; 6 = yes, 7 = no
         End If
 
     End Function
-    Sub DrawKeyboard(WhatNotes As String) 'Accepts CSV
-        Dim AddNotes() As String
-        Dim NoteStep As Integer
 
-        NoteStep = 0
-        AddNotes = Split(WhatNotes, ",")
-        frmKeyboard.KeyClearAll()
-
-        For Each Note In AddNotes
-            If frmKeyboard.Visible = True Then
-                If Note = RootNote Then
-                    If oTones = True Then
-                        frmKeyboard.KeyDraw(Note, Color.Red, Trim(Str(NoteStep)))
-                    Else
-                        frmKeyboard.KeyDraw(Note, Color.Red, Note)
-                    End If
-                Else
-                    If oTones = True Then
-                        frmKeyboard.KeyDraw(Note, Color.Green, Trim(Str(NoteStep)))
-                    Else
-                        frmKeyboard.KeyDraw(Note, Color.Green, Note)
-                    End If
-
-                End If
-            End If
-            NoteStep += 1
-        Next
-    End Sub
 
 
 
@@ -499,5 +499,9 @@ LoadError: 'ERROR HANDLER; 6 = yes, 7 = no
 
     Private Sub cmdProgressor_Click(sender As Object, e As EventArgs) Handles cmdProgressor.Click
         frmProgressor.Show()
+    End Sub
+
+    Private Sub GroupBox3_Enter(sender As Object, e As EventArgs) Handles GroupBox3.Enter
+
     End Sub
 End Class

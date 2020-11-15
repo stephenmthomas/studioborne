@@ -44,6 +44,9 @@
         chkTabRoot.Checked = oTabroot
         chkNoteText.Checked = oNotes
         chkTones.Checked = oTones
+        chkNoteIcon.Checked = oIcon
+        cbColRoot.SelectedIndex = RootColor
+        cbColNote.SelectedIndex = NoteColor
         txtFretMax.Text = FretMax
         txtFretMin.Text = FretMin
         chkExpanded.Checked = oExpanded
@@ -62,6 +65,7 @@
         '97 - 122 = Ascii codes for simple letters
         '65 - 90  = Ascii codes for capital letters
         '48 - 57  = Ascii codes for numbers
+        '44 = comma
 
         If Asc(e.KeyChar) <> 8 Then
             If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
@@ -120,5 +124,26 @@
 
     Private Sub GroupBox2_Enter(sender As Object, e As EventArgs) Handles GroupBox2.Enter
 
+    End Sub
+
+    Private Sub txtTuning_Click(sender As Object, e As EventArgs) Handles txtTuning.Click
+
+    End Sub
+
+    Private Sub cbColRoot_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbColRoot.SelectedIndexChanged
+        RootColor = cbColRoot.SelectedIndex
+
+    End Sub
+
+    Private Sub cbColNote_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbColNote.SelectedIndexChanged
+        NoteColor = cbColNote.SelectedIndex
+    End Sub
+
+    Private Sub GroupBox3_Enter(sender As Object, e As EventArgs) Handles GroupBox3.Enter
+
+    End Sub
+
+    Private Sub chkNoteIcon_CheckedChanged(sender As Object, e As EventArgs) Handles chkNoteIcon.CheckedChanged
+        oIcon = chkNoteIcon.Checked
     End Sub
 End Class

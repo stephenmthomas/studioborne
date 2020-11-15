@@ -49,6 +49,9 @@ CONTENTS:
 	
 	
 [4] VERSION HISTORY
+	0.97 - Pending
+		-Added the ability to change note blip colors.
+
 	0.96 - Released 14NOV2020
 		-Received some critical advice on Reddit, and thus:
 			-Made a Readme

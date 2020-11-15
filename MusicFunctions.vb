@@ -1,6 +1,6 @@
 ﻿Module MusicFunctions
-    Public SBVersion As String = "version 0.96"
-    Public DefaultOpts As String = "autoshow=true,notes=false,tones=false,tabroots=false,icons=true,ontop=false,transparency=0.5,transparent=false,fretmin=0,fretmax=17,expanded=false,fretload=false,keyload=false,mode=0,key=3,frettune=E-A-D-G-B-E"
+    Public SBVersion As String = "version 0.97"
+    Public DefaultOpts As String = "autoshow=True,notes=False,tones=False,tabroots=False,icons=True,rootcolor=0,notecolor=1,ontop=True,transparency=.5,transparent=False,fretmin=0,fretmax=17,expanded=False,fretload=False,keyload=False,mode=0,key=3,frettune=E-A-D-G-B-E"
 
     'OPTIONS/CONFIGURATION VARIABLES: (in order of config file)
     Public oAutoshow As Boolean = True      'Auto-Show Chords Option
@@ -8,10 +8,12 @@
     Public oTones As Boolean = False        'Note blips show scale interval
     Public oTabroot As Boolean = False      'Do generated tabs highlight the root note?
     Public oIcon As Boolean = True          'Show graphics in note blips
+    Public RootColor As Integer = 0         'Red = 0, Green = 1, Yellow = 2, Blue = 3 - to correspond with the option boxes
+    Public NoteColor As Integer = 1
     Public oOnTop As Boolean = True         'Do forms stay on top?
     Public Transparency As Single = 0.5     'Transparency value
     Public oTransparent As Boolean = False
-    Public FretMin As Integer = 0
+    Public FretMin As Integer = 0           'Red = 0, Green = 1, Yellow = 2, Blue = 3 - to correspond with the option boxes
     Public FretMax As Integer = 17
     Public oExpanded As Boolean             'Does the main form start expanded?
     Public oFretLoad As Boolean             'Does the Fretboard load automatically?
@@ -343,4 +345,25 @@ Starter:
 
 
     End Sub
+    Function SetNoteClipColor(IsRoot As Boolean) As Color
+        Dim ColDex As Integer
+
+        If IsRoot = True Then
+            ColDex = RootColor
+        Else
+            ColDex = NoteColor
+        End If
+
+        If ColDex = 0 Then 'RED
+            SetNoteClipColor = Color.Red
+        ElseIf ColDex = 1 Then 'GREEN
+            SetNoteClipColor = Color.Green
+        ElseIf ColDex = 2 Then 'YELLOW
+            SetNoteClipColor = Color.Yellow
+        ElseIf ColDex = 3 Then 'BLUE
+            SetNoteClipColor = Color.Blue
+        Else
+            SetNoteClipColor = Color.Green
+        End If
+    End Function
 End Module

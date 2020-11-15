@@ -44,6 +44,7 @@ Partial Class frmTabTool
         Me.cmdInfo = New System.Windows.Forms.Button()
         Me.cmdTriadView = New System.Windows.Forms.Button()
         Me.cmdTabEditor = New System.Windows.Forms.Button()
+        Me.cmdProgressor = New System.Windows.Forms.Button()
         Me.DebugBox = New System.Windows.Forms.GroupBox()
         Me.txtNotes = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -64,7 +65,6 @@ Partial Class frmTabTool
         Me.cmdChord2 = New System.Windows.Forms.Button()
         Me.cmdChord1 = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.cmdProgressor = New System.Windows.Forms.Button()
         Me.DebugBox.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -274,6 +274,17 @@ Partial Class frmTabTool
         Me.cmdTabEditor.Text = "Tab Editor"
         Me.ToolTip.SetToolTip(Me.cmdTabEditor, "Shows all chord degree triads on a single form.")
         Me.cmdTabEditor.UseVisualStyleBackColor = True
+        '
+        'cmdProgressor
+        '
+        Me.cmdProgressor.ForeColor = System.Drawing.Color.Purple
+        Me.cmdProgressor.Location = New System.Drawing.Point(6, 95)
+        Me.cmdProgressor.Name = "cmdProgressor"
+        Me.cmdProgressor.Size = New System.Drawing.Size(109, 21)
+        Me.cmdProgressor.TabIndex = 65
+        Me.cmdProgressor.Text = "Progressor"
+        Me.ToolTip.SetToolTip(Me.cmdProgressor, "Shows all chord degree triads on a single form.")
+        Me.cmdProgressor.UseVisualStyleBackColor = True
         '
         'DebugBox
         '
@@ -486,17 +497,6 @@ Partial Class frmTabTool
         Me.GroupBox3.TabIndex = 64
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "TOOLS:"
-        '
-        'cmdProgressor
-        '
-        Me.cmdProgressor.ForeColor = System.Drawing.Color.Purple
-        Me.cmdProgressor.Location = New System.Drawing.Point(6, 95)
-        Me.cmdProgressor.Name = "cmdProgressor"
-        Me.cmdProgressor.Size = New System.Drawing.Size(109, 21)
-        Me.cmdProgressor.TabIndex = 65
-        Me.cmdProgressor.Text = "Progressor"
-        Me.ToolTip.SetToolTip(Me.cmdProgressor, "Shows all chord degree triads on a single form.")
-        Me.cmdProgressor.UseVisualStyleBackColor = True
         '
         'frmTabTool
         '

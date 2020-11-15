@@ -7,8 +7,29 @@
     Dim g_image As Image = My.Resources.ind_g
     Dim y_image As Image = My.Resources.ind_y
     Dim b_image As Image = My.Resources.ind_b
+    Function SetNoteColor(IsRoot As Boolean) As Image
+        Dim ColDex As Integer
 
-    Public Sub KeyDraw(WhatNote As String, WutColor As Color, Optional ByVal WhatText As String = "")
+        If IsRoot = True Then
+            ColDex = RootColor
+        Else
+            ColDex = NoteColor
+        End If
+
+        If ColDex = 0 Then
+            SetNoteColor = r_image
+        ElseIf ColDex = 1 Then
+            SetNoteColor = g_image
+        ElseIf ColDex = 2 Then
+            SetNoteColor = y_image
+        ElseIf ColDex = 3 Then
+            SetNoteColor = b_image
+        Else
+            SetNoteColor = g_image
+        End If
+
+    End Function
+    Public Sub KeyDraw(WhatNote As String, WutColor As Color, Optional ByVal WhatText As String = "", Optional ByVal IsRoot As Boolean = False)
         Dim Oct1Dot, Oct2Dot As New Label
 
         If oNotes = False And oTones = False Then
@@ -25,14 +46,10 @@
             .TextAlign = ContentAlignment.MiddleCenter
             .ForeColor = Color.Black
             If oIcon = True Then
-                If WutColor = Color.Red Then
-                    .Image = r_image
-                ElseIf WutColor = Color.Blue Then
-                    .Image = b_image
-                ElseIf WutColor = Color.Yellow Then
-                    .Image = y_image
+                If IsRoot = True Then
+                    .Image = SetNoteColor(True)
                 Else
-                    .Image = g_image
+                    .Image = SetNoteColor(False)
                 End If
             End If
         End With
@@ -46,14 +63,10 @@
             .Font = New Font("Verdana", 8, FontStyle.Bold)
             .TextAlign = ContentAlignment.MiddleCenter
             If oIcon = True Then
-                If WutColor = Color.Red Then
-                    .Image = r_image
-                ElseIf WutColor = Color.Blue Then
-                    .Image = b_image
-                ElseIf WutColor = Color.Yellow Then
-                    .Image = y_image
+                If IsRoot = True Then
+                    .Image = SetNoteColor(True)
                 Else
-                    .Image = g_image
+                    .Image = SetNoteColor(False)
                 End If
             End If
         End With

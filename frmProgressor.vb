@@ -20,8 +20,9 @@
     Private Sub cmdStart_Click(sender As Object, e As EventArgs) Handles cmdStart.Click
 
         ChordDegs = Split(txtProg.Text, ",")
-
         ProgSteps = UBound(ChordDegs)
+
+        nCycles = txtCycles.Text
         CurStep = 0
         ProgSpeed = (60000 / Val(txtSpeed.Text))
 

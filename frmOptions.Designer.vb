@@ -33,6 +33,10 @@ Partial Class frmOptions
         Me.chkNoteText = New System.Windows.Forms.CheckBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.chkExpanded = New System.Windows.Forms.CheckBox()
+        Me.chkFretload = New System.Windows.Forms.CheckBox()
+        Me.chkKeyload = New System.Windows.Forms.CheckBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.chkTransparency = New System.Windows.Forms.CheckBox()
         Me.chkOnTop = New System.Windows.Forms.CheckBox()
@@ -46,10 +50,6 @@ Partial Class frmOptions
         Me.Label12 = New System.Windows.Forms.Label()
         Me.txtFretMax = New System.Windows.Forms.TextBox()
         Me.txtFretMin = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.chkExpanded = New System.Windows.Forms.CheckBox()
-        Me.chkFretload = New System.Windows.Forms.CheckBox()
-        Me.chkKeyload = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -159,6 +159,50 @@ Partial Class frmOptions
         Me.Label3.Text = "Note Color:"
         Me.tTip.SetToolTip(Me.Label3, "Setting the guitar fret range limits the area where notes will be drawn on the fr" &
         "etboard.")
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(122, 16)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(84, 14)
+        Me.Label11.TabIndex = 71
+        Me.Label11.Text = "FRET RANGE:"
+        Me.tTip.SetToolTip(Me.Label11, "Setting the fret range limits the area where notes will be drawn on the fretboard" &
+        ".")
+        '
+        'chkExpanded
+        '
+        Me.chkExpanded.AutoSize = True
+        Me.chkExpanded.Location = New System.Drawing.Point(6, 77)
+        Me.chkExpanded.Name = "chkExpanded"
+        Me.chkExpanded.Size = New System.Drawing.Size(124, 18)
+        Me.chkExpanded.TabIndex = 65
+        Me.chkExpanded.Text = "Start Expanded"
+        Me.tTip.SetToolTip(Me.chkExpanded, "Sets if the main form will start in the expanded state or not.")
+        Me.chkExpanded.UseVisualStyleBackColor = True
+        '
+        'chkFretload
+        '
+        Me.chkFretload.AutoSize = True
+        Me.chkFretload.Location = New System.Drawing.Point(6, 91)
+        Me.chkFretload.Name = "chkFretload"
+        Me.chkFretload.Size = New System.Drawing.Size(159, 18)
+        Me.chkFretload.TabIndex = 66
+        Me.chkFretload.Text = "Auto Load Fretboard"
+        Me.tTip.SetToolTip(Me.chkFretload, "Sets if the main form will start in the expanded state or not.")
+        Me.chkFretload.UseVisualStyleBackColor = True
+        '
+        'chkKeyload
+        '
+        Me.chkKeyload.AutoSize = True
+        Me.chkKeyload.Location = New System.Drawing.Point(6, 105)
+        Me.chkKeyload.Name = "chkKeyload"
+        Me.chkKeyload.Size = New System.Drawing.Size(152, 18)
+        Me.chkKeyload.TabIndex = 67
+        Me.chkKeyload.Text = "Auto Load Keyboard"
+        Me.tTip.SetToolTip(Me.chkKeyload, "Sets if the main form will start in the expanded state or not.")
+        Me.chkKeyload.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
@@ -302,50 +346,6 @@ Partial Class frmOptions
         Me.txtFretMin.TabIndex = 72
         Me.txtFretMin.Text = "0"
         Me.txtFretMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(122, 16)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(84, 14)
-        Me.Label11.TabIndex = 71
-        Me.Label11.Text = "FRET RANGE:"
-        Me.tTip.SetToolTip(Me.Label11, "Setting the fret range limits the area where notes will be drawn on the fretboard" &
-        ".")
-        '
-        'chkExpanded
-        '
-        Me.chkExpanded.AutoSize = True
-        Me.chkExpanded.Location = New System.Drawing.Point(6, 77)
-        Me.chkExpanded.Name = "chkExpanded"
-        Me.chkExpanded.Size = New System.Drawing.Size(124, 18)
-        Me.chkExpanded.TabIndex = 65
-        Me.chkExpanded.Text = "Start Expanded"
-        Me.tTip.SetToolTip(Me.chkExpanded, "Sets if the main form will start in the expanded state or not.")
-        Me.chkExpanded.UseVisualStyleBackColor = True
-        '
-        'chkFretload
-        '
-        Me.chkFretload.AutoSize = True
-        Me.chkFretload.Location = New System.Drawing.Point(6, 91)
-        Me.chkFretload.Name = "chkFretload"
-        Me.chkFretload.Size = New System.Drawing.Size(159, 18)
-        Me.chkFretload.TabIndex = 66
-        Me.chkFretload.Text = "Auto Load Fretboard"
-        Me.tTip.SetToolTip(Me.chkFretload, "Sets if the main form will start in the expanded state or not.")
-        Me.chkFretload.UseVisualStyleBackColor = True
-        '
-        'chkKeyload
-        '
-        Me.chkKeyload.AutoSize = True
-        Me.chkKeyload.Location = New System.Drawing.Point(6, 105)
-        Me.chkKeyload.Name = "chkKeyload"
-        Me.chkKeyload.Size = New System.Drawing.Size(152, 18)
-        Me.chkKeyload.TabIndex = 67
-        Me.chkKeyload.Text = "Auto Load Keyboard"
-        Me.tTip.SetToolTip(Me.chkKeyload, "Sets if the main form will start in the expanded state or not.")
-        Me.chkKeyload.UseVisualStyleBackColor = True
         '
         'frmOptions
         '
