@@ -37,7 +37,10 @@ Partial Class frmOptions
         Me.chkExpanded = New System.Windows.Forms.CheckBox()
         Me.chkFretload = New System.Windows.Forms.CheckBox()
         Me.chkKeyload = New System.Windows.Forms.CheckBox()
+        Me.lblTuning = New System.Windows.Forms.Label()
+        Me.chkInfoLoad = New System.Windows.Forms.CheckBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.cmdRestoreDefault = New System.Windows.Forms.Button()
         Me.chkTransparency = New System.Windows.Forms.CheckBox()
         Me.chkOnTop = New System.Windows.Forms.CheckBox()
         Me.chkAutoChord = New System.Windows.Forms.CheckBox()
@@ -45,11 +48,13 @@ Partial Class frmOptions
         Me.cbColNote = New System.Windows.Forms.ComboBox()
         Me.cbColRoot = New System.Windows.Forms.ComboBox()
         Me.txtTuning = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.txtFretMax = New System.Windows.Forms.TextBox()
         Me.txtFretMin = New System.Windows.Forms.TextBox()
+        Me.cmdAccept = New System.Windows.Forms.Button()
+        Me.cmdCancel = New System.Windows.Forms.Button()
+        Me.chkFretBlip = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -71,7 +76,7 @@ Partial Class frmOptions
         '
         Me.cmdAbout.Font = New System.Drawing.Font("Courier New", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdAbout.ForeColor = System.Drawing.Color.Red
-        Me.cmdAbout.Location = New System.Drawing.Point(7, 325)
+        Me.cmdAbout.Location = New System.Drawing.Point(7, 366)
         Me.cmdAbout.Name = "cmdAbout"
         Me.cmdAbout.Size = New System.Drawing.Size(32, 27)
         Me.cmdAbout.TabIndex = 59
@@ -204,8 +209,34 @@ Partial Class frmOptions
         Me.tTip.SetToolTip(Me.chkKeyload, "Sets if the main form will start in the expanded state or not.")
         Me.chkKeyload.UseVisualStyleBackColor = True
         '
+        'lblTuning
+        '
+        Me.lblTuning.AutoSize = True
+        Me.lblTuning.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.lblTuning.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTuning.ForeColor = System.Drawing.SystemColors.Highlight
+        Me.lblTuning.Location = New System.Drawing.Point(7, 15)
+        Me.lblTuning.Name = "lblTuning"
+        Me.lblTuning.Size = New System.Drawing.Size(56, 14)
+        Me.lblTuning.TabIndex = 65
+        Me.lblTuning.Text = "TUNING:"
+        Me.tTip.SetToolTip(Me.lblTuning, "Click here to set the tuning.")
+        '
+        'chkInfoLoad
+        '
+        Me.chkInfoLoad.AutoSize = True
+        Me.chkInfoLoad.Location = New System.Drawing.Point(6, 119)
+        Me.chkInfoLoad.Name = "chkInfoLoad"
+        Me.chkInfoLoad.Size = New System.Drawing.Size(166, 18)
+        Me.chkInfoLoad.TabIndex = 71
+        Me.chkInfoLoad.Text = "Auto Load Info Panel"
+        Me.tTip.SetToolTip(Me.chkInfoLoad, "Sets if the main form will start in the expanded state or not.")
+        Me.chkInfoLoad.UseVisualStyleBackColor = True
+        '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.chkInfoLoad)
+        Me.GroupBox1.Controls.Add(Me.cmdRestoreDefault)
         Me.GroupBox1.Controls.Add(Me.chkKeyload)
         Me.GroupBox1.Controls.Add(Me.chkFretload)
         Me.GroupBox1.Controls.Add(Me.chkExpanded)
@@ -217,10 +248,21 @@ Partial Class frmOptions
         Me.GroupBox1.Controls.Add(Me.chkAutoChord)
         Me.GroupBox1.Location = New System.Drawing.Point(7, 3)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(227, 127)
+        Me.GroupBox1.Size = New System.Drawing.Size(227, 170)
         Me.GroupBox1.TabIndex = 57
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "General Options"
+        '
+        'cmdRestoreDefault
+        '
+        Me.cmdRestoreDefault.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdRestoreDefault.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.cmdRestoreDefault.Location = New System.Drawing.Point(6, 136)
+        Me.cmdRestoreDefault.Name = "cmdRestoreDefault"
+        Me.cmdRestoreDefault.Size = New System.Drawing.Size(214, 27)
+        Me.cmdRestoreDefault.TabIndex = 70
+        Me.cmdRestoreDefault.Text = "Restore Default Settings"
+        Me.cmdRestoreDefault.UseVisualStyleBackColor = True
         '
         'chkTransparency
         '
@@ -256,6 +298,7 @@ Partial Class frmOptions
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.chkFretBlip)
         Me.GroupBox2.Controls.Add(Me.cbColNote)
         Me.GroupBox2.Controls.Add(Me.cbColRoot)
         Me.GroupBox2.Controls.Add(Me.Label3)
@@ -263,7 +306,7 @@ Partial Class frmOptions
         Me.GroupBox2.Controls.Add(Me.chkTones)
         Me.GroupBox2.Controls.Add(Me.chkNoteIcon)
         Me.GroupBox2.Controls.Add(Me.chkNoteText)
-        Me.GroupBox2.Location = New System.Drawing.Point(7, 136)
+        Me.GroupBox2.Location = New System.Drawing.Point(7, 177)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(227, 114)
         Me.GroupBox2.TabIndex = 58
@@ -290,20 +333,13 @@ Partial Class frmOptions
         '
         'txtTuning
         '
+        Me.txtTuning.Cursor = System.Windows.Forms.Cursors.Hand
         Me.txtTuning.Location = New System.Drawing.Point(10, 32)
         Me.txtTuning.Name = "txtTuning"
+        Me.txtTuning.ReadOnly = True
         Me.txtTuning.Size = New System.Drawing.Size(90, 20)
         Me.txtTuning.TabIndex = 66
         Me.txtTuning.Text = "E,A,D,G,B,E"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(7, 15)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(56, 14)
-        Me.Label6.TabIndex = 65
-        Me.Label6.Text = "TUNING:"
         '
         'GroupBox3
         '
@@ -312,8 +348,8 @@ Partial Class frmOptions
         Me.GroupBox3.Controls.Add(Me.txtFretMin)
         Me.GroupBox3.Controls.Add(Me.Label11)
         Me.GroupBox3.Controls.Add(Me.txtTuning)
-        Me.GroupBox3.Controls.Add(Me.Label6)
-        Me.GroupBox3.Location = New System.Drawing.Point(7, 256)
+        Me.GroupBox3.Controls.Add(Me.lblTuning)
+        Me.GroupBox3.Location = New System.Drawing.Point(7, 297)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(227, 63)
         Me.GroupBox3.TabIndex = 59
@@ -335,7 +371,7 @@ Partial Class frmOptions
         Me.txtFretMax.Name = "txtFretMax"
         Me.txtFretMax.Size = New System.Drawing.Size(29, 20)
         Me.txtFretMax.TabIndex = 73
-        Me.txtFretMax.Text = "24"
+        Me.txtFretMax.Text = "17"
         Me.txtFretMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtFretMin
@@ -347,12 +383,43 @@ Partial Class frmOptions
         Me.txtFretMin.Text = "0"
         Me.txtFretMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
+        'cmdAccept
+        '
+        Me.cmdAccept.Location = New System.Drawing.Point(168, 366)
+        Me.cmdAccept.Name = "cmdAccept"
+        Me.cmdAccept.Size = New System.Drawing.Size(66, 27)
+        Me.cmdAccept.TabIndex = 69
+        Me.cmdAccept.Text = "Accept"
+        Me.cmdAccept.UseVisualStyleBackColor = True
+        '
+        'cmdCancel
+        '
+        Me.cmdCancel.Location = New System.Drawing.Point(99, 366)
+        Me.cmdCancel.Name = "cmdCancel"
+        Me.cmdCancel.Size = New System.Drawing.Size(66, 27)
+        Me.cmdCancel.TabIndex = 70
+        Me.cmdCancel.Text = "Cancel"
+        Me.cmdCancel.UseVisualStyleBackColor = True
+        '
+        'chkFretBlip
+        '
+        Me.chkFretBlip.AutoSize = True
+        Me.chkFretBlip.Location = New System.Drawing.Point(115, 75)
+        Me.chkFretBlip.Name = "chkFretBlip"
+        Me.chkFretBlip.Size = New System.Drawing.Size(110, 18)
+        Me.chkFretBlip.TabIndex = 82
+        Me.chkFretBlip.Text = "Fret Overlay"
+        Me.tTip.SetToolTip(Me.chkFretBlip, "Shows fret number instead of note or interval on the fretboard.")
+        Me.chkFretBlip.UseVisualStyleBackColor = True
+        '
         'frmOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(241, 363)
+        Me.ClientSize = New System.Drawing.Size(241, 399)
+        Me.Controls.Add(Me.cmdCancel)
+        Me.Controls.Add(Me.cmdAccept)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.cmdAbout)
         Me.Controls.Add(Me.GroupBox2)
@@ -388,7 +455,7 @@ Partial Class frmOptions
     Friend WithEvents chkNoteIcon As CheckBox
     Friend WithEvents chkNoteText As CheckBox
     Friend WithEvents txtTuning As TextBox
-    Friend WithEvents Label6 As Label
+    Friend WithEvents lblTuning As Label
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents cbColNote As ComboBox
     Friend WithEvents Label12 As Label
@@ -398,4 +465,9 @@ Partial Class frmOptions
     Friend WithEvents chkExpanded As CheckBox
     Friend WithEvents chkKeyload As CheckBox
     Friend WithEvents chkFretload As CheckBox
+    Friend WithEvents cmdAccept As Button
+    Friend WithEvents cmdCancel As Button
+    Friend WithEvents cmdRestoreDefault As Button
+    Friend WithEvents chkInfoLoad As CheckBox
+    Friend WithEvents chkFretBlip As CheckBox
 End Class

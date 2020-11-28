@@ -91,6 +91,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmGtrTune.Designer.vb">
+      <DependentUpon>frmGtrTune.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmGtrTune.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmInfo.Designer.vb">
       <DependentUpon>frmInfo.vb</DependentUpon>
     </Compile>
@@ -178,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmFretboard.resx">
       <DependentUpon>frmFretboard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGtrTune.resx">
+      <DependentUpon>frmGtrTune.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInfo.resx">
       <DependentUpon>frmInfo.vb</DependentUpon>

@@ -1,14 +1,8 @@
 ﻿Public Class frmChordBuilder
     Dim TempRoot As String 'Temporarily stores the root from the main window here, so that when a chord is built its root is shown in red
     Dim SplitSymbol() As String
-    Sub GenSemitoneChecks(WhatNotes As String)
-        'Checks the appropriate semitones on the expanded form
-        'uses CSV as argument
-
-        Dim NoteSplit() As String
-
-        NoteSplit = Split(WhatNotes, ",")
-
+    Dim ChordStack As String 'Intervals in CSV for the chord
+    Sub ClearChecks()
         cb0.Checked = False
         cb1.Checked = False
         cb2.Checked = False
@@ -34,6 +28,14 @@
         cb22.Checked = False
         cb23.Checked = False
         cb24.Checked = False
+    End Sub
+    Sub GenSemitoneChecks(WhatIntervals As String)
+        'Checks the appropriate semitones on the expanded form
+        'uses CSV as argument
+
+        Dim NoteSplit() As String
+
+        NoteSplit = Split(WhatIntervals, ",")
 
         For Each sNote In NoteSplit
             If Val(sNote) = 0 Then cb0.Checked = True
@@ -64,92 +66,94 @@
         Next
 
     End Sub
+    Sub GenChordFromChecks()
+        Dim CheckStack As String = ""
+
+        If cb0.Checked = True Then CheckStack += "0,"
+        If cb1.Checked = True Then CheckStack += "1,"
+        If cb2.Checked = True Then CheckStack += "2,"
+        If cb3.Checked = True Then CheckStack += "3,"
+        If cb4.Checked = True Then CheckStack += "4,"
+        If cb5.Checked = True Then CheckStack += "5,"
+        If cb6.Checked = True Then CheckStack += "6,"
+        If cb7.Checked = True Then CheckStack += "7,"
+        If cb8.Checked = True Then CheckStack += "8,"
+        If cb9.Checked = True Then CheckStack += "9,"
+        If cb10.Checked = True Then CheckStack += "10,"
+        If cb11.Checked = True Then CheckStack += "11,"
+        If cb12.Checked = True Then CheckStack += "12,"
+        If cb13.Checked = True Then CheckStack += "13,"
+        If cb14.Checked = True Then CheckStack += "14,"
+        If cb15.Checked = True Then CheckStack += "15,"
+        If cb16.Checked = True Then CheckStack += "16,"
+        If cb17.Checked = True Then CheckStack += "17,"
+        If cb18.Checked = True Then CheckStack += "18,"
+        If cb19.Checked = True Then CheckStack += "19,"
+        If cb20.Checked = True Then CheckStack += "20,"
+        If cb21.Checked = True Then CheckStack += "21,"
+        If cb22.Checked = True Then CheckStack += "22,"
+        If cb23.Checked = True Then CheckStack += "23,"
+        If cb24.Checked = True Then CheckStack += "24,"
+
+
+        If Len(CheckStack) > 0 Then
+            CheckStack = Mid(CheckStack, 1, Len(CheckStack) - 1)
+            CurrentSemitones = CheckStack
+            txtNotes.Text = GenChordFromCSV(cbRoot.Text, CheckStack)
+            frmInfo.txtChord.Text = GenChordFromCSV(cbRoot.Text, CheckStack)
+        End If
+
+
+    End Sub
+    Sub FindChord(WhatIntCSV As String)
+        If cbSymbol.Items.Contains(ChordTypeFromCSV(WhatIntCSV)) Then
+            cbSymbol.SelectedIndex = cbSymbol.Items.IndexOf(ChordTypeFromCSV(WhatIntCSV))
+        End If
+    End Sub
+    Private Sub cbSymbol_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSymbol.SelectedIndexChanged
+        cbQuick.SelectedIndex = cbSymbol.SelectedIndex
+    End Sub
     Private Sub cbQuick_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbQuick.SelectedIndexChanged
         cbSymbol.SelectedIndex = cbQuick.SelectedIndex
         cbIntervals.SelectedIndex = cbQuick.SelectedIndex
-        txtNotes.Text = GenChordFromCSV(cbRoot.Text, cbIntervals.Text)
-
-
-
-        If InStr(cbSymbol.Text, "/") > 0 Then
-            If cbSymbol.Text = "min/maj7" Then
-                txtName.Text = cbRoot.Text & cbSymbol.Text
-            Else
-                SplitSymbol = Split(cbSymbol.Text, "/")
-                txtName.Text = cbRoot.Text & SplitSymbol(0)
-            End If
-        Else
-            txtName.Text = cbRoot.Text & cbSymbol.Text
-        End If
-
-
-        GenSemitoneChecks(cbIntervals.Text)
-
-        If chkAutoDisplay.Checked = True Then
-            TempRoot = RootNote
-            RootNote = cbRoot.Text
-            frmTabTool.DrawKeyboard(txtNotes.Text)
-            frmTabTool.DrawFretBoard(txtNotes.Text)
-            RootNote = TempRoot
-        End If
     End Sub
-
-    Private Sub cbSymbol_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSymbol.SelectedIndexChanged
-        cbQuick.SelectedIndex = cbSymbol.SelectedIndex
-
-    End Sub
-
-    Private Sub frmChordBuilder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        cbQuick.SelectedIndex = 21
-        cbRoot.SelectedIndex = 3
-        Me.Height = 140
-
-
-    End Sub
-
     Private Sub cbIntervals_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbIntervals.SelectedIndexChanged
         cbQuick.SelectedIndex = cbIntervals.SelectedIndex
         frmTabTool.txtVals.Text = cbIntervals.Text
-    End Sub
 
-    Private Sub cbRoot_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRoot.SelectedIndexChanged
-
-        If InStr(cbSymbol.Text, "/") > 0 Then
-            If cbSymbol.Text = "min/maj7" Then
-                txtName.Text = cbRoot.Text & cbSymbol.Text
-            Else
-                SplitSymbol = Split(cbSymbol.Text, "/")
-                txtName.Text = cbRoot.Text & SplitSymbol(0)
-            End If
-        Else
-            txtName.Text = cbRoot.Text & cbSymbol.Text
-        End If
-
-        txtNotes.Text = GenChordFromCSV(cbRoot.Text, cbIntervals.Text)
-
+        ClearChecks()
         GenSemitoneChecks(cbIntervals.Text)
 
-        If chkAutoDisplay.Checked = True Then
-            TempRoot = RootNote
-            RootNote = cbRoot.Text
-            frmTabTool.DrawKeyboard(txtNotes.Text)
-            frmTabTool.DrawFretBoard(txtNotes.Text)
-            RootNote = TempRoot
-        End If
     End Sub
+    Private Sub cbRoot_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRoot.SelectedIndexChanged
+        ClearChecks()
+        GenSemitoneChecks(cbIntervals.Text)
+    End Sub
+
+    Private Sub frmChordBuilder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        'PRELOAD TO PREVENT CRASHING
+        cbRoot.Text = frmTabTool.cbKey.Text
+        cbSymbol.Text = "Δ/maj"
+        cbIntervals.Text = "0,4,7"
+
+
+        'cbIntervals.SelectedIndex = 21
+        Me.Height = 140
+        chkOnTop.Checked = oOnTop
+        'cbRoot.SelectedIndex = frmTabTool.cbKey.SelectedIndex
+    End Sub
+
 
     Private Sub cmdShow_Click(sender As Object, e As EventArgs) Handles cmdShow.Click
         'Updates the keyboard or fretboard
-
-        TempRoot = RootNote
-        RootNote = cbRoot.Text
-        frmTabTool.DrawKeyboard(txtNotes.Text)
-        frmTabTool.DrawFretBoard(txtNotes.Text)
-        RootNote = TempRoot
+        frmTabTool.DrawKeyboard(CurrentChord, True)
+        frmTabTool.DrawFretBoard(CurrentChord)
     End Sub
 
     Private Sub txtNotes_TextChanged(sender As Object, e As EventArgs) Handles txtNotes.TextChanged
         CurrentChord = txtNotes.Text
+        ProcessChord()
 
     End Sub
 
@@ -184,52 +188,135 @@
             lbld13.Text = "Diminished Thirteenth"
         End If
     End Sub
+    Sub ProcessChord()
 
-    Private Sub cmdShowChord_Click(sender As Object, e As EventArgs) Handles cmdShowChord.Click
-        Dim ChordStack As String
-
-        ChordStack = ""
-
-        If cb0.Checked = True Then ChordStack += "0,"
-        If cb1.Checked = True Then ChordStack += "1,"
-        If cb2.Checked = True Then ChordStack += "2,"
-        If cb3.Checked = True Then ChordStack += "3,"
-        If cb4.Checked = True Then ChordStack += "4,"
-        If cb5.Checked = True Then ChordStack += "5,"
-        If cb6.Checked = True Then ChordStack += "6,"
-        If cb7.Checked = True Then ChordStack += "7,"
-        If cb8.Checked = True Then ChordStack += "8,"
-        If cb9.Checked = True Then ChordStack += "9,"
-        If cb10.Checked = True Then ChordStack += "10,"
-        If cb11.Checked = True Then ChordStack += "11,"
-        If cb12.Checked = True Then ChordStack += "12,"
-        If cb13.Checked = True Then ChordStack += "13,"
-        If cb14.Checked = True Then ChordStack += "14,"
-        If cb15.Checked = True Then ChordStack += "15,"
-        If cb16.Checked = True Then ChordStack += "16,"
-        If cb17.Checked = True Then ChordStack += "17,"
-        If cb18.Checked = True Then ChordStack += "18,"
-        If cb19.Checked = True Then ChordStack += "19,"
-        If cb20.Checked = True Then ChordStack += "20,"
-        If cb21.Checked = True Then ChordStack += "21,"
-        If cb22.Checked = True Then ChordStack += "22,"
-        If cb23.Checked = True Then ChordStack += "23,"
-        If cb24.Checked = True Then ChordStack += "24,"
-
-        ChordStack = Mid(ChordStack, 1, Len(ChordStack) - 1)
-
-        If cbIntervals.Items.Contains(ChordStack) Then
-            cbIntervals.SelectedIndex = cbIntervals.Items.IndexOf(ChordStack)
+        If InStr(cbSymbol.Text, "/") > 0 Then
+            If cbSymbol.Text = "min/maj7" Then
+                txtName.Text = cbRoot.Text & cbSymbol.Text
+            Else
+                SplitSymbol = Split(cbSymbol.Text, "/")
+                txtName.Text = cbRoot.Text & SplitSymbol(0)
+            End If
+        Else
+            txtName.Text = cbRoot.Text & " " & cbSymbol.Text
         End If
 
-        CurrentChord = GenChordFromCSV(cbRoot.Text, ChordStack)
-
-        frmTabTool.DrawKeyboard(CurrentChord)
-        frmTabTool.DrawFretBoard(CurrentChord)
-
+        If chkAutoDisplay.Checked = True Then
+            frmTabTool.DrawKeyboard(CurrentChord, True)
+            frmTabTool.DrawFretBoard(CurrentChord)
+            frmKeyboard.Text = "Keyboard - " & cbRoot.Text & " " & ChordTypeFromCSV(CurrentSemitones)
+            frmFretboard.Text = "Fretboard - " & cbRoot.Text & " " & ChordTypeFromCSV(CurrentSemitones)
+        End If
+    End Sub
+    Private Sub cmdShowChord_Click(sender As Object, e As EventArgs) Handles cmdShowChord.Click
+        ProcessChord()
+        FindChord(ChordStack)
     End Sub
 
     Private Sub frmChordBuilder_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         RefreshAllForms()
+    End Sub
+
+    Private Sub cb0_CheckedChanged(sender As Object, e As EventArgs) Handles cb0.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub chkAutoDisplay_CheckedChanged(sender As Object, e As EventArgs) Handles chkAutoDisplay.CheckedChanged
+    End Sub
+
+    Private Sub cb1_CheckedChanged(sender As Object, e As EventArgs) Handles cb1.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb2_CheckedChanged(sender As Object, e As EventArgs) Handles cb2.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb3_CheckedChanged(sender As Object, e As EventArgs) Handles cb3.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb4_CheckedChanged(sender As Object, e As EventArgs) Handles cb4.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb5_CheckedChanged(sender As Object, e As EventArgs) Handles cb5.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb6_CheckedChanged(sender As Object, e As EventArgs) Handles cb6.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb7_CheckedChanged(sender As Object, e As EventArgs) Handles cb7.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb8_CheckedChanged(sender As Object, e As EventArgs) Handles cb8.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb9_CheckedChanged(sender As Object, e As EventArgs) Handles cb9.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb10_CheckedChanged(sender As Object, e As EventArgs) Handles cb10.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb11_CheckedChanged(sender As Object, e As EventArgs) Handles cb11.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb12_CheckedChanged(sender As Object, e As EventArgs) Handles cb12.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb13_CheckedChanged(sender As Object, e As EventArgs) Handles cb13.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb14_CheckedChanged(sender As Object, e As EventArgs) Handles cb14.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb15_CheckedChanged(sender As Object, e As EventArgs) Handles cb15.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb16_CheckedChanged(sender As Object, e As EventArgs) Handles cb16.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb17_CheckedChanged(sender As Object, e As EventArgs) Handles cb17.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb18_CheckedChanged(sender As Object, e As EventArgs) Handles cb18.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb19_CheckedChanged(sender As Object, e As EventArgs) Handles cb19.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb20_CheckedChanged(sender As Object, e As EventArgs) Handles cb20.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb21_CheckedChanged(sender As Object, e As EventArgs) Handles cb21.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb22_CheckedChanged(sender As Object, e As EventArgs) Handles cb22.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb23_CheckedChanged(sender As Object, e As EventArgs) Handles cb23.CheckedChanged
+        GenChordFromChecks()
+    End Sub
+
+    Private Sub cb24_CheckedChanged(sender As Object, e As EventArgs) Handles cb24.CheckedChanged
+        GenChordFromChecks()
     End Sub
 End Class

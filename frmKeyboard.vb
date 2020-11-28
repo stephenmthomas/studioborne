@@ -7,6 +7,7 @@
     Dim g_image As Image = My.Resources.ind_g
     Dim y_image As Image = My.Resources.ind_y
     Dim b_image As Image = My.Resources.ind_b
+    Dim CurrentKeyRoot As String
     Function SetNoteColor(IsRoot As Boolean) As Image
         Dim ColDex As Integer
 
@@ -29,11 +30,17 @@
         End If
 
     End Function
-    Public Sub KeyDraw(WhatNote As String, WutColor As Color, Optional ByVal WhatText As String = "", Optional ByVal IsRoot As Boolean = False)
+    Public Sub KeyDraw(WhatNote As String, WutColor As Color, Optional ByVal WhatText As String = "", Optional ByVal IsRoot As Boolean = False, Optional ByVal Octave1 As Boolean = True, Optional ByVal Octave2 As Boolean = True)
+        'WhatText puts text in the note boxes
+        'IsRoot indicates whether or not WhatNote is a root note
         Dim Oct1Dot, Oct2Dot As New Label
 
         If oNotes = False And oTones = False Then
             WhatText = ""
+        End If
+
+        If IsRoot = True Then
+            CurrentKeyRoot = WhatNote
         End If
 
         With Oct1Dot
@@ -71,8 +78,9 @@
             End If
         End With
 
-        Me.Controls.Add(Oct1Dot)
-        Me.Controls.Add(Oct2Dot)
+        If Octave1 = True Then Me.Controls.Add(Oct1Dot)
+        If Octave2 = True Then Me.Controls.Add(Oct2Dot)
+
         Me.pbKeys.SendToBack()
 
     End Sub

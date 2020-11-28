@@ -34,12 +34,18 @@ Partial Class frmInfo
         Me.Label9 = New System.Windows.Forms.Label()
         Me.txtVals = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.chkOnTop = New System.Windows.Forms.CheckBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.cmdMaximize = New System.Windows.Forms.Button()
+        Me.txtLog = New System.Windows.Forms.TextBox()
+        Me.txtInfo = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(153, 4)
+        Me.Label2.Location = New System.Drawing.Point(77, 4)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(84, 14)
         Me.Label2.TabIndex = 7
@@ -48,9 +54,10 @@ Partial Class frmInfo
         'cbMode
         '
         Me.cbMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbMode.Enabled = False
         Me.cbMode.FormattingEnabled = True
         Me.cbMode.Items.AddRange(New Object() {"Major (Ionian)", "Dorian", "Phrygian", "Phrygian Dominant", "Lydian", "Mixolydian", "Minor (Aeolian)", "Locrian", "Melodic Minor", "Harmonic Minor", "Super Locrian", "Major Pentatonic*", "Minor Pentatonic*", "Blues Scale*", "Chromatic*"})
-        Me.cbMode.Location = New System.Drawing.Point(152, 20)
+        Me.cbMode.Location = New System.Drawing.Point(80, 20)
         Me.cbMode.Name = "cbMode"
         Me.cbMode.Size = New System.Drawing.Size(141, 22)
         Me.cbMode.TabIndex = 6
@@ -58,7 +65,7 @@ Partial Class frmInfo
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(6, 4)
+        Me.Label1.Location = New System.Drawing.Point(2, 4)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(35, 14)
         Me.Label1.TabIndex = 5
@@ -67,17 +74,18 @@ Partial Class frmInfo
         'cbKey
         '
         Me.cbKey.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbKey.Enabled = False
         Me.cbKey.FormattingEnabled = True
         Me.cbKey.Items.AddRange(New Object() {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"})
         Me.cbKey.Location = New System.Drawing.Point(5, 20)
         Me.cbKey.Name = "cbKey"
-        Me.cbKey.Size = New System.Drawing.Size(141, 22)
+        Me.cbKey.Size = New System.Drawing.Size(69, 22)
         Me.cbKey.TabIndex = 4
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(300, 4)
+        Me.Label3.Location = New System.Drawing.Point(224, 3)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(77, 14)
         Me.Label3.TabIndex = 9
@@ -86,11 +94,12 @@ Partial Class frmInfo
         'cbInt
         '
         Me.cbInt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbInt.Enabled = False
         Me.cbInt.FormattingEnabled = True
         Me.cbInt.Items.AddRange(New Object() {"2,2,1,2,2,2,1", "2,1,2,2,2,1,2", "1,2,2,2,1,2,2", "1,3,1,2,1,2,2", "2,2,2,1,2,2,1", "2,2,1,2,2,1,2", "2,1,2,2,1,2,2", "1,2,2,1,2,2,2", "2,1,2,2,2,2,1", "2,1,2,2,1,3,1", "1,2,1,2,2,2,2", "2,2,3,2,3", "3,2,2,3,2", "3,2,1,1,3,2", "1,1,1,1,1,1,1,1,1,1,1,1"})
-        Me.cbInt.Location = New System.Drawing.Point(299, 20)
+        Me.cbInt.Location = New System.Drawing.Point(227, 20)
         Me.cbInt.Name = "cbInt"
-        Me.cbInt.Size = New System.Drawing.Size(141, 22)
+        Me.cbInt.Size = New System.Drawing.Size(134, 22)
         Me.cbInt.TabIndex = 8
         '
         'txtNotes
@@ -104,11 +113,11 @@ Partial Class frmInfo
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 43)
+        Me.Label4.Location = New System.Drawing.Point(1, 45)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(91, 14)
+        Me.Label4.Size = New System.Drawing.Size(49, 14)
         Me.Label4.TabIndex = 10
-        Me.Label4.Text = "SCALE NOTES:"
+        Me.Label4.Text = "NOTES:"
         '
         'txtChord
         '
@@ -121,7 +130,7 @@ Partial Class frmInfo
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(153, 44)
+        Me.Label9.Location = New System.Drawing.Point(149, 45)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(84, 14)
         Me.Label9.TabIndex = 27
@@ -132,24 +141,91 @@ Partial Class frmInfo
         Me.txtVals.Enabled = False
         Me.txtVals.Location = New System.Drawing.Point(299, 60)
         Me.txtVals.Name = "txtVals"
-        Me.txtVals.Size = New System.Drawing.Size(141, 20)
+        Me.txtVals.Size = New System.Drawing.Size(135, 20)
         Me.txtVals.TabIndex = 26
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(296, 44)
+        Me.Label5.Location = New System.Drawing.Point(294, 45)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(140, 14)
+        Me.Label5.Size = New System.Drawing.Size(112, 14)
         Me.Label5.TabIndex = 25
-        Me.Label5.Text = "RELATIVE SEMITONES:"
+        Me.Label5.Text = "LAST SEMITONES:"
+        '
+        'chkOnTop
+        '
+        Me.chkOnTop.AutoSize = True
+        Me.chkOnTop.Location = New System.Drawing.Point(394, 1)
+        Me.chkOnTop.Name = "chkOnTop"
+        Me.chkOnTop.Size = New System.Drawing.Size(47, 18)
+        Me.chkOnTop.TabIndex = 42
+        Me.chkOnTop.Text = "Top"
+        Me.chkOnTop.UseVisualStyleBackColor = True
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.Label6.Location = New System.Drawing.Point(2, 84)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(91, 14)
+        Me.Label6.TabIndex = 44
+        Me.Label6.Text = "INFORMATION:"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.Label7.Location = New System.Drawing.Point(2, 210)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(35, 14)
+        Me.Label7.TabIndex = 46
+        Me.Label7.Text = "LOG:"
+        '
+        'cmdMaximize
+        '
+        Me.cmdMaximize.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdMaximize.ForeColor = System.Drawing.Color.Green
+        Me.cmdMaximize.Location = New System.Drawing.Point(366, 20)
+        Me.cmdMaximize.Name = "cmdMaximize"
+        Me.cmdMaximize.Size = New System.Drawing.Size(66, 21)
+        Me.cmdMaximize.TabIndex = 47
+        Me.cmdMaximize.Text = "Expand"
+        Me.cmdMaximize.UseVisualStyleBackColor = True
+        '
+        'txtLog
+        '
+        Me.txtLog.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtLog.Location = New System.Drawing.Point(4, 222)
+        Me.txtLog.Multiline = True
+        Me.txtLog.Name = "txtLog"
+        Me.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtLog.Size = New System.Drawing.Size(428, 130)
+        Me.txtLog.TabIndex = 48
+        Me.txtLog.WordWrap = False
+        '
+        'txtInfo
+        '
+        Me.txtInfo.Location = New System.Drawing.Point(5, 98)
+        Me.txtInfo.Multiline = True
+        Me.txtInfo.Name = "txtInfo"
+        Me.txtInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtInfo.Size = New System.Drawing.Size(429, 114)
+        Me.txtInfo.TabIndex = 49
         '
         'frmInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(446, 90)
+        Me.ClientSize = New System.Drawing.Size(438, 358)
+        Me.Controls.Add(Me.txtInfo)
+        Me.Controls.Add(Me.txtLog)
+        Me.Controls.Add(Me.cmdMaximize)
+        Me.Controls.Add(Me.Label7)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.chkOnTop)
         Me.Controls.Add(Me.txtChord)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.txtVals)
@@ -184,4 +260,10 @@ Partial Class frmInfo
     Friend WithEvents Label9 As Label
     Friend WithEvents txtVals As TextBox
     Friend WithEvents Label5 As Label
+    Friend WithEvents chkOnTop As CheckBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label7 As Label
+    Friend WithEvents cmdMaximize As Button
+    Friend WithEvents txtLog As TextBox
+    Friend WithEvents txtInfo As TextBox
 End Class

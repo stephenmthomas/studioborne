@@ -26,11 +26,12 @@ Partial Class frmTabEdit
         Me.cmdDraw = New System.Windows.Forms.Button()
         Me.txtTab = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.chkOnTop = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'cmdAddChord
         '
-        Me.cmdAddChord.Location = New System.Drawing.Point(726, 512)
+        Me.cmdAddChord.Location = New System.Drawing.Point(726, 5)
         Me.cmdAddChord.Name = "cmdAddChord"
         Me.cmdAddChord.Size = New System.Drawing.Size(88, 20)
         Me.cmdAddChord.TabIndex = 60
@@ -39,7 +40,7 @@ Partial Class frmTabEdit
         '
         'cmdDraw
         '
-        Me.cmdDraw.Location = New System.Drawing.Point(820, 512)
+        Me.cmdDraw.Location = New System.Drawing.Point(820, 5)
         Me.cmdDraw.Name = "cmdDraw"
         Me.cmdDraw.Size = New System.Drawing.Size(137, 20)
         Me.cmdDraw.TabIndex = 59
@@ -48,29 +49,40 @@ Partial Class frmTabEdit
         '
         'txtTab
         '
-        Me.txtTab.Location = New System.Drawing.Point(6, 22)
+        Me.txtTab.Location = New System.Drawing.Point(6, 31)
         Me.txtTab.Multiline = True
         Me.txtTab.Name = "txtTab"
         Me.txtTab.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtTab.Size = New System.Drawing.Size(951, 484)
+        Me.txtTab.Size = New System.Drawing.Size(951, 475)
         Me.txtTab.TabIndex = 58
         Me.txtTab.WordWrap = False
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(3, 5)
+        Me.Label7.Location = New System.Drawing.Point(3, 14)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(77, 14)
         Me.Label7.TabIndex = 57
         Me.Label7.Text = "TABLATURE:"
+        '
+        'chkOnTop
+        '
+        Me.chkOnTop.AutoSize = True
+        Me.chkOnTop.Location = New System.Drawing.Point(910, 507)
+        Me.chkOnTop.Name = "chkOnTop"
+        Me.chkOnTop.Size = New System.Drawing.Size(47, 18)
+        Me.chkOnTop.TabIndex = 61
+        Me.chkOnTop.Text = "Top"
+        Me.chkOnTop.UseVisualStyleBackColor = True
         '
         'frmTabEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(961, 537)
+        Me.ClientSize = New System.Drawing.Size(961, 525)
+        Me.Controls.Add(Me.chkOnTop)
         Me.Controls.Add(Me.cmdAddChord)
         Me.Controls.Add(Me.cmdDraw)
         Me.Controls.Add(Me.txtTab)
@@ -88,4 +100,5 @@ Partial Class frmTabEdit
     Friend WithEvents cmdDraw As Button
     Friend WithEvents txtTab As TextBox
     Friend WithEvents Label7 As Label
+    Friend WithEvents chkOnTop As CheckBox
 End Class

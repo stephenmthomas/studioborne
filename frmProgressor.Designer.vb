@@ -38,6 +38,7 @@ Partial Class frmProgressor
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cmdStop = New System.Windows.Forms.Button()
         Me.cmdStart = New System.Windows.Forms.Button()
+        Me.chkOnTop = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'cbProgList
@@ -165,12 +166,23 @@ Partial Class frmProgressor
         Me.cmdStart.Text = "Start"
         Me.cmdStart.UseVisualStyleBackColor = True
         '
+        'chkOnTop
+        '
+        Me.chkOnTop.AutoSize = True
+        Me.chkOnTop.Location = New System.Drawing.Point(260, 163)
+        Me.chkOnTop.Name = "chkOnTop"
+        Me.chkOnTop.Size = New System.Drawing.Size(47, 18)
+        Me.chkOnTop.TabIndex = 77
+        Me.chkOnTop.Text = "Top"
+        Me.chkOnTop.UseVisualStyleBackColor = True
+        '
         'frmProgressor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(310, 169)
+        Me.ClientSize = New System.Drawing.Size(310, 182)
+        Me.Controls.Add(Me.chkOnTop)
         Me.Controls.Add(Me.cmdStart)
         Me.Controls.Add(Me.cmdStop)
         Me.Controls.Add(Me.txtCycles)
@@ -209,4 +221,5 @@ Partial Class frmProgressor
     Friend WithEvents Label2 As Label
     Friend WithEvents cmdStop As Button
     Friend WithEvents cmdStart As Button
+    Friend WithEvents chkOnTop As CheckBox
 End Class

@@ -1,4 +1,6 @@
-﻿Public Class frmProgressor
+﻿Imports System.ComponentModel
+
+Public Class frmProgressor
     Dim nCycles As Long = 2500
     Dim ProgSpeed As Long
     Dim ProgSteps As Integer
@@ -7,7 +9,7 @@
 
     Private Sub frmProgressor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cbProgressions.SelectedIndex = 0
-
+        chkOnTop.Checked = oOnTop
     End Sub
     Private Sub cbProgressions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbProgressions.SelectedIndexChanged
         cbProgList.SelectedIndex = cbProgressions.SelectedIndex
@@ -69,5 +71,14 @@
 
         ProgSpeed = (60000 / Val(txtSpeed.Text)) * 4 '60,000 ms over BPM is one tick per second, x 4 makes it a 4 times slower than the bpm
 
+    End Sub
+
+    Private Sub chkOnTop_CheckedChanged(sender As Object, e As EventArgs) Handles chkOnTop.CheckedChanged
+        Me.TopMost = chkOnTop.Checked
+    End Sub
+
+    Private Sub frmProgressor_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        Timer1.Enabled = False
+        RefreshAllForms()
     End Sub
 End Class

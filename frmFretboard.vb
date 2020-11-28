@@ -47,6 +47,8 @@
             WhatText = ""
         End If
 
+        If oFretBlips = True Then WhatText = Trim(Str(WutFret))
+
         With NewDot
             .Text = WhatText
             .BackColor = WutColor
@@ -84,7 +86,7 @@
         Next
     End Sub
     Private Sub frmFretboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        chkOnTop.Checked = oOnTop
 
     End Sub
 

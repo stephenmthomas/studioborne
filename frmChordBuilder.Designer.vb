@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmChordBuilder
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmChordBuilder
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmChordBuilder))
@@ -242,7 +242,7 @@ Partial Class frmChordBuilder
         '
         Me.cbIntervals.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbIntervals.FormattingEnabled = True
-        Me.cbIntervals.Items.AddRange(New Object() {"0,1,5,6,10,12,15,17", "0,2,4,7", "0,2,7", "0,3,6", "0,3,6,10", "0,3,6,11", "0,3,6,9", "0,3,7", "0,3,7,10", "0,3,7,10,13,17", "0,3,7,10,14,17", "0,3,7,10,14,17,21", "0,3,7,11", "0,3,7,11,14", "0,3,7,9", "0,3,8,10", "0,4,5", "0,4,6,10", "0,4,6,10", "0,4,6,10,14", "0,4,6,11", "0,4,7", "0,4,7,10", "0,4,7,10", "0,4,7,10,13", "0,4,7,10,14", "0,4,7,10,14,17", "0,4,7,10,14,17,21", "0,4,7,10,14,18", "0,4,7,10,15", "0,4,7,10,15,18", "0,4,7,11", "0,4,7,11,14", "0,4,7,11,14", "0,4,7,11,14,17", "0,4,7,11,14,18", "0,4,7,11,14,18,21", "0,4,7,11,18", "0,4,7,14", "0,4,7,9", "0,4,7,9,10", "0,4,8", "0,4,8,10", "0,4,8,10", "0,4,8,11", "0,4,8,11,18", "0,5,10,15,19", "0,5,6,7", "0,5,7", "0,5,7,10", "0,6,10", "0,7", "0,7,9,13,16", "0,8,11,16,21", "1,5,8"})
+        Me.cbIntervals.Items.AddRange(New Object() {"0,1,5,6,10,12,15,17", "0,2,4,7", "0,2,7", "0,3,6", "0,3,6,10", "0,3,6,11", "0,3,6,9", "0,3,7", "0,3,7,10", "0,3,7,10,13,17", "0,3,7,10,14,17", "0,3,7,10,14,17,21", "0,3,7,11", "0,3,7,11,14", "0,3,7,9", "0,3,8,10", "0,4,5", "0,4,6,10", "0,4,6,10", "0,4,6,10,14", "0,4,6,11", "0,4,7", "0,4,7,10", "0,4,7,10", "0,4,7,10,13", "0,4,7,10,14", "0,4,7,10,14,17", "0,4,7,10,14,17,21", "0,4,7,10,14,18", "0,4,7,10,15", "0,4,7,10,15,18", "0,4,7,11", "0,4,7,11,14", "0,4,7,11,14", "0,4,7,11,14,17", "0,4,7,11,14,18", "0,4,7,11,14,17,21", "0,4,7,11,18", "0,4,7,14", "0,4,7,9", "0,4,7,9,10", "0,4,8", "0,4,8,10", "0,4,8,10", "0,4,8,11", "0,4,8,11,18", "0,5,10,15,19", "0,5,6,7", "0,5,7", "0,5,7,10", "0,6,10", "0,7", "0,7,9,13,16", "0,8,11,16,21", "1,5,8"})
         Me.cbIntervals.Location = New System.Drawing.Point(368, 21)
         Me.cbIntervals.Name = "cbIntervals"
         Me.cbIntervals.Size = New System.Drawing.Size(118, 22)
@@ -347,6 +347,8 @@ Partial Class frmChordBuilder
         'cb4
         '
         Me.cb4.AutoSize = True
+        Me.cb4.Checked = True
+        Me.cb4.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cb4.Location = New System.Drawing.Point(215, 178)
         Me.cb4.Name = "cb4"
         Me.cb4.Size = New System.Drawing.Size(40, 18)
@@ -377,6 +379,8 @@ Partial Class frmChordBuilder
         'cb7
         '
         Me.cb7.AutoSize = True
+        Me.cb7.Checked = True
+        Me.cb7.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cb7.Location = New System.Drawing.Point(215, 223)
         Me.cb7.Name = "cb7"
         Me.cb7.Size = New System.Drawing.Size(40, 18)
@@ -957,6 +961,8 @@ Partial Class frmChordBuilder
         'cb0
         '
         Me.cb0.AutoSize = True
+        Me.cb0.Checked = True
+        Me.cb0.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cb0.Location = New System.Drawing.Point(215, 118)
         Me.cb0.Name = "cb0"
         Me.cb0.Size = New System.Drawing.Size(40, 18)

@@ -16,6 +16,7 @@
         NewOpts += "autoshow=" & oAutoshow & ","
         NewOpts += "notes=" & oNotes & ","
         NewOpts += "tones=" & oTones & ","
+        NewOpts += "fretblips=" & oFretBlips & ","
         NewOpts += "tabroots=" & oTabroot & ","
         NewOpts += "icons=" & oIcon & ","
         NewOpts += "rootcolor=" & Trim(Str(RootColor)) & ","
@@ -28,6 +29,7 @@
         NewOpts += "expanded=" & oExpanded & ","
         NewOpts += "fretload=" & oFretLoad & ","
         NewOpts += "keyload=" & oKeyLoad & ","
+        NewOpts += "infoload=" & oInfoLoad & ","
         NewOpts += "mode=" & cbMode.SelectedIndex & ","
         NewOpts += "key=" & cbKey.SelectedIndex & ","
         NewOpts += "frettune=" & Replace(Tuning, ",", "-")
@@ -36,13 +38,17 @@
         ConfigFile.WriteLine(NewOpts)
         ConfigFile.Close()
     End Sub
-    Sub LoadOptions()
+    Sub LoadOptions(Optional ByVal DefaultRestore As Boolean = False)
         Dim ConfigFile As System.IO.StreamWriter
         Dim SBOptions As String
         Dim Opts(), CurOpt() As String
         Dim LdError As Integer
 
         On Error GoTo LoadError
+
+        If DefaultRestore = True Then
+            CloseAllForms()
+        End If
 
 LoadConfig:
         'IF THE CONFIGURATION FILE EXISTS:
@@ -55,6 +61,7 @@ LoadConfig:
                 If CurOpt(0) = "autoshow" Then oAutoshow = CurOpt(1)
                 If CurOpt(0) = "notes" Then oNotes = CurOpt(1)
                 If CurOpt(0) = "tones" Then oTones = CurOpt(1)
+                If CurOpt(0) = "fretblips" Then oFretBlips = CurOpt(1)
                 If CurOpt(0) = "tabroots" Then oTabroot = CurOpt(1)
                 If CurOpt(0) = "icons" Then oIcon = CurOpt(1)
                 If CurOpt(0) = "rootcolor" Then RootColor = Val(CurOpt(1))
@@ -67,9 +74,14 @@ LoadConfig:
                 If CurOpt(0) = "expanded" Then oExpanded = CurOpt(1)
                 If CurOpt(0) = "fretload" Then oFretLoad = CurOpt(1)
                 If CurOpt(0) = "keyload" Then oKeyLoad = CurOpt(1)
+                If CurOpt(0) = "infoload" Then oInfoLoad = CurOpt(1)
                 If CurOpt(0) = "mode" Then cbMode.SelectedIndex = CurOpt(1)
                 If CurOpt(0) = "key" Then cbKey.SelectedIndex = CurOpt(1)
-                If CurOpt(0) = "frettune" Then Tuning = Replace(CurOpt(1), "-", ",")
+                If CurOpt(0) = "frettune" Then
+                    Tuning = Replace(CurOpt(1), "-", ",")
+                    Tuning = Trim(Replace(Tuning, vbNewLine, ""))
+                End If
+
             Next
 
         Else 'NO CONFIGURATION FILE PRESENT
@@ -84,9 +96,34 @@ LoadConfig:
         CurrentMode = cbMode.Text
         RootNote = CurrentKey
 
+
+        Me.Text = Me.Text & " - " & SBVersion
+        If oExpanded = True Then
+            cmdMaximize.Text = "Shrink"
+            Me.Height = 227
+            Me.Width = 504
+        Else
+            cmdMaximize.Text = "Expand"
+            Me.Height = 113
+            Me.Width = 367
+        End If
+
+        GenValues()
+
+        If oFretLoad = True Then frmFretboard.Show()
+        If oKeyLoad = True Then frmKeyboard.Show()
+        If oInfoLoad = True Then frmInfo.Visible = True
+
+        If DefaultRestore = True Then
+            frmOptions.Show()
+        End If
+
+        RefreshAllForms()
+
         Exit Sub
 
 LoadError: 'ERROR HANDLER; 6 = yes, 7 = no
+        AddLog("Load Settings Error: " & DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"))
         LdError = MsgBox("There appears to be an error loading the configuration file.  Would you like to reset the configuration file and try again? (Recommended!)", vbYesNo, "Load Error!")
         If LdError = 6 Then
             ConfigFile = My.Computer.FileSystem.OpenTextFileWriter(Application.StartupPath & "\settings.cfg", False)
@@ -104,30 +141,34 @@ LoadError: 'ERROR HANDLER; 6 = yes, 7 = no
 
     End Sub
     Private Sub frmTabTool_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        frmInfo.Show()
+        frmInfo.Visible = False
+        AddLog("Initialize: " & DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"))
 
         LoadOptions()
+        OnTopAllForms()
 
-        Me.Text = Me.Text & " - " & SBVersion
         If oExpanded = True Then
-            Me.Height = 227
-            Me.Width = 504
+            frmInfo.Height = 397
+            frmInfo.Width = 454
+            frmInfo.cmdMaximize.Text = "Shrink"
         Else
-            Me.Height = 113
-            Me.Width = 367
+            frmInfo.Height = 125
+            frmInfo.Width = 454
+            frmInfo.cmdMaximize.Text = "Expand"
         End If
 
-        GenValues()
+        AddLog("Successfully Loaded: " & DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"))
 
-        If oFretLoad = True Then frmFretboard.Show()
-        If oKeyLoad = True Then frmKeyboard.Show()
-
-        RefreshAllForms()
     End Sub
 
 
     Private Sub cbMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbMode.SelectedIndexChanged
         cbInt.SelectedIndex = cbMode.SelectedIndex
         CurrentMode = cbMode.Text
+
+        AddLog("-CurrentMode=" & CurrentMode)
+
         CurrentNotes = GenNotesCSV(cbInt.Text)
         frmInfo.txtNotes.Text = CurrentNotes
         GenValues()
@@ -167,7 +208,11 @@ LoadError: 'ERROR HANDLER; 6 = yes, 7 = no
         GenRootDiff(CurrentKey)
         CurrentNotes = GenNotesCSV(cbInt.Text)
         GenValues()
+
+        AddLog("-CurrentKey=" & CurrentKey)
+
         RefreshAllForms()
+
     End Sub
 
     Public Sub DrawFretBoard(WhatNotes As String)
@@ -177,6 +222,7 @@ LoadError: 'ERROR HANDLER; 6 = yes, 7 = no
         'Grab last note and add tab line first
         'process through 24 semitones, placing tab/fret values when they apply
 
+        AddLog("-DrawFretBoard=" & WhatNotes & ";Intervals:" & GenIntsFromNotes(WhatNotes))
 
         Dim ScaleNotes(), TuningNotes() As String
         Dim CurString, CurNote As Integer
@@ -196,7 +242,7 @@ LoadError: 'ERROR HANDLER; 6 = yes, 7 = no
                     'ScaleNote(CurNote) = note in scale to look for
                     If FretPitch = ScaleNotes(CurNote) Then 'If the current note is in the scale [GUITAR MONEY MAKER]
                         If frmFretboard.Visible = True Then
-                            If FretPitch = RootNote Then 'IF THE NOTE IS THE ROOT, PASS RED (functional, but bad technique written after the fact)
+                            If FretPitch = ScaleNotes(0) Then 'IF THE NOTE IS THE ROOT, PASS RED (functional, but bad technique written after the fact)
                                 If oTones = True Then 'Note will have the scale degree drawn on it
                                     frmFretboard.FretDraw(CurString, CurFret, SetNoteClipColor(True), Trim(Str(CurNote + 1)), True)
                                 Else
@@ -215,38 +261,92 @@ LoadError: 'ERROR HANDLER; 6 = yes, 7 = no
             Next CurFret
         Next CurString
 
+
+
     End Sub
-    Sub DrawKeyboard(WhatNotes As String) 'Accepts CSV
+    Sub DrawKeyboard(WhatNotes As String, Optional ByVal IsChord As Boolean = False)
+        'Accepts CSV string - uses NOTES not INTERVALS
+
+        AddLog("-DrawKeyboard=" & WhatNotes & ";Intervals:" & GenIntsFromNotes(WhatNotes))
+
         Dim AddNotes() As String
-        Dim NoteStep As Integer
+        Dim NoteStep As Integer = 0
+        Dim NoteIntervals() As String
+        Dim KeysInterval As Integer 'Determines if a key comes BEFORE the root on the keyboard
+        Dim StepsFromC As Integer
+        Dim DrawOct1, DrawOct2 As Boolean
+        Dim OverOctave As Boolean = False
 
-        NoteStep = 0
-        AddNotes = Split(WhatNotes, ",")
+
+
         frmKeyboard.KeyClearAll()
+        NoteIntervals = Split(GenIntsFromNotes(WhatNotes), ",")
+        If IsChord = True Then
+            For Each NoteInt In NoteIntervals
+                If NoteInt >= 12 Then
+                    OverOctave = True
+                End If
+            Next
+        End If
+        AddNotes = Split(WhatNotes, ",") 'Splits the input notes in to individual notes, assuming 0 is the Root
 
-        For Each Note In AddNotes
-            If frmKeyboard.Visible = True Then
-                If Note = RootNote Then
+        If frmKeyboard.Visible = True Then 'Only draw keys if the keyboard is visible
+
+            For Each Note In AddNotes
+                DrawOct1 = True
+                DrawOct2 = True
+                KeysInterval = KeyboardStep(Note) - KeyboardStep(AddNotes(0))
+                StepsFromC = GenIntFromNotes("C", Note)
+                'AddLog("-Drawing Note=" & Note & ";Step=" & (NoteStep + 1) & ";Int=" & NoteIntervals(NoteStep) & ";KeysInterval=" & KeysInterval & ";StepsFromC=" & StepsFromC)
+
+                If OverOctave = True Then
+                    If NoteIntervals(NoteStep) >= 12 Then
+                        DrawOct1 = False
+                        If KeysInterval < 0 And StepsFromC < 12 Then
+                            DrawOct1 = True
+                            DrawOct2 = False
+                        End If
+                    ElseIf NoteIntervals(NoteStep) < 12 And StepsFromC < 12 Then
+                        DrawOct2 = False
+                        If KeysInterval < 0 Then
+                            DrawOct1 = False
+                            DrawOct2 = True
+                        End If
+                    ElseIf NoteIntervals(NoteStep) >= 12 And StepsFromC >= 12 Then
+                        DrawOct1 = True
+                        DrawOct2 = False
+                        If KeysInterval < 0 Then
+                            DrawOct1 = False
+                            DrawOct2 = True
+                        End If
+                    End If
+                End If
+
+
+
+                If Note = AddNotes(0) Then
                     If oTones = True Then
-                        frmKeyboard.KeyDraw(Note, SetNoteClipColor(True), Trim(Str(NoteStep + 1)), True)
+                        frmKeyboard.KeyDraw(Note, SetNoteClipColor(True), Trim(Str(NoteStep + 1)), True, DrawOct1, DrawOct2)
                     Else
-                        frmKeyboard.KeyDraw(Note, SetNoteClipColor(True), Note, True)
+                        frmKeyboard.KeyDraw(Note, SetNoteClipColor(True), Note, True, DrawOct1, DrawOct2)
                     End If
                 Else
                     If oTones = True Then
-                        frmKeyboard.KeyDraw(Note, SetNoteClipColor(False), Trim(Str(NoteStep + 1)))
+                        frmKeyboard.KeyDraw(Note, SetNoteClipColor(False), Trim(Str(NoteStep + 1)),, DrawOct1, DrawOct2)
                     Else
-                        frmKeyboard.KeyDraw(Note, SetNoteClipColor(False), Note)
+                        frmKeyboard.KeyDraw(Note, SetNoteClipColor(False), Note,, DrawOct1, DrawOct2)
                     End If
-
                 End If
-            End If
-            NoteStep += 1
-        Next
+                NoteStep += 1
+            Next
+
+        End If
+
     End Sub
     Sub DrawTriadForm()
         'Draws triads on the triad viewer
         frmKeyTriad.KeyClearAll()
+        AddLog("-DrawTriadForm")
         For DegreeX = 1 To 7
             DrawTriad(DegreeX)
         Next
@@ -287,6 +387,10 @@ LoadError: 'ERROR HANDLER; 6 = yes, 7 = no
         Dim TempRoot() As String
         Dim i As Integer 'WhatDegree
 
+        Dim Temp7 As Boolean = False
+
+        AddLog("-GeneratingChord:WhatDegree=" & WhatDegree)
+
         i = WhatDegree - 1
 
         ChordStr = CurrentNotes & "," & CurrentNotes & "," & CurrentNotes & "," & CurrentNotes
@@ -304,137 +408,167 @@ LoadError: 'ERROR HANDLER; 6 = yes, 7 = no
 
         'Check Third Degree Options (sus2, 4)
         If chkSus2.Checked = True Then
-            nThird = ChangePitch(nThird, -2)
-        ElseIf chkSus4.Checked = True Then
-            nThird = ChangePitch(nThird, 1)
+            nThird = ChangePitch(nRoot, 2)
         ElseIf chkMin.Checked = True Then
-            nThird = ChangePitch(nThird, -1)
+            nThird = ChangePitch(nRoot, 3)
+        ElseIf chkMaj.Checked = True Then
+            nThird = ChangePitch(nRoot, 4)
+        ElseIf chkSus4.Checked = True Then
+            nThird = ChangePitch(nRoot, 5)
         End If
 
         'Check Fifth Degree Options
         If chkDim.Checked = True Then
-            nFifth = ChangePitch(nFifth, -1)
+            'nFifth = ChangePitch(nFifth, -1)
+            nThird = ChangePitch(nRoot, 3)
+            nFifth = ChangePitch(nRoot, 6)
         ElseIf chkAug.Checked = True Then
-            nFifth = ChangePitch(nFifth, 1)
+            'nFifth = ChangePitch(nFifth, 1)
+            nThird = ChangePitch(nRoot, 4)
+            nFifth = ChangePitch(nRoot, 8)
         ElseIf chkAug7.Checked = True Then
-            chk7.Checked = True
-            nFifth = ChangePitch(nFifth, 1)
-            nSeventh = ChangePitch(nSeventh, -1)
+            Temp7 = True
+            nThird = ChangePitch(nRoot, 4)
+            nFifth = ChangePitch(nRoot, 8)
+            nSeventh = ChangePitch(nRoot, 10)
         ElseIf chkDim7.Checked = True Then
-            chk7.Checked = True
-            nThird = ChangePitch(nThird, -1)
-            nFifth = ChangePitch(nFifth, -1)
-            nSeventh = ChangePitch(nSeventh, -2)
+            Temp7 = True
+            nThird = ChangePitch(nRoot, 3)
+            nFifth = ChangePitch(nRoot, 6)
+            nSeventh = ChangePitch(nRoot, 9)
         End If
 
         ChordStr = nRoot & "," & nThird & "," & nFifth
 
         'Check Extended Chord
-        If chk7.Checked = True Then ChordStr += "," & nSeventh
-        If chk9.Checked = True Then ChordStr += "," & nNinth
-        If chk11.Checked = True Then ChordStr += "," & nEleventh
+        If chk7.Checked = True Then 'MAJOR 7TH
+            nThird = ChangePitch(nRoot, 4)
+            nFifth = ChangePitch(nRoot, 7)
+            nSeventh = ChangePitch(nRoot, 11)
+            ChordStr = nRoot & "," & nThird & "," & nFifth & "," & nSeventh
+        ElseIf chkm7.Checked = True Then 'MINOR 7TH
+            nThird = ChangePitch(nRoot, 3)
+            nFifth = ChangePitch(nRoot, 7)
+            nSeventh = ChangePitch(nRoot, 10)
+            ChordStr = nRoot & "," & nThird & "," & nFifth & "," & nSeventh
+        ElseIf Temp7 = True Then
+            ChordStr += "," & nSeventh
+        End If
 
+        If chk9.Checked = True Then 'major 9th
+            nThird = ChangePitch(nRoot, 4)
+            nFifth = ChangePitch(nRoot, 7)
+            nSeventh = ChangePitch(nRoot, 11)
+            nNinth = ChangePitch(nRoot, 14)
+            ChordStr = nRoot & "," & nThird & "," & nFifth & "," & nSeventh & "," & nNinth
+        ElseIf chkm9.Checked = True Then 'minor 9th
+            nThird = ChangePitch(nRoot, 3)
+            nFifth = ChangePitch(nRoot, 7)
+            nSeventh = ChangePitch(nRoot, 11)
+            nNinth = ChangePitch(nRoot, 14)
+            ChordStr = nRoot & "," & nThird & "," & nFifth & "," & nSeventh & "," & nNinth
+        End If
+
+        If chk11.Checked = True Then 'major 11th
+            nThird = ChangePitch(nRoot, 4)
+            nFifth = ChangePitch(nRoot, 7)
+            nSeventh = ChangePitch(nRoot, 11)
+            nNinth = ChangePitch(nRoot, 14)
+            nEleventh = ChangePitch(nRoot, 17)
+            ChordStr = nRoot & "," & nThird & "," & nFifth & "," & nSeventh & "," & nNinth & "," & nEleventh
+        ElseIf chkm11.Checked = True Then 'minor 11th
+            nThird = ChangePitch(nRoot, 3)
+            nFifth = ChangePitch(nRoot, 7)
+            nSeventh = ChangePitch(nRoot, 10)
+            nNinth = ChangePitch(nRoot, 14)
+            nEleventh = ChangePitch(nRoot, 17)
+            ChordStr = nRoot & "," & nThird & "," & nFifth & "," & nSeventh & "," & nNinth & "," & nEleventh
+        End If
+
+        If chk13.Checked = True Then 'major 13th
+            nThird = ChangePitch(nRoot, 4)
+            nFifth = ChangePitch(nRoot, 7)
+            nSeventh = ChangePitch(nRoot, 11)
+            nNinth = ChangePitch(nRoot, 14)
+            nEleventh = ChangePitch(nRoot, 17)
+            n13th = ChangePitch(nRoot, 21)
+            ChordStr = nRoot & "," & nThird & "," & nFifth & "," & nSeventh & "," & nNinth & "," & nEleventh & "," & n13th
+        ElseIf chkm13.Checked = True Then 'minor 13th
+            nThird = ChangePitch(nRoot, 3)
+            nFifth = ChangePitch(nRoot, 7)
+            nSeventh = ChangePitch(nRoot, 10)
+            nNinth = ChangePitch(nRoot, 14)
+            nEleventh = ChangePitch(nRoot, 17)
+            n13th = ChangePitch(nRoot, 21)
+            ChordStr = nRoot & "," & nThird & "," & nFifth & "," & nSeventh & "," & nNinth & "," & nEleventh & "," & n13th
+        End If
+
+
+        TempRoot = Split(ChordStr, ",") 'So that TempRoot(0) is the 'root' of the chord, ie the 0 note
         LastChord = WhatDegree
-        GenerateChord = ChordStr
+        CurrentSemitones = GenIntsFromNotes(ChordStr)
+
+        If frmInfo.Visible = True Then
+            frmInfo.txtChord.Text = ChordStr
+            frmInfo.txtVals.Text = CurrentSemitones
+        End If
+
 
         If oAutoshow = True Then
-            TempRoot = Split(ChordStr, ",")
-            RootNote = TempRoot(0)
-            DrawKeyboard(ChordStr)
+            DrawKeyboard(ChordStr, True)
             DrawFretBoard(ChordStr)
-            RootNote = CurrentKey
+            frmKeyboard.Text = "Keyboard - " & TempRoot(0) & " " & ChordTypeFromCSV(CurrentSemitones)
+            frmFretboard.Text = "Fretboard - " & TempRoot(0) & " " & ChordTypeFromCSV(CurrentSemitones)
         End If
 
         If frmProgressor.Timer1.Enabled = True Then
             If frmProgressor.chkKey.Checked = True Then
-                DrawKeyboard(ChordStr)
-                frmKeyboard.Text = "Keyboard - " & CurrentKey & " " & CurrentMode & " " & WhatDegree & " Chord"
+                DrawKeyboard(ChordStr, True)
+                frmKeyboard.Text = "Keyboard - " & CurrentKey & " " & CurrentMode & " - " & TempRoot(0) & " " & ChordTypeFromCSV(CurrentSemitones) & " Chord"
             End If
             If frmProgressor.chkFret.Checked = True Then
                 DrawFretBoard(ChordStr)
-                frmFretboard.Text = "Fretboard - " & CurrentKey & " " & CurrentMode & " " & WhatDegree & " Chord"
+                frmFretboard.Text = "Fretboard - " & CurrentKey & " " & CurrentMode & " - " & TempRoot(0) & " " & ChordTypeFromCSV(CurrentSemitones) & " Chord"
             End If
         End If
 
+        Temp7 = False
+
+        GenerateChord = ChordStr
+
     End Function
-
-
-
-
     Private Sub cmdChord1_Click(sender As Object, e As EventArgs) Handles cmdChord1.Click
         CurrentChord = GenerateChord(1)
-        Dim SplitChord() As String
-        SplitChord = Split(CurrentChord, ",")
-
-        frmFretboard.Text = "Fretboard - " & CurrentKey & " " & CurrentMode & " " & cmdChord1.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(CurrentSemitones)
-        frmKeyboard.Text = "Keyboard - " & CurrentKey & " " & CurrentMode & " " & cmdChord1.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(CurrentSemitones)
-
         frmInfo.txtChord.Text = CurrentChord
 
     End Sub
     Private Sub cmdChord2_Click(sender As Object, e As EventArgs) Handles cmdChord2.Click
         CurrentChord = GenerateChord(2)
-        Dim SplitChord() As String
-        SplitChord = Split(CurrentChord, ",")
-
-        frmFretboard.Text = "Fretboard - " & CurrentKey & " " & CurrentMode & " " & cmdChord2.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(CurrentSemitones)
-        frmKeyboard.Text = "Keyboard - " & CurrentKey & " " & CurrentMode & " " & cmdChord2.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(CurrentSemitones)
-
         frmInfo.txtChord.Text = CurrentChord
     End Sub
 
     Private Sub cmdChord3_Click(sender As Object, e As EventArgs) Handles cmdChord3.Click
         CurrentChord = GenerateChord(3)
-        Dim SplitChord() As String
-        SplitChord = Split(CurrentChord, ",")
-
-        frmFretboard.Text = "Fretboard - " & CurrentKey & " " & CurrentMode & " " & cmdChord3.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(CurrentSemitones)
-        frmKeyboard.Text = "Keyboard - " & CurrentKey & " " & CurrentMode & " " & cmdChord3.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(CurrentSemitones)
-
         frmInfo.txtChord.Text = CurrentChord
     End Sub
 
     Private Sub cmdChord4_Click(sender As Object, e As EventArgs) Handles cmdChord4.Click
         CurrentChord = GenerateChord(4)
-        Dim SplitChord() As String
-        SplitChord = Split(CurrentChord, ",")
-
-        frmFretboard.Text = "Fretboard - " & CurrentKey & " " & CurrentMode & " " & cmdChord4.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(CurrentSemitones)
-        frmKeyboard.Text = "Keyboard - " & CurrentKey & " " & CurrentMode & " " & cmdChord4.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(CurrentSemitones)
-
         frmInfo.txtChord.Text = CurrentChord
     End Sub
 
     Private Sub cmdChord5_Click(sender As Object, e As EventArgs) Handles cmdChord5.Click
         CurrentChord = GenerateChord(5)
-        Dim SplitChord() As String
-        SplitChord = Split(CurrentChord, ",")
-
-        frmFretboard.Text = "Fretboard - " & CurrentKey & " " & CurrentMode & " " & cmdChord5.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(CurrentSemitones)
-        frmKeyboard.Text = "Keyboard - " & CurrentKey & " " & CurrentMode & " " & cmdChord5.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(CurrentSemitones)
-
         frmInfo.txtChord.Text = CurrentChord
     End Sub
 
     Private Sub cmdChord6_Click(sender As Object, e As EventArgs) Handles cmdChord6.Click
         CurrentChord = GenerateChord(6)
-        Dim SplitChord() As String
-        SplitChord = Split(CurrentChord, ",")
-
-        frmFretboard.Text = "Fretboard - " & CurrentKey & " " & CurrentMode & " " & cmdChord6.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(CurrentSemitones)
-        frmKeyboard.Text = "Keyboard - " & CurrentKey & " " & CurrentMode & " " & cmdChord6.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(CurrentSemitones)
-
         frmInfo.txtChord.Text = CurrentChord
     End Sub
 
     Private Sub cmdChord7_Click(sender As Object, e As EventArgs) Handles cmdChord7.Click
         CurrentChord = GenerateChord(7)
-        Dim SplitChord() As String
-        SplitChord = Split(CurrentChord, ",")
-
-        frmFretboard.Text = "Fretboard - " & CurrentKey & " " & CurrentMode & " " & cmdChord7.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(CurrentSemitones)
-        frmKeyboard.Text = "Keyboard - " & CurrentKey & " " & CurrentMode & " " & cmdChord7.Text & " Chord" & " - " & SplitChord(0) & " " & ChordTypeFromCSV(CurrentSemitones)
-
         frmInfo.txtChord.Text = CurrentChord
     End Sub
 
@@ -478,6 +612,7 @@ LoadError: 'ERROR HANDLER; 6 = yes, 7 = no
 
     Private Sub frmTabTool_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         SaveOptions()
+        frmInfo.Close()
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
@@ -486,7 +621,7 @@ LoadError: 'ERROR HANDLER; 6 = yes, 7 = no
     End Sub
 
     Private Sub cmdInfo_Click(sender As Object, e As EventArgs) Handles cmdInfo.Click
-        frmInfo.Show()
+        frmInfo.Visible = True
     End Sub
 
     Private Sub cmdAbout_Click(sender As Object, e As EventArgs)
@@ -503,5 +638,13 @@ LoadError: 'ERROR HANDLER; 6 = yes, 7 = no
 
     Private Sub GroupBox3_Enter(sender As Object, e As EventArgs) Handles GroupBox3.Enter
 
+    End Sub
+
+    Private Sub chkOnTop_CheckedChanged(sender As Object, e As EventArgs) Handles chkOnTop.CheckedChanged
+        Me.TopMost = chkOnTop.Checked
+    End Sub
+
+    Private Sub txtVals_TextChanged(sender As Object, e As EventArgs) Handles txtVals.TextChanged
+        frmInfo.txtVals.Text = txtVals.Text
     End Sub
 End Class

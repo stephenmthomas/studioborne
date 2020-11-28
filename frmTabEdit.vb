@@ -1,6 +1,6 @@
 ﻿Public Class frmTabEdit
     Private Sub frmTabEdit_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        chkOnTop.Checked = oOnTop
     End Sub
     Public Sub GenerateTabScale(WhatNotes As String)
         'First, split string text in to notes
@@ -90,5 +90,9 @@
         txtTab.Text += "Generating " & CurrentKey & " " & CurrentMode & " degree " & Str(LastChord) & " chord:" & vbNewLine
         GenerateTabScale(CurrentChord)
         RootNote = CurrentKey
+    End Sub
+
+    Private Sub chkOnTop_CheckedChanged(sender As Object, e As EventArgs) Handles chkOnTop.CheckedChanged
+        Me.TopMost = chkOnTop.Checked
     End Sub
 End Class

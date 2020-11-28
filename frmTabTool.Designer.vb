@@ -45,6 +45,8 @@ Partial Class frmTabTool
         Me.cmdTriadView = New System.Windows.Forms.Button()
         Me.cmdTabEditor = New System.Windows.Forms.Button()
         Me.cmdProgressor = New System.Windows.Forms.Button()
+        Me.chkOnTop = New System.Windows.Forms.CheckBox()
+        Me.chkMaj = New System.Windows.Forms.CheckBox()
         Me.DebugBox = New System.Windows.Forms.GroupBox()
         Me.txtNotes = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -54,6 +56,11 @@ Partial Class frmTabTool
         Me.cbInt = New System.Windows.Forms.ComboBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.chkm13 = New System.Windows.Forms.CheckBox()
+        Me.chkm11 = New System.Windows.Forms.CheckBox()
+        Me.chkm9 = New System.Windows.Forms.CheckBox()
+        Me.chkm7 = New System.Windows.Forms.CheckBox()
+        Me.chk13 = New System.Windows.Forms.CheckBox()
         Me.chk11 = New System.Windows.Forms.CheckBox()
         Me.chk9 = New System.Windows.Forms.CheckBox()
         Me.chk7 = New System.Windows.Forms.CheckBox()
@@ -155,7 +162,7 @@ Partial Class frmTabTool
         'chkMin
         '
         Me.chkMin.AutoSize = True
-        Me.chkMin.Location = New System.Drawing.Point(144, 15)
+        Me.chkMin.Location = New System.Drawing.Point(8, 28)
         Me.chkMin.Name = "chkMin"
         Me.chkMin.Size = New System.Drawing.Size(47, 18)
         Me.chkMin.TabIndex = 73
@@ -166,7 +173,7 @@ Partial Class frmTabTool
         'chkAug
         '
         Me.chkAug.AutoSize = True
-        Me.chkAug.Location = New System.Drawing.Point(100, 29)
+        Me.chkAug.Location = New System.Drawing.Point(107, 44)
         Me.chkAug.Name = "chkAug"
         Me.chkAug.Size = New System.Drawing.Size(47, 18)
         Me.chkAug.TabIndex = 71
@@ -177,7 +184,7 @@ Partial Class frmTabTool
         'chkDim7
         '
         Me.chkDim7.AutoSize = True
-        Me.chkDim7.Location = New System.Drawing.Point(51, 29)
+        Me.chkDim7.Location = New System.Drawing.Point(57, 44)
         Me.chkDim7.Name = "chkDim7"
         Me.chkDim7.Size = New System.Drawing.Size(54, 18)
         Me.chkDim7.TabIndex = 70
@@ -188,7 +195,7 @@ Partial Class frmTabTool
         'chkSus4
         '
         Me.chkSus4.AutoSize = True
-        Me.chkSus4.Location = New System.Drawing.Point(244, 15)
+        Me.chkSus4.Location = New System.Drawing.Point(259, 44)
         Me.chkSus4.Name = "chkSus4"
         Me.chkSus4.Size = New System.Drawing.Size(54, 18)
         Me.chkSus4.TabIndex = 69
@@ -199,7 +206,7 @@ Partial Class frmTabTool
         'chkDim
         '
         Me.chkDim.AutoSize = True
-        Me.chkDim.Location = New System.Drawing.Point(8, 29)
+        Me.chkDim.Location = New System.Drawing.Point(8, 44)
         Me.chkDim.Name = "chkDim"
         Me.chkDim.Size = New System.Drawing.Size(47, 18)
         Me.chkDim.TabIndex = 67
@@ -210,7 +217,7 @@ Partial Class frmTabTool
         'chkAug7
         '
         Me.chkAug7.AutoSize = True
-        Me.chkAug7.Location = New System.Drawing.Point(144, 28)
+        Me.chkAug7.Location = New System.Drawing.Point(150, 44)
         Me.chkAug7.Name = "chkAug7"
         Me.chkAug7.Size = New System.Drawing.Size(54, 18)
         Me.chkAug7.TabIndex = 74
@@ -221,7 +228,7 @@ Partial Class frmTabTool
         'chkSus2
         '
         Me.chkSus2.AutoSize = True
-        Me.chkSus2.Location = New System.Drawing.Point(189, 15)
+        Me.chkSus2.Location = New System.Drawing.Point(199, 44)
         Me.chkSus2.Name = "chkSus2"
         Me.chkSus2.Size = New System.Drawing.Size(54, 18)
         Me.chkSus2.TabIndex = 75
@@ -256,7 +263,7 @@ Partial Class frmTabTool
         'cmdTriadView
         '
         Me.cmdTriadView.ForeColor = System.Drawing.Color.Purple
-        Me.cmdTriadView.Location = New System.Drawing.Point(6, 122)
+        Me.cmdTriadView.Location = New System.Drawing.Point(6, 101)
         Me.cmdTriadView.Name = "cmdTriadView"
         Me.cmdTriadView.Size = New System.Drawing.Size(109, 21)
         Me.cmdTriadView.TabIndex = 63
@@ -267,7 +274,7 @@ Partial Class frmTabTool
         'cmdTabEditor
         '
         Me.cmdTabEditor.ForeColor = System.Drawing.Color.Blue
-        Me.cmdTabEditor.Location = New System.Drawing.Point(6, 149)
+        Me.cmdTabEditor.Location = New System.Drawing.Point(6, 128)
         Me.cmdTabEditor.Name = "cmdTabEditor"
         Me.cmdTabEditor.Size = New System.Drawing.Size(109, 21)
         Me.cmdTabEditor.TabIndex = 64
@@ -278,13 +285,35 @@ Partial Class frmTabTool
         'cmdProgressor
         '
         Me.cmdProgressor.ForeColor = System.Drawing.Color.Purple
-        Me.cmdProgressor.Location = New System.Drawing.Point(6, 95)
+        Me.cmdProgressor.Location = New System.Drawing.Point(6, 75)
         Me.cmdProgressor.Name = "cmdProgressor"
         Me.cmdProgressor.Size = New System.Drawing.Size(109, 21)
         Me.cmdProgressor.TabIndex = 65
         Me.cmdProgressor.Text = "Progressor"
         Me.ToolTip.SetToolTip(Me.cmdProgressor, "Shows all chord degree triads on a single form.")
         Me.cmdProgressor.UseVisualStyleBackColor = True
+        '
+        'chkOnTop
+        '
+        Me.chkOnTop.AutoSize = True
+        Me.chkOnTop.Location = New System.Drawing.Point(433, 166)
+        Me.chkOnTop.Name = "chkOnTop"
+        Me.chkOnTop.Size = New System.Drawing.Size(47, 18)
+        Me.chkOnTop.TabIndex = 65
+        Me.chkOnTop.Text = "Top"
+        Me.ToolTip.SetToolTip(Me.chkOnTop, "Keep this window on top of all others?")
+        Me.chkOnTop.UseVisualStyleBackColor = True
+        '
+        'chkMaj
+        '
+        Me.chkMaj.AutoSize = True
+        Me.chkMaj.Location = New System.Drawing.Point(8, 12)
+        Me.chkMaj.Name = "chkMaj"
+        Me.chkMaj.Size = New System.Drawing.Size(47, 18)
+        Me.chkMaj.TabIndex = 76
+        Me.chkMaj.Text = "maj"
+        Me.ToolTip.SetToolTip(Me.chkMaj, "Diminished: Root, Flat Third, Flat Fifth")
+        Me.chkMaj.UseVisualStyleBackColor = True
         '
         'DebugBox
         '
@@ -364,15 +393,21 @@ Partial Class frmTabTool
         Me.GroupBox1.Controls.Add(Me.cmdChord3)
         Me.GroupBox1.Controls.Add(Me.cmdChord2)
         Me.GroupBox1.Controls.Add(Me.cmdChord1)
-        Me.GroupBox1.Location = New System.Drawing.Point(7, 76)
+        Me.GroupBox1.Location = New System.Drawing.Point(7, 74)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(338, 106)
+        Me.GroupBox1.Size = New System.Drawing.Size(338, 108)
         Me.GroupBox1.TabIndex = 63
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "BASIC CHORDS:"
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.chkm13)
+        Me.GroupBox2.Controls.Add(Me.chkm11)
+        Me.GroupBox2.Controls.Add(Me.chkm9)
+        Me.GroupBox2.Controls.Add(Me.chkm7)
+        Me.GroupBox2.Controls.Add(Me.chk13)
+        Me.GroupBox2.Controls.Add(Me.chkMaj)
         Me.GroupBox2.Controls.Add(Me.chkSus2)
         Me.GroupBox2.Controls.Add(Me.chkAug7)
         Me.GroupBox2.Controls.Add(Me.chkMin)
@@ -384,17 +419,67 @@ Partial Class frmTabTool
         Me.GroupBox2.Controls.Add(Me.chk9)
         Me.GroupBox2.Controls.Add(Me.chk7)
         Me.GroupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.GroupBox2.Location = New System.Drawing.Point(11, 42)
+        Me.GroupBox2.Location = New System.Drawing.Point(11, 37)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(318, 52)
+        Me.GroupBox2.Size = New System.Drawing.Size(318, 65)
         Me.GroupBox2.TabIndex = 64
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Chord Alteration:"
+        Me.GroupBox2.Text = "Quick Chord Alteration:"
+        '
+        'chkm13
+        '
+        Me.chkm13.AutoSize = True
+        Me.chkm13.Location = New System.Drawing.Point(199, 28)
+        Me.chkm13.Name = "chkm13"
+        Me.chkm13.Size = New System.Drawing.Size(47, 18)
+        Me.chkm13.TabIndex = 81
+        Me.chkm13.Text = "m13"
+        Me.chkm13.UseVisualStyleBackColor = True
+        '
+        'chkm11
+        '
+        Me.chkm11.AutoSize = True
+        Me.chkm11.Location = New System.Drawing.Point(150, 28)
+        Me.chkm11.Name = "chkm11"
+        Me.chkm11.Size = New System.Drawing.Size(47, 18)
+        Me.chkm11.TabIndex = 80
+        Me.chkm11.Text = "m11"
+        Me.chkm11.UseVisualStyleBackColor = True
+        '
+        'chkm9
+        '
+        Me.chkm9.AutoSize = True
+        Me.chkm9.Location = New System.Drawing.Point(107, 28)
+        Me.chkm9.Name = "chkm9"
+        Me.chkm9.Size = New System.Drawing.Size(40, 18)
+        Me.chkm9.TabIndex = 79
+        Me.chkm9.Text = "m9"
+        Me.chkm9.UseVisualStyleBackColor = True
+        '
+        'chkm7
+        '
+        Me.chkm7.AutoSize = True
+        Me.chkm7.Location = New System.Drawing.Point(57, 28)
+        Me.chkm7.Name = "chkm7"
+        Me.chkm7.Size = New System.Drawing.Size(40, 18)
+        Me.chkm7.TabIndex = 78
+        Me.chkm7.Text = "m7"
+        Me.chkm7.UseVisualStyleBackColor = True
+        '
+        'chk13
+        '
+        Me.chk13.AutoSize = True
+        Me.chk13.Location = New System.Drawing.Point(199, 12)
+        Me.chk13.Name = "chk13"
+        Me.chk13.Size = New System.Drawing.Size(47, 18)
+        Me.chk13.TabIndex = 77
+        Me.chk13.Text = "M13"
+        Me.chk13.UseVisualStyleBackColor = True
         '
         'chk11
         '
         Me.chk11.AutoSize = True
-        Me.chk11.Location = New System.Drawing.Point(100, 15)
+        Me.chk11.Location = New System.Drawing.Point(150, 12)
         Me.chk11.Name = "chk11"
         Me.chk11.Size = New System.Drawing.Size(47, 18)
         Me.chk11.TabIndex = 66
@@ -404,7 +489,7 @@ Partial Class frmTabTool
         'chk9
         '
         Me.chk9.AutoSize = True
-        Me.chk9.Location = New System.Drawing.Point(51, 16)
+        Me.chk9.Location = New System.Drawing.Point(107, 12)
         Me.chk9.Name = "chk9"
         Me.chk9.Size = New System.Drawing.Size(40, 18)
         Me.chk9.TabIndex = 65
@@ -414,7 +499,7 @@ Partial Class frmTabTool
         'chk7
         '
         Me.chk7.AutoSize = True
-        Me.chk7.Location = New System.Drawing.Point(8, 16)
+        Me.chk7.Location = New System.Drawing.Point(57, 12)
         Me.chk7.Name = "chk7"
         Me.chk7.Size = New System.Drawing.Size(40, 18)
         Me.chk7.TabIndex = 64
@@ -493,7 +578,7 @@ Partial Class frmTabTool
         Me.GroupBox3.Controls.Add(Me.cmdOptions)
         Me.GroupBox3.Location = New System.Drawing.Point(358, 6)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(121, 176)
+        Me.GroupBox3.Size = New System.Drawing.Size(121, 158)
         Me.GroupBox3.TabIndex = 64
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "TOOLS:"
@@ -503,7 +588,8 @@ Partial Class frmTabTool
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 14.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(488, 188)
+        Me.ClientSize = New System.Drawing.Size(488, 371)
+        Me.Controls.Add(Me.chkOnTop)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.DebugBox)
@@ -573,4 +659,11 @@ Partial Class frmTabTool
     Friend WithEvents cmdOptions As Button
     Friend WithEvents cmdTabEditor As Button
     Friend WithEvents cmdProgressor As Button
+    Friend WithEvents chkOnTop As CheckBox
+    Friend WithEvents chkMaj As CheckBox
+    Friend WithEvents chk13 As CheckBox
+    Friend WithEvents chkm13 As CheckBox
+    Friend WithEvents chkm11 As CheckBox
+    Friend WithEvents chkm9 As CheckBox
+    Friend WithEvents chkm7 As CheckBox
 End Class
